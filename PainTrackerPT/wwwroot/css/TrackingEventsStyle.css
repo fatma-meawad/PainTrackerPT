@@ -1,0 +1,28 @@
+﻿/*ICT2106 Calendar*/
+/*Details column to be shown on the side*/
+.moreDetails {
+    margin-left: 1%;
+    width: 19%;
+    border: 1px solid black;
+    order: 1;
+}
+
+#wrapContent {
+    padding: 10px;
+    height: 100%;
+}
+
+
+.fc-view-container {
+    order: 0;
+    width: 80%;
+}
+
+.boxContainer {
+    display: flex;
+}
+
+/* ICON DECORATION */
+i.fas, i.fab, i.far, i.fal {
+    color: lightgrey;
+}
