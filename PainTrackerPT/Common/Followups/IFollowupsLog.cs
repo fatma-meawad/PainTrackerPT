@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PainTrackerPT.Common.Followups
 {
@@ -11,42 +13,21 @@ namespace PainTrackerPT.Common.Followups
         FollowupsLog GetLogAt(DateTime dt);
         FollowupsLog GetLogFromTo(DateTime start_dt, DateTime end_dt);
     }
-
-    interface IFollowUp{
-
-    }
-
-    interface IQuestion{
-
-    }
-
-    interface IFollowUpState{
-        void askQuestions();
-        void answerQuestions();
-        void generateAdvice();
-        void completeFollowUp();
-    }
-
+    
     interface IPainDiary{
 
     }
-    interface IAnswer{
-
-    }
-    interface IAdvice{
-
-    }
-    interface IRecommendation{
-
-    }
+    
     interface IFollowUpBuilder{
          FollowUp build();
          FollowUpBuilder setDescription(String description);
          FollowUpBuilder setQuestion(List<IQuestion> questions);
     }
+
     interface IMediaFatory{
         AbstractClassMedia make(String type);
     }
+
     interface IAnswerBuilder{
         Answer  build();
         AnswerBuilder setDescription(String description);
@@ -75,21 +56,27 @@ namespace PainTrackerPT.Common.Followups
 
     interface IDoctor{
     }
+
     interface IFollowUpService{
 
     }
+
     interface IQuestionService{
         
     }
+
     interface IAnswerService{
 
     }
+
     interface IRecommendationService{
 
     }
+
     interface IAdviceService{
 
     }
+
     interface IFollowUpRepository{
         void Create(IFollowUp followUp);
         Task<IEnumerable<FollowUp>> SelectAll();
@@ -97,6 +84,7 @@ namespace PainTrackerPT.Common.Followups
         void Update(IFollowUp followUp);
         Task<int> Save();
     }
+
     interface IQuestionRepository{
         void Create(IQuestion question);
         Task<IEnumerable<Question>> SelectAll();
@@ -104,6 +92,7 @@ namespace PainTrackerPT.Common.Followups
         void Update(IQuestion question);
         Task<int> Save();
     }
+
     interface IAnswerRepository{
         void Create(IAnswer answer);
         Task<IEnumerable<Answer>> SelectAll();
@@ -359,128 +348,6 @@ namespace PainTrackerPT.Common.Followups
         }
     }
 
-    class PendingQuestionState : IFollowUpState
-    {
-        public void answerQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void askQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void completeFollowUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void generateAdvice()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class PendingAnswerState : IFollowUpState
-    {
-        public void answerQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void askQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void completeFollowUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void generateAdvice()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class PendingAdviceState : IFollowUpState
-    {
-        public void answerQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void askQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void completeFollowUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void generateAdvice()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class CompletedState : IFollowUpState
-    {
-        public void answerQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void askQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void completeFollowUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void generateAdvice()
-        {
-            throw new NotImplementedException();
-        }
-    }
-    class CancelledState : IFollowUpState
-    {
-        public void answerQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void askQuestions()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void completeFollowUp()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void generateAdvice()
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    class FollowUp: IFollowUp{
-        public Guid FollowUpId {get; set;}
-        public IFollowUpState State {get; set;}
-        public List<IQuestion> Questions {get; set;}
-        public String Description {get; set;}
-        public DateTime DateGenerated {get;set;}
-    }
-
     class AnswerBuilder : IAnswerBuilder
     {
         public Answer build()
@@ -535,27 +402,6 @@ namespace PainTrackerPT.Common.Followups
         }
     }
 
-    class Question : IQuestion{
-        public Guid QuestionId{get;set;}
-        public IAnswer Answer{get;set;}
-        public String Description{get;set;}
-        public DateTime DateGenerated{get;set;}
-    }
-
-    class Answer: IAnswer{
-        public Guid AnswerId{get;set;}
-        public String Feedback{get;set;}
-        public String Description{get;set;}
-        public IAdvice Advice{get;set;}
-        public List<AbstractClassMedia> AttachmentList{get;set;}
-        public DateTime DateGenerated{get;set;}
-    }
-    class Recommendation : IRecommendation{
-        public Guid RecommendationId{get;set;}
-        public String Description{get;set;}
-        public DateTime DateGenerated{get;set;}
-    }
-
     class QuestionBuilder : IQuestionBuilder
     {
         public IAnswer Answer{get;set;}
@@ -575,7 +421,6 @@ namespace PainTrackerPT.Common.Followups
             throw new NotImplementedException();
         }
     }
-
 
     class Video: AbstractClassMedia{
 
