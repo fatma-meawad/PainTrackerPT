@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
-namespace TrackingEvents.Models
+namespace PainTrackerPT.Models.Events
 {
     public class Events
     {
-        [Required]
-        public int Id { get; set; }
-        public string eventType { get; set; }
-        public string eventDesc { get; set; }
-        public virtual PainDiary painDiaryModule { get; set; } // Foreign key
-        public virtual Followup followupModule { get; set; } // Foreign key
-    }
+        public Guid Id { get; set; }
+        public String Description { get; set; }
+        public DateTime timeStamp { get; set; }
+        public string eventTitle { get; set; }
+        public DateTime eventStartDate { get; set; }
+        public DateTime eventEndDate { get; set; }
+        public string eventDesc { get; set; }    }
 }

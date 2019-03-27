@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PainTrackerPT.Controllers.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,11 +9,9 @@ namespace TrackingEvents.Controllers
 {
     public class Summary : ISummary
     {
-        // This method will call a DAO to collate all the events from all tables.
-        public async void getAllEvents()
+        public void getAllEvents()
         {
-            EventsDAOController dao = new EventsDAOController();
-            await dao.GetAllEvents();
+            throw new NotImplementedException();
         }
     }
 }
