@@ -1,4 +1,5 @@
 ﻿using PainTrackerPT.Models.Medicine;
+using PainTrackerPT.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Common.Medicine
 {
-    public interface IMedicineLog<T>
+    public interface IMedicineService<T>
     {
         T GetLogAt(DateTime dt);
         T GetLogFromTo(DateTime start_dt, DateTime end_dt);
@@ -15,5 +16,6 @@ namespace PainTrackerPT.Common.Medicine
         T SelectById(int? id);
         void Update(T obj);
         void Delete(int? id);
+
     }
 }

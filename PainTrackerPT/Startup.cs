@@ -11,6 +11,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
+using PainTrackerPT.Common.Medicine;
+using PainTrackerPT.Services;
+using PainTrackerPT.Repository;
 
 namespace PainTrackerPT
 {
@@ -38,9 +41,13 @@ namespace PainTrackerPT
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<PainTrackerPTContext>(options =>
-                    //options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
-                    // Just for testing use the in memory database but in real testing, create  your own one.
-                    options.UseInMemoryDatabase("PainTrackerPTContext"));
+                    options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
+            // Just for testing use the in memory database but in real testing, create  your own one.
+            //options.UseInMemoryDatabase("PainTrackerPTContext"));
+
+            services.AddScoped(typeof(IMedicineLog<>), typeof(MedicineRepository<>));
+            services.AddScoped(typeof(IMedicineService<>), typeof(MedicineService<>));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,6 +73,7 @@ namespace PainTrackerPT
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
             });
         }
     }

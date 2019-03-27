@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PainTrackerPT.Models.Medicine.MedicineEvent>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Medicine Event Index</h1>
+
+<p>
+    @ViewBag.ID
+    @*@Html.ActionLink("Create", "Create", new { dt = ViewBag.Message })*@
+</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Dosage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TimeStamp)
+                </th>                
+                <th>
+                    @{
+                        int MedId = (int)ViewBag.ID;
+                        }
+                        Medicine ID = @MedId
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dosage)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TimeStamp)
+                        </td>                       
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Medicine;
 
@@ -12,35 +13,26 @@ namespace PainTrackerPT.Controllers.Medicine
 {
     public class MedicineLogsController : Controller
     {
-        private readonly PainTrackerPTContext _context;
+        private readonly IMedicineService<MedicineLog> _medService;
+        private MedicineLog _medLog = new MedicineLog();
 
-        public MedicineLogsController(PainTrackerPTContext context)
+        public MedicineLogsController(IMedicineService<MedicineLog> medService)
         {
-            _context = context;
+            _medService = medService;         
         }
-
-        // GET: MedicineLogs
+              
+        
+        // GET: MedicineLogs/Details/5
+        public ActionResult Details(DateTime dt)
+        {            
+            return View(_medService.GetLogAt(dt));
+            
+        }
+       
+        //GET: MedicineLogs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MedicineLog.ToListAsync());
-        }
-
-        // GET: MedicineLogs/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var medicineLog = await _context.MedicineLog
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (medicineLog == null)
-            {
-                return NotFound();
-            }
-
-            return View(medicineLog);
+            return View(_medService.SelectAll());
         }
 
         // GET: MedicineLogs/Create
@@ -54,40 +46,39 @@ namespace PainTrackerPT.Controllers.Medicine
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,timeStamp")] MedicineLog medicineLog)
+        public async Task<IActionResult> Create(int id, [Bind("Id,Name,Type,timeStamp")] MedicineLog medicineLog)
         {
             if (ModelState.IsValid)
-            {
-                medicineLog.Id = Guid.NewGuid();
-                _context.Add(medicineLog);
-                await _context.SaveChangesAsync();
+            {               
+                _medService.Insert(medicineLog);
                 return RedirectToAction(nameof(Index));
             }
             return View(medicineLog);
         }
 
-        // GET: MedicineLogs/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        // GET: Medicines/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var medicineLog = await _context.MedicineLog.FindAsync(id);
-            if (medicineLog == null)
+            _medLog = _medService.SelectById(id);
+
+            if (_medLog == null)
             {
                 return NotFound();
             }
-            return View(medicineLog);
+            return View(_medLog);
         }
 
-        // POST: MedicineLogs/Edit/5
+        //POST: MedicineLogs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Description,timeStamp")] MedicineLog medicineLog)
+        public async Task<IActionResult> Edit(int id,[Bind("Id,Name,Type,timeStamp")] MedicineLog medicineLog)
         {
             if (id != medicineLog.Id)
             {
@@ -98,19 +89,11 @@ namespace PainTrackerPT.Controllers.Medicine
             {
                 try
                 {
-                    _context.Update(medicineLog);
-                    await _context.SaveChangesAsync();
+                    _medService.Update(medicineLog);                   
                 }
                 catch (DbUpdateConcurrencyException)
-                {
-                    if (!MedicineLogExists(medicineLog.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                {                    
+                    throw;                    
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -118,37 +101,36 @@ namespace PainTrackerPT.Controllers.Medicine
         }
 
         // GET: MedicineLogs/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var medicineLog = await _context.MedicineLog
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (medicineLog == null)
+            _medLog = _medService.SelectById(id);
+
+            if (_medLog == null)
             {
                 return NotFound();
             }
 
-            return View(medicineLog);
+            return View(_medLog);
         }
 
-        // POST: MedicineLogs/Delete/5
+        // POST: Medicines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            var medicineLog = await _context.MedicineLog.FindAsync(id);
-            _context.MedicineLog.Remove(medicineLog);
-            await _context.SaveChangesAsync();
+            _medService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MedicineLogExists(Guid id)
+        // GET: Medicines/Event/
+        public ActionResult Event(int id)
         {
-            return _context.MedicineLog.Any(e => e.Id == id);
+            return null;
         }
     }
 }
