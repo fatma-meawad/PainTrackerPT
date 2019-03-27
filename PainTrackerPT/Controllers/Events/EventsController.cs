@@ -23,5 +23,10 @@ namespace PainTrackerPT.Controllers
             return Json(output);
 
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }

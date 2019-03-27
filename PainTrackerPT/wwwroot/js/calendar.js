@@ -12,7 +12,7 @@ $(document).ready(function () {
         nowIndicator: true,
         eventSources: [{
             //url: 'data/events.json', // use the `url` property
-            url: 'https://localhost:44361/Events/get'
+            url: 'https://localhost:5001/Events/get'
 
          }],
         eventRender: function (event, element) {
