@@ -3,86 +3,39 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-<h4>Filters <i class="fas fa-filter"></i></h4>
+<h5>Filters</h5>
 <div class="row">
-    <div class="col-5">
-        <div class="col-12 row">
-            <div class="col">
-                <div class="form-group row">
-                    <label for="typeAppt" class="col col-form-label">APPOINTMENT</label>
-                    <select name="typeAppt" id="typeAppt" class="col form-control" style="font-size:small">
-                        <option value="medtype001">APPT_TYPE001</option>
-                        <option value="medtype002">APPT_TYPE002</option>
-                        <option value="medtype003">APPT_TYPE003</option>
-                        <option value="medtype004">APPT_TYPE004</option>
-                    </select>
-                </div>
-            </div>
+    <div class="col-8 row">
+        <div class="col">
+            <label class="switch">
+                <input type="checkbox" class="primary" id="eventType" value="typePD">
+                <span class="slider round"></span>
+            </label>
+            <label>Pain Diary</label>
+        </div>
+        <div class="col">
+            <label class="switch">
+                <input type="checkbox" class="primary" id="eventType" value="typeMI">
+                <span class="slider round"></span>
+            </label>
+            <label>Medicine Intake</label>
+        </div>
+        <div class="col">
+            <label class="switch">
+                <input type="checkbox" class="primary" id="eventType" value="typeFU">
+                <span class="slider round"></span>
+            </label>
+            <label>Followup</label>
         </div>
 
-        <div class="col-12 row">
-            <div class="col">
-                <div class="form-group row">
-                    <label for="typeMed" class="col col-form-label">MEDICINE</label>
-                    <select name="typeMed" id="typeMed" class="col form-control" style="font-size:small">
-                        <option value="medtype001">MED_TYPE001</option>
-                        <option value="medtype002">MED_TYPE002</option>
-                        <option value="medtype003">MED_TYPE003</option>
-                        <option value="medtype004">MED_TYPE004</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <label for="typeMed" class="mb-2 form-check-label">PAIN EPISODE</label>
-        <div class="col-12 row small">
-            <div class="form-group ml-2 mb-0">
-                <div class="form-check col mb-2">
-                    <label class="form-check-label"><input type="checkbox" class="form-check-input" value="PAIN001">NO PAIN</label>
-                </div>
-                <div class="form-check col mb-2">
-                    <label class="form-check-label"><input type="checkbox" class="form-check-input" value="PAIN002">DISCOMFORTING</label>
-                </div>
-            </div>
-            <div class="form-group ml-2 mb-0">
-                <div class="form-check col mb-2">
-                    <label class="form-check-label"><input type="checkbox" class="form-check-input" value="PAIN003">DISTRESSING</label>
-                </div>
-                <div class="form-check col mb-2">
-                    <label class="form-check-label"><input type="checkbox" class="form-check-input" value="PAIN004">INTENSE</label>
-                </div>
-            </div>
-            <div class="form-group ml-2 mb-0">
-                <div class="form-check col mb-2">
-                    <label class="form-check-label"><input type="checkbox" class="form-check-input" value="PAIN005">UTTERLY HORRIBLE</label>
-                </div>
-                <div class="form-check col mb-2">
-                    <label class="form-check-label"><input type="checkbox" class="form-check-input" value="PAIN006">UNIMAGINABLE UNSPEAKABLE</label>
-                </div>
-            </div>
-        </div>
+        @*<div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitches">
+            <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
+        </div>*@
     </div>
 </div>
 
 
-
-<hr />
-
-@*<form asp-action="addDesc" class="form-inline">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" value="0" />
-
-    <div class="form-group justify-content-center col-md-8 offset-md-2">
-        <label asp-for="eventDesc" class="control-label col-4">EVENT DESCRIPTION: </label>
-        <input asp-for="eventDesc" class="form-control col-5" />
-        <span asp-validation-for="eventDesc" class="text-danger"></span>
-
-        <div class="col-1">
-            <input type="submit" value="SAVE" class="btn btn-primary" />
-        </div>
-    </div>
-</form>*@
 
 <hr />
 
