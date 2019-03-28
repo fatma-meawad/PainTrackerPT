@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PainTrackerPT.Models;
 
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    partial class PainTrackerPTContextModelSnapshot : ModelSnapshot
+    [Migration("20190328064929_hi")]
+    partial class hi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,7 +49,7 @@ namespace PainTrackerPT.Migrations
                     b.ToTable("DoctorsLog");
                 });
 
-            modelBuilder.Entity("PainTrackerPT.Models.Events.EventsLog", b =>
+            modelBuilder.Entity("PainTrackerPT.Models.Events.Events", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
@@ -61,6 +63,20 @@ namespace PainTrackerPT.Migrations
                     b.Property<string>("eventTitle");
 
                     b.Property<string>("moduleType");
+
+                    b.Property<DateTime>("timeStamp");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Events.EventsLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
 
                     b.Property<DateTime>("timeStamp");
 
