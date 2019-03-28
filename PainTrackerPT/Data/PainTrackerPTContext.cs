@@ -25,7 +25,6 @@ namespace PainTrackerPT.Models
 
         public DbSet<PainTrackerPT.Models.Doctors.DoctorsLog> DoctorsLog { get; set; }
 
-        public DbSet<PainTrackerPT.Models.Events.Events> Events { get; set; }
         public DbSet<PainTrackerPT.Models.Events.EventsLog> EventsLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.Followups.FollowupsLog> FollowupsLog { get; set; }
