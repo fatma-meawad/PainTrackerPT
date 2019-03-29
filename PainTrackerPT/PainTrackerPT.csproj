@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\EventsLogs\**" />
+    <Content Remove="Views\EventsLogs\**" />
+    <EmbeddedResource Remove="Views\EventsLogs\**" />
+    <None Remove="Views\EventsLogs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Migrations\20190327054013_KeylessCreate.cs" />
     <Compile Remove="Migrations\20190327054013_KeylessCreate.Designer.cs" />
   </ItemGroup>
@@ -15,11 +22,6 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="Views\EventsLogs\" />
   </ItemGroup>
 
 </Project>

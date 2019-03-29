@@ -1,5 +1,24 @@
 $(document).ready(function () {
     console.log("init calendar loaded");
+    
+    $('input[type="checkbox"][id="eventType"]').click(function () {
+        if ($(this).is(":checked")) {
+            if ($(this).val() == "typePD") {
+
+            } else if ($(this).val() == "typeMI") {
+
+            } else if ($(this).val() == "typeFU") {
+
+            } else {
+
+            }
+
+        }
+        else if ($(this).is(":not(:checked)")) {
+            alert("Checkbox is unchecked.");
+        }
+    });
+
 
     $("#calendar").fullCalendar({
         // put your options and callbacks here
