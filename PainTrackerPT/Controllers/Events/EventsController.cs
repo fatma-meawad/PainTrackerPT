@@ -29,17 +29,10 @@ namespace PainTrackerPT.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,timeStamp")] EventsLog e)
+        //[ValidateAntiForgeryToken]
+        public void Create([Bind("eventTitle,eventStartDate,eventEndDate,eventDesc,moduleType")] EventsLog e)
         {
-            //if (ModelState.IsValid)
-            //{s
-            //    eventsLog.Id = Guid.NewGuid();
-            //    _context.Add(eventsLog);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            return View(e);
+            _eRepo.addEvent(e);
         }
 
         public IActionResult Index()

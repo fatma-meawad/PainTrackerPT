@@ -13,19 +13,24 @@ namespace PainTrackerPT.Controllers.Events
 {
     public class EventsRepo: IEventsRepo
     {
-        internal PainTrackerPTContext db = new PainTrackerPTContext();
-
-        public void addEvent(EventsLog e)
-        {
-            throw new NotImplementedException();
-        }
-
         //private readonly PainTrackerPTContext _context;
 
         //public EventsRepo(PainTrackerPTContext context)
         //{
         //    _context = context;
         //}
+
+        internal PainTrackerPTContext db = new PainTrackerPTContext();
+
+        public async void addEvent(EventsLog e)
+        {
+            Guid g;
+            g = Guid.NewGuid();
+            e.Id = g;
+            e.timeStamp = DateTime.Now;
+            db.Add(e);
+            await db.SaveChangesAsync();
+        }
 
         public async Task<JArray> getAllEvents()
         {
