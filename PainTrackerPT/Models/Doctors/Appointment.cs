@@ -15,7 +15,7 @@ namespace PainTrackerPT.Models.Doctors
 
         public string Message { get; set; }
         public string AppDate { get; set; }
-
+        public string ProposedDate { get; set; }
         public string ApptLocation { get; set; }
 
     }
