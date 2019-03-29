@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Models.Followups
 {
-    public class Advice : IAdvice
+    public class Advice
     {
         public Guid AdviceId { get; set; }
         public String Description { get; set; }

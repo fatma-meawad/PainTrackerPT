@@ -8,22 +8,22 @@ namespace PainTrackerPT.Models.Followups
 {
     public class PendingAdviceState : IFollowUpState
     {
-        public void AskQuestions()
+        public void answerQuestion()
         {
             throw new NotImplementedException();
         }
 
-        public void AnswerQuestions()
+        public void askQuestions()
         {
             throw new NotImplementedException();
         }
 
-        public void GenerateAdvice()
+        public void completeFollowUp()
         {
             throw new NotImplementedException();
         }
 
-        public void CompleteFollowUp()
+        public void generateAdvice()
         {
             throw new NotImplementedException();
         }
