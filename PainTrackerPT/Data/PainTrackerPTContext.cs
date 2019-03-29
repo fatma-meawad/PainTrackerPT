@@ -10,14 +10,19 @@ using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Models.Medicine;
 using PainTrackerPT.Models.PainDiary;
 
+
 namespace PainTrackerPT.Models
 {
     public class PainTrackerPTContext : DbContext
     {
+
+
         public PainTrackerPTContext (DbContextOptions<PainTrackerPTContext> options)
             : base(options)
         {
         }
+
+        public DbSet<Patient> Patients { get; set; }
 
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
 
@@ -31,6 +36,7 @@ namespace PainTrackerPT.Models
 
         public DbSet<PainTrackerPT.Models.PainDiary.PainDiaryLog> PainDiaryLog { get; set; }
 
-        public DbSet<PainTrackerPT.Models.Doctors.Patient> Patient { get; set; }
+
     }
+
 }

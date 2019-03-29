@@ -38,9 +38,9 @@ namespace PainTrackerPT
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<PainTrackerPTContext>(options =>
-                    //options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
                     // Just for testing use the in memory database but in real testing, create  your own one.
-                    options.UseInMemoryDatabase("PainTrackerPTContext"));
+                    //options.UseInMemoryDatabase("PainTrackerPTContext"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

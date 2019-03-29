@@ -10,23 +10,23 @@ using PainTrackerPT.Models.Doctors;
 
 namespace PainTrackerPT.Controllers.Doctors
 {
-    public class PatientsController : Controller
+    public class DoctorsController : Controller
     {
         private readonly PainTrackerPTContext _context;
 
-        public PatientsController(PainTrackerPTContext context)
+        public DoctorsController(PainTrackerPTContext context)
         {
             _context = context;
         }
 
-        // GET: Patients
-        public async Task<IActionResult> Index()
+        // GET: Doctors
+        public async Task<IActionResult> PatientAccount_Index()
         {
             return View(await _context.Patients.ToListAsync());
         }
 
         // GET: Patients/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> PatientAccount_Details(int? id)
         {
             if (id == null)
             {
@@ -42,9 +42,8 @@ namespace PainTrackerPT.Controllers.Doctors
 
             return View(patient);
         }
-
-        // GET: Patients/Create
-        public IActionResult Create()
+        // GET: Doctors/PatientAccount_Create
+        public ActionResult PatientAccount_Create()
         {
             return View();
         }
@@ -60,13 +59,13 @@ namespace PainTrackerPT.Controllers.Doctors
             {
                 _context.Add(patient);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(PatientAccount_Index));
             }
             return View(patient);
         }
 
         // GET: Patients/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> PatientAccount_Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +85,7 @@ namespace PainTrackerPT.Controllers.Doctors
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PatientId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
+        public async Task<IActionResult> PatientAccount_Edit(int id, [Bind("PatientId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
         {
             if (id != patient.PatientId)
             {
@@ -111,13 +110,13 @@ namespace PainTrackerPT.Controllers.Doctors
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(PatientAccount_Index));
             }
             return View(patient);
         }
 
         // GET: Patients/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> PatientAccount_Delete(int? id)
         {
             if (id == null)
             {
@@ -137,12 +136,12 @@ namespace PainTrackerPT.Controllers.Doctors
         // POST: Patients/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> PatientAccount_DeleteConfirmed(int id)
         {
             var patient = await _context.Patients.FindAsync(id);
             _context.Patients.Remove(patient);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(PatientAccount_Index));
         }
 
         private bool PatientExists(int id)
