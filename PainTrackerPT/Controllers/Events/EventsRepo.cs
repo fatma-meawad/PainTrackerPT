@@ -35,6 +35,7 @@ namespace PainTrackerPT.Controllers.Events
             {
                 JObject evt = new JObject
                 {
+                    { "id", e.Id },
                     { "title", e.eventTitle },
                     { "start", e.eventStartDate },
                     { "end", e.eventEndDate },
@@ -58,6 +59,7 @@ namespace PainTrackerPT.Controllers.Events
             {
                 JObject evt = new JObject
                 {
+                    { "id", e.Id },
                     { "title", e.eventTitle },
                     { "start", e.eventStartDate },
                     { "end", e.eventEndDate },
@@ -81,6 +83,7 @@ namespace PainTrackerPT.Controllers.Events
             {
                 JObject evt = new JObject
                 {
+                    { "id", e.Id },
                     { "title", e.eventTitle },
                     { "start", e.eventStartDate },
                     { "end", e.eventEndDate },
@@ -103,6 +106,7 @@ namespace PainTrackerPT.Controllers.Events
             {
                 JObject evt = new JObject
                 {
+                    { "id", e.Id },
                     { "title", e.eventTitle },
                     { "start", e.eventStartDate },
                     { "end", e.eventEndDate },
