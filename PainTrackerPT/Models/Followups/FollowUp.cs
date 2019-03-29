@@ -12,5 +12,6 @@ namespace PainTrackerPT.Models.Followups
         public List<Advice> Advice { get; set; }
         public string Description { get; set; }
         public DateTime DateGenerated { get; set; }
+        public List<Question> Questions { get; set; }
     }
 }
