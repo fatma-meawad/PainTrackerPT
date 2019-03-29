@@ -13,5 +13,35 @@ namespace PainTrackerPT.Data.Followups
 {
     public class MediaService : IMediaService{
         private IMediaRepository _mediaRepository;
+
+        public MediaService()
+        {
+            this._mediaRepository = new MediaRepository();
+        }
+
+        public void CreateNewMedia(AbstractMedia media)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteMedia(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<AbstractMedia> Select(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<AbstractMedia>> SelectAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateMedia(Guid id, AbstractMedia media)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

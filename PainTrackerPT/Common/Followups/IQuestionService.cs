@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Common.Followups
 {
     public interface IQuestionService
     {
-        void CreateNewFollowUp(FollowUp followUp);
-        void UpdateFollowUp(Guid id, FollowUp followUp);
-        void DeleteFollowUp(Guid id);
-        void Select(Guid id);
-        void SelectAll();
+        void CreateNewQuestion(Question question);
+        void UpdateQuestion(Guid id, Question question);
+        void DeleteQuestion(Guid id);
+        Task<AbstractMedia> Select(Guid id);
+        Task<IEnumerable<AbstractMedia>> SelectAll();
     }
 }

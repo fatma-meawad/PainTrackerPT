@@ -15,29 +15,34 @@ namespace PainTrackerPT.Data.Followups
     public class FollowUpService : IFollowUpService {
         private IFollowUpRepository _followUpRepository;
 
+        public FollowUpService()
+        {
+            this._followUpRepository = new FollowUpRepository();
+        }
+
         public void CreateNewFollowUp(FollowUp followUp)
         {
-            throw new NotImplementedException();
+            this._followUpRepository.Create(followUp);
         }
 
         public void DeleteFollowUp(Guid id)
         {
-            throw new NotImplementedException();
+            this._followUpRepository.Remove(id);
         }
 
-        public void Select(Guid id)
+        public Task<FollowUp> Select(Guid id)
         {
-            throw new NotImplementedException();
+            return this._followUpRepository.SelectById(id);
         }
 
-        public void SelectAll()
+        public Task<IEnumerable<FollowUp>> SelectAll()
         {
-            throw new NotImplementedException();
+            return this._followUpRepository.SelectAll();
         }
 
         public void UpdateFollowUp(Guid id, FollowUp followUp)
         {
-            throw new NotImplementedException();
+            this._followUpRepository.Update(followUp);
         }
     }
 }

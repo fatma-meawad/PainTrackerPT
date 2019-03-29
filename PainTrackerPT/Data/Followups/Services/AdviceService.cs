@@ -14,5 +14,35 @@ namespace PainTrackerPT.Data.Followups
 {
     public class AdviceService : IAdviceService{
         private IAdviceRepository _adviceRepsitory;
+
+        public AdviceService()
+        {
+            this._adviceRepsitory = new AdviceRepository();
+        }
+    
+        public void CreateNewAdvice(Advice advice)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAdvice(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Advice> Select(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<Advice>> SelectAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateAdvice(Guid id, Advice advice)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
