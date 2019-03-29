@@ -29,7 +29,7 @@ namespace PainTrackerPT.Controllers.Events
         {
             JArray output = new JArray();
 
-            string query = "SELECT * FROM dbo.Events";
+            string query = "SELECT * FROM dbo.EventsLog";
 
             foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
             {
@@ -52,7 +52,7 @@ namespace PainTrackerPT.Controllers.Events
         {
             JArray output = new JArray();
 
-            string query = "SELECT * FROM dbo.Events WHERE moduleType='typePD'";
+            string query = "SELECT * FROM dbo.EventsLog WHERE moduleType='PD'";
 
             foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
             {
@@ -75,7 +75,7 @@ namespace PainTrackerPT.Controllers.Events
         {
             JArray output = new JArray();
 
-            string query = "SELECT * FROM dbo.Events WHERE moduleType='typeFU'";
+            string query = "SELECT * FROM dbo.EventsLog WHERE moduleType='FU'";
 
             foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
             {
@@ -97,7 +97,7 @@ namespace PainTrackerPT.Controllers.Events
         public async Task<JArray> getAllMedicineIntake() {
             JArray output = new JArray();
 
-            string query = "SELECT * FROM dbo.Events WHERE moduleType='typeMI'";
+            string query = "SELECT * FROM dbo.EventsLog WHERE moduleType='MI'";
 
             foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
             {
