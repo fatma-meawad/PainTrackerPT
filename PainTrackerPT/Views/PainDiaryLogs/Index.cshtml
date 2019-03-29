@@ -1,41 +1,58 @@
-﻿@model IEnumerable<PainTrackerPT.Models.PainDiary.PainDiaryLog>
+﻿@model IEnumerable<PainTrackerPT.Models.PainDiary.Entry>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.timeStamp)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.timeStamp)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<style>
+    #PDwrapper {
+        padding: 25px;
+    }
+</style>
+
+
+<div id="PDwrapper">
+
+    <h1>My Pain Diary <button style="margin-left:70%" class="btn" onclick='window.location.href = "@Url.Action("Create","PainDiaryLogs")";'><i class="flaticon-edit-1 fa-2x"></i><br /></button></h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.entryTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.entryDescription)
+                </th>
+                <th>
+                    Entry Date
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.entryTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.entryDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.entryTime)
+                    </td>
+
+
+                    <td>
+                        <a asp-action="View" asp-route-id="@item.entryID">View</a> |
+                        <a asp-action="Delete" asp-route-id="@item.entryID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>

@@ -1,38 +1,81 @@
-﻿@model PainTrackerPT.Models.PainDiary.PainDiaryLog
+﻿@model PainTrackerPT.Models.PainDiary.Entry
 
 @{
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<style>
+    #PDwrapper {
+        padding: 25px;
+    }
+</style>
 
-<h4>PainDiaryLog</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="timeStamp" class="control-label"></label>
-                <input asp-for="timeStamp" class="form-control" />
-                <span asp-validation-for="timeStamp" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+
+<div id="PDwrapper">
+
+    <h1>Create Entry</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="entryTitle" class="control-label"></label>
+                    <input asp-for="entryTitle" class="form-control" />
+                    <span asp-validation-for="entryTitle" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="entryDescription" class="control-label"></label>
+                    <input asp-for="entryDescription" class="form-control" />
+                    <span asp-validation-for="entryDescription" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="entryTime" class="control-label"></label>
+                    <input asp-for="entryTime" class="form-control" />
+                    <span asp-validation-for="entryTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="painArea" class="control-label"></label>
+                    <select asp-for="painArea" class="form-control" >
+                        <option value="head">HEAD</option>
+                        <option value="neck">NECK</option>
+                        <option value="shoulder">SHOULDER</option>
+                        <option value="hand">HAND</option>
+                        <option value="chest">CHEST</option>
+                        <option value="stomach">STOMACH</option>
+                        <option value="leg">LEG</option>
+                    </select>
+                    <span asp-validation-for="painArea" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="painIntensity" class="control-label"></label> <br />
+                    <label class="pull-left">1</label><label class="pull-right">5</label>
+                    <input type="range" min="1" max="5" asp-for="painIntensity" class="form-control" />
+                    
+                    <span asp-validation-for="painIntensity" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="painTime" class="control-label"></label>
+                    <input asp-for="painTime" class="form-control" />
+                    <span asp-validation-for="painTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="diaryId" class="control-label"></label>
+                    <input asp-for="diaryId" readonly class="form-control" value="1" />
+                    <span asp-validation-for="diaryId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
