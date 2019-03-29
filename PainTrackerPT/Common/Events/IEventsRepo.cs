@@ -10,6 +10,9 @@ namespace PainTrackerPT.Common.Events
     public interface IEventsRepo
     {
         Task<JArray> getAllEvents();
+        Task<JArray> getAllPainDiary();
+        Task<JArray> getAllFollowUp();
+        Task<JArray> getAllMedicineIntake();
         void addEvent(EventsLog e);
     }
 }

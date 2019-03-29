@@ -20,25 +20,21 @@ namespace PainTrackerPT.Controllers.Events
             throw new NotImplementedException();
         }
 
-        //private readonly PainTrackerPTContext _context;
-
-        //public EventsRepo(PainTrackerPTContext context)
-        //{
-        //    _context = context;
-        //}
-
         public async Task<JArray> getAllEvents()
         {
             JArray output = new JArray();
 
-            foreach (var e in await db.EventsLog.ToListAsync())
+            string query = "SELECT * FROM dbo.Events";
+
+            foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
             {
                 JObject evt = new JObject
                 {
                     { "title", e.eventTitle },
                     { "start", e.eventStartDate },
                     { "end", e.eventEndDate },
-                    { "desc", e.eventDesc }
+                    { "desc", e.eventDesc },
+                    { "type", e.moduleType }
                 };
 
                 output.Add(evt);
@@ -46,6 +42,76 @@ namespace PainTrackerPT.Controllers.Events
 
             return output;
         }
+
+        public async Task<JArray> getAllPainDiary()
+        {
+            JArray output = new JArray();
+
+            string query = "SELECT * FROM dbo.Events WHERE moduleType='typePD'";
+
+            foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
+            {
+                JObject evt = new JObject
+                {
+                    { "title", e.eventTitle },
+                    { "start", e.eventStartDate },
+                    { "end", e.eventEndDate },
+                    { "desc", e.eventDesc },
+                    { "type", e.moduleType }
+                };
+
+                output.Add(evt);
+            }
+
+            return output;
+        }
+
+        public async Task<JArray> getAllFollowUp()
+        {
+            JArray output = new JArray();
+
+            string query = "SELECT * FROM dbo.Events WHERE moduleType='typeFU'";
+
+            foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
+            {
+                JObject evt = new JObject
+                {
+                    { "title", e.eventTitle },
+                    { "start", e.eventStartDate },
+                    { "end", e.eventEndDate },
+                    { "desc", e.eventDesc },
+                    { "type", e.moduleType }
+                };
+
+                output.Add(evt);
+            }
+
+            return output;
+        }
+
+        public async Task<JArray> getAllMedicineIntake()
+        {
+            JArray output = new JArray();
+
+            string query = "SELECT * FROM dbo.Events WHERE moduleType='typeMI'";
+
+            foreach (var e in await db.EventsLog.FromSql(query).ToListAsync())
+            {
+                JObject evt = new JObject
+                {
+                    { "title", e.eventTitle },
+                    { "start", e.eventStartDate },
+                    { "end", e.eventEndDate },
+                    { "desc", e.eventDesc },
+                    { "type", e.moduleType }
+                };
+
+                output.Add(evt);
+            }
+
+            return output;
+        }
+
 
     }
 }

@@ -1,37 +1,39 @@
-﻿@model IEnumerable<PainTrackerPT.Models.Events.Events>
+﻿@model IEnumerable<PainTrackerPT.Models.Events.EventsLog>
 
 @{
     ViewData["Title"] = "Home Page";
 }
 <h5>Filters</h5>
 <div class="row">
-    <div class="col-8 row">
+    <div class="col row">
         <div class="col">
-            <label class="switch">
+            <label class="switch col-4">
+                <input type="checkbox" class="primary" id="eventType" checked>
+                <span class="slider round"></span>
+            </label>
+            <label class="col-8">All</label>
+        </div>
+        <div class="col">
+            <label class="switch col-4">
                 <input type="checkbox" class="primary" id="eventType" value="typePD">
                 <span class="slider round"></span>
             </label>
-            <label>Pain Diary</label>
+            <label class="col-8">Pain Diary</label>
         </div>
         <div class="col">
-            <label class="switch">
+            <label class="switch col-4">
                 <input type="checkbox" class="primary" id="eventType" value="typeMI">
                 <span class="slider round"></span>
             </label>
-            <label>Medicine Intake</label>
+            <label class="col-8">Medicine Intake</label>
         </div>
         <div class="col">
-            <label class="switch">
+            <label class="switch col-4">
                 <input type="checkbox" class="primary" id="eventType" value="typeFU">
                 <span class="slider round"></span>
             </label>
-            <label>Followup</label>
+            <label class="col-8">Followup</label>
         </div>
-
-        @*<div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitches">
-            <label class="custom-control-label" for="customSwitches">Toggle this switch element</label>
-        </div>*@
     </div>
 </div>
 
