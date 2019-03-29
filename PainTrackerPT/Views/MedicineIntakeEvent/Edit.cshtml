@@ -1,18 +1,19 @@
 ﻿@model PainTrackerPT.Models.Medicine.MedicineEvent
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create Schedule for @ViewBag.MedID</h1>
+<h1>Edit for @ViewBag.eventID in @ViewBag.medID</h1>
 
 <h4>MedicineEvent</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MedId" value=@ViewBag.MedID/>
+            <input type="hidden" asp-for="EventId" value=@ViewBag.eventID />
+            <input type="hidden" asp-for="MedId" value=@ViewBag.medID />
             <div class="form-group">
                 <label asp-for="Dosage" class="control-label"></label>
                 <input asp-for="Dosage" class="form-control" />
@@ -24,17 +25,16 @@
                 <span asp-validation-for="TimeStamp" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    @Html.ActionLink("Index", "Index", "MedicineIntakeEvent", new { id = @ViewBag.MedID })
+    <a asp-action="Index">Back to List</a>
 </div>
-<hr />
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-<hr />

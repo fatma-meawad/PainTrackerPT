@@ -4,39 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Models.Medicine;
 
 namespace PainTrackerPT.Controllers.Medicine
 {
-    public class MedicineIntakeEventController : Controller
+    public class MedicineIntakeEventController : Controller 
     {
-
         private readonly IMedicineService<MedicineEvent> _medService;
-        private MedicineEvent _medEvent = new MedicineEvent();
+        private MedicineEvent _medEvent;
 
         public MedicineIntakeEventController(IMedicineService<MedicineEvent> medService)
         {
             _medService = medService;
         }
-
+       
         // GET: MedicineIntakeEvent
         public ActionResult Index(int id)
-        {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //_medEvent = _medService.SelectById(id);
-
-            //if (_medEvent == null)
-            //{
-            //    return NotFound();
-            //}
-            //return View(_medEvent);
-            ViewBag.ID = id;
-            return View(_medService.SelectAll());
+        {            
+            ViewBag.ID = id;            
+            return View(_medService.SelectMedEventById(id));            
         }
 
         // GET: MedicineIntakeEvent/Details/5
@@ -46,77 +34,88 @@ namespace PainTrackerPT.Controllers.Medicine
         }
 
         // GET: MedicineIntakeEvent/Create
-        public ActionResult Create()
+        public ActionResult Create(int medID)
         {
+            ViewBag.MedID = medID;
             return View();
         }
 
         // POST: MedicineIntakeEvent/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("EventId,Dosage,Timestamp")] MedicineEvent medicineEvent)
+        public async Task<IActionResult> Create(int medID, [Bind("EventId,Dosage,TimeStamp,MedId")] MedicineEvent medicineEvent)
         {
-            try
-            {
-                // TODO: Add insert logic here
-                if (ModelState.IsValid)
-                {
-                    medicineEvent.MedId = id;
-                    _medService.Insert(medicineEvent);
-                    return RedirectToAction(nameof(Index));
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _medService.Insert(medicineEvent);
+            //return RedirectToAction(nameof(Index)); 
+            return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId });            
         }
 
         // GET: MedicineIntakeEvent/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, int medID)
         {
+            ViewBag.medID = medID;
+            ViewBag.eventID = id; 
             return View();
         }
 
-        // POST: MedicineIntakeEvent/Edit/5
+        //POST: MedicineIntakeEvent/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("EventId,Dosage,TimeStamp, MedId")] MedicineEvent medicineEvent)
         {
-            try
+            if (id != medicineEvent.EventId)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    _medService.Update(medicineEvent);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    throw;
+                }
+                return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId });
             }
+            return View(medicineEvent);
         }
 
-        // GET: MedicineIntakeEvent/Delete/5
-        public ActionResult Delete(int id)
+        // GET: MedicineEvent/Delete/5
+        public async Task<IActionResult> Delete(int? id, int medID)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            _medEvent = _medService.SelectById(id);
+
+            if (_medEvent == null)
+            {
+                return NotFound();
+            }
+
+            return View(_medEvent);
         }
 
-        // POST: MedicineIntakeEvent/Delete/5
-        [HttpPost]
+        // POST: Medicines/Delete/5
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeleteConfirmed([Bind("EventId,Dosage,TimeStamp, MedId")] MedicineEvent medicineEvent)
+            //int id, int medID)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            _medService.Delete(medicineEvent.EventId);
+            return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId });
+        }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        // GET: Medicines/Event/
+        public ActionResult Event(int id)
+        {
+            return null;
         }
     }
 }

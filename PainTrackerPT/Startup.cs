@@ -14,6 +14,7 @@ using PainTrackerPT.Models;
 using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Services;
 using PainTrackerPT.Repository;
+using PainTrackerPT.Data.Medicine.APIClasses;
 
 namespace PainTrackerPT
 {
@@ -47,7 +48,8 @@ namespace PainTrackerPT
 
             services.AddScoped(typeof(IMedicineLog<>), typeof(MedicineRepository<>));
             services.AddScoped(typeof(IMedicineService<>), typeof(MedicineService<>));
-            
+            services.AddScoped(typeof(IMedicineIntakeEventAPI), typeof(MedicineIntakeEventAPI));
+            services.AddScoped(typeof(IMedicineDataAPI), typeof(MedicineDataAPI));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

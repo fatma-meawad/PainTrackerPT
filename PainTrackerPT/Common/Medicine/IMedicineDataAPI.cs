@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Common.Medicine
 {
-    interface IMedicineIntakeEvent
+    public interface IMedicineDataAPI
     {
-        MedicineLog GetLogAt(DateTime dt);
-        MedicineLog GetLogFromTo(DateTime start_dt, DateTime end_dt);
+        //Team Analytics's methods
+        IEnumerable<MedicineLog> GetMedicine(int patientID, int medicineID);
     }
 }

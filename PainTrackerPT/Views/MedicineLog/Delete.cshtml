@@ -11,18 +11,18 @@
     <h4>MedicineLog</h4>
     <hr />
     <dl class="row">
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)*@
+            @Html.DisplayFor(model => model.Name)
         </dd>
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.timeStamp)
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.timeStamp)
-        </dd*@>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
     </dl>
     
     <form asp-action="Delete">

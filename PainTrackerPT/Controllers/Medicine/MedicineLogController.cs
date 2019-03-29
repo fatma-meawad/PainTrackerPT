@@ -11,12 +11,12 @@ using PainTrackerPT.Models.Medicine;
 
 namespace PainTrackerPT.Controllers.Medicine
 {
-    public class MedicineLogsController : Controller
+    public class MedicineLogController : Controller
     {
         private readonly IMedicineService<MedicineLog> _medService;
-        private MedicineLog _medLog = new MedicineLog();
+        private MedicineLog _medLog;
 
-        public MedicineLogsController(IMedicineService<MedicineLog> medService)
+        public MedicineLogController(IMedicineService<MedicineLog> medService)
         {
             _medService = medService;         
         }
@@ -32,12 +32,15 @@ namespace PainTrackerPT.Controllers.Medicine
         //GET: MedicineLogs
         public async Task<IActionResult> Index()
         {
-            return View(_medService.SelectAll());
+            //return View(_medService.SelectAll());
+            return View(_medService.SelectMedLogById(1,1));
         }
 
         // GET: MedicineLogs/Create
         public IActionResult Create()
         {
+            var medNameList = _medService.GetMedicineNameList();
+            ViewData["medNameList"] = medNameList;
             return View();
         }
 

@@ -18,5 +18,7 @@ namespace PainTrackerPT.Models.Medicine
         [Required]
         [ForeignKey("MedicineLog")]
         public int MedId { get; set; }
+
+
     }
 }

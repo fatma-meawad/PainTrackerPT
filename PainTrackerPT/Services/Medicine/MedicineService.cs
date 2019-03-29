@@ -10,16 +10,35 @@ namespace PainTrackerPT.Services
     public class MedicineService<T> : IMedicineService<T> where T: class
     {
         private readonly IMedicineLog<T> _medLog;
-      
+        private readonly IMedicineLog<MedicineEvent> _medEvent;
+        private readonly IMedicineLog<MedicineLog> _medData;
 
-        public MedicineService(IMedicineLog<T> medLog)
+
+        public MedicineService(IMedicineLog<T> medLog, IMedicineLog<MedicineEvent> medEvent, IMedicineLog<MedicineLog> medData)
         {
             _medLog = medLog;
+            _medEvent = medEvent;
+            _medData = medData;
         }
 
         public IEnumerable<T> SelectAll()
         {
             return _medLog.SelectAll();
+        }
+
+        public IEnumerable<MedicineLog> GetMedicineNameList()
+        {           
+            return _medData.GetMedicineNameList();
+        }
+
+        public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
+        {
+            return _medEvent.SelectMedEventById(medicineID);
+        }
+
+        public IEnumerable<MedicineLog> SelectMedLogById(int patientID, int medicineID)
+        {
+            return _medData.SelectMedLogById(patientID, medicineID);
         }
 
         public void Insert(T obj)
