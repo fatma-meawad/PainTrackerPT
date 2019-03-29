@@ -7,7 +7,7 @@ namespace PainTrackerPT.Models.Events
 {
     public class EventsLog
     {
-        public Guid Id { get; set; }
+       public Guid Id { get; set; }
         public DateTime timeStamp { get; set; }
         public string eventTitle { get; set; }
         public DateTime eventStartDate { get; set; }

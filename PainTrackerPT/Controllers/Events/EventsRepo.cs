@@ -15,9 +15,14 @@ namespace PainTrackerPT.Controllers.Events
     {
         internal PainTrackerPTContext db = new PainTrackerPTContext();
 
-        public void addEvent(EventsLog e)
+        public async void addEvent(EventsLog e)
         {
-            throw new NotImplementedException();
+            Guid g;
+            g = Guid.NewGuid();
+            e.Id = g;
+            e.timeStamp = DateTime.Now;
+            db.Add(e);
+            await db.SaveChangesAsync();
         }
 
         public async Task<JArray> getAllEvents()
@@ -89,8 +94,7 @@ namespace PainTrackerPT.Controllers.Events
             return output;
         }
 
-        public async Task<JArray> getAllMedicineIntake()
-        {
+        public async Task<JArray> getAllMedicineIntake() {
             JArray output = new JArray();
 
             string query = "SELECT * FROM dbo.Events WHERE moduleType='typeMI'";
