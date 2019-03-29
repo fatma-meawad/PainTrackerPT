@@ -4,47 +4,39 @@ $(document).ready(function () {
     $('input[type="checkbox"][id="eventType"]').click(function () {
         if ($(this).is(":checked")) {
             if ($(this).val() == "typePD") {
-                $('#calendar').fullCalendar('removeEvents');
-                $('#calendar').fullCalendar('removeEventSources');
-                $('#calendar').fullCalendar('addEventSource', 'https://localhost:5001/events/getpaindairy');   
-                $('#calendar').fullCalendar('rerenderEvents');
-                $('#calendar').fullCalendar('refetchEvents');
-                console.log("getpaindiary");
-            } else if ($(this).val() == "typeMI") {
-                $('#calendar').fullCalendar('removeEvents');
-                $('#calendar').fullCalendar('removeEventSources');
-                $('#calendar').fullCalendar('addEventSource', 'https://localhost:5001/events/getmedicineintake');
-                $('#calendar').fullCalendar('rerenderEvents');
-                $('#calendar').fullCalendar('refetchEvents');
-                console.log("getmedicineintake");
-            } else if ($(this).val() == "typeFU") {
-                $('#calendar').fullCalendar('removeEvents');
-                $('#calendar').fullCalendar('removeEventSources');
-                $('#calendar').fullCalendar('addEventSource', 'https://localhost:5001/events/getfollowup');
-                $('#calendar').fullCalendar('rerenderEvents');
-                $('#calendar').fullCalendar('refetchEvents');
-                console.log("getfollowup");
+                addEventFromCalendar('https://localhost:5001/events/getpaindairy');
+            }
+            else if ($(this).val() == "typeMI") {
+                addEventFromCalendar('https://localhost:5001/events/getmedicineintake');
+            }
+            else if ($(this).val() == "typeFU") {
+                addEventFromCalendar('https://localhost:5001/events/getfollowup');
             }
         }
         else if ($(this).is(":not(:checked)")) {
             if ($(this).val() == "typePD") {
-                $('#calendar').fullCalendar('removeEventSource', 'https://localhost:5001/events/getpaindairy');
-                $('#calendar').fullCalendar('rerenderEvents');
-                $('#calendar').fullCalendar('refetchEvents');
-                console.log("getpaindiary");
-            } else if ($(this).val() == "typeMI") {
-                $('#calendar').fullCalendar('removeEventSource', 'https://localhost:5001/events/getmedicineintake');
-                $('#calendar').fullCalendar('rerenderEvents');
-                $('#calendar').fullCalendar('refetchEvents');
-                console.log("getmedicineintake");
-            } else if ($(this).val() == "typeFU") {
-                $('#calendar').fullCalendar('removeEventSource', 'https://localhost:5001/events/getfollowup');
-                $('#calendar').fullCalendar('rerenderEvents');
-                $('#calendar').fullCalendar('refetchEvents');
-                console.log("getfollowup");
+                removeEventFromCalendar('https://localhost:5001/events/getpaindairy');
+            }
+            else if ($(this).val() == "typeMI") {
+                removeEventFromCalendar('https://localhost:5001/events/getmedicineintake');
+            }
+            else if ($(this).val() == "typeFU") {
+                removeEventFromCalendar('https://localhost:5001/events/getfollowup');
             }
         }
     });
+
+    function addEventFromCalendar(eventUrl) {
+        $('#calendar').fullCalendar('addEventSource', eventUrl);
+        $('#calendar').fullCalendar('rerenderEvents');
+        $('#calendar').fullCalendar('refetchEvents');
+    }
+
+    function removeEventFromCalendar(eventUrl) {
+        $('#calendar').fullCalendar('removeEventSource', eventUrl);
+        $('#calendar').fullCalendar('rerenderEvents');
+        $('#calendar').fullCalendar('refetchEvents');
+    }
 
     callCalendar('https://localhost:5001/Events/get');
 

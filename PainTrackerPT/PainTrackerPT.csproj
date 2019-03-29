@@ -15,6 +15,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20190327054013_KeylessCreate.cs" />
     <Compile Remove="Migrations\20190327054013_KeylessCreate.Designer.cs" />
+    <Compile Remove="Migrations\20190329085247_keyless290319.cs" />
+    <Compile Remove="Migrations\20190329085247_keyless290319.Designer.cs" />
   </ItemGroup>
 
 

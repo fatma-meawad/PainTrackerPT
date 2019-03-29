@@ -10,6 +10,5 @@ namespace PainTrackerPT.Common.Events
     {
         EventsLog GetLogAt(DateTime dt);
         EventsLog GetLogFromTo(DateTime start_dt, DateTime end_dt);
-
     }
 }
