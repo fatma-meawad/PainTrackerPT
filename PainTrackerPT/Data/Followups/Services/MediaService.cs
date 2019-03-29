@@ -7,14 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
+using PainTrackerPT.Common.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IMediaService
-    {
-    
-    }
-
     public class MediaService : IMediaService{
         private IMediaRepository _mediaRepository;
     }

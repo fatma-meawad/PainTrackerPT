@@ -8,14 +8,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
+using PainTrackerPT.Common.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IFollowUpService
-    {
-    
-    }
-
     public class FollowUpService : IFollowUpService {
         private IFollowUpRepository _followUpRepository;
     }
