@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Analytics;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Analytics;
 
@@ -12,17 +13,27 @@ namespace PainTrackerPT.Controllers
 {
     public class AnalyticsLogsController : Controller
     {
-        private readonly PainTrackerPTContext _context;
 
-        public AnalyticsLogsController(PainTrackerPTContext context)
+        private readonly IGinyuGateway _gateway;
+        private readonly IGFPatientGateway _patientGateway;
+
+        public AnalyticsLogsController(IGinyuGateway gateway, IGFPatientGateway _patient)
         {
-            _context = context;
+            _gateway = gateway;
+            _patientGateway = _patient;
+        }
+
+        public async Task<ActionResult> Trends()
+        {
+            return View(_patientGateway.SelectById(1));
         }
 
         // GET: AnalyticsLogs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.AnalyticsLog.ToListAsync());
+            //Currently Retrieving a specific user information for testing    
+            return View(_gateway.SelectAll());
+            //return View(_patientGateway.SelectById(1));
         }
 
         // GET: AnalyticsLogs/Details/5
@@ -33,8 +44,8 @@ namespace PainTrackerPT.Controllers
                 return NotFound();
             }
 
-            var analyticsLog = await _context.AnalyticsLog
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var analyticsLog = _gateway.Find(id);
+
             if (analyticsLog == null)
             {
                 return NotFound();
@@ -59,8 +70,9 @@ namespace PainTrackerPT.Controllers
             if (ModelState.IsValid)
             {
                 analyticsLog.Id = Guid.NewGuid();
-                _context.Add(analyticsLog);
-                await _context.SaveChangesAsync();
+
+                _gateway.Insert(analyticsLog);
+                _gateway.Save();
                 return RedirectToAction(nameof(Index));
             }
             return View(analyticsLog);
@@ -74,7 +86,7 @@ namespace PainTrackerPT.Controllers
                 return NotFound();
             }
 
-            var analyticsLog = await _context.AnalyticsLog.FindAsync(id);
+            var analyticsLog = _gateway.Find(id);
             if (analyticsLog == null)
             {
                 return NotFound();
@@ -98,8 +110,9 @@ namespace PainTrackerPT.Controllers
             {
                 try
                 {
-                    _context.Update(analyticsLog);
-                    await _context.SaveChangesAsync();
+                    _gateway.Update(analyticsLog);
+                    _gateway.Save();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,8 +138,7 @@ namespace PainTrackerPT.Controllers
                 return NotFound();
             }
 
-            var analyticsLog = await _context.AnalyticsLog
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var analyticsLog = _gateway.Find(id);
             if (analyticsLog == null)
             {
                 return NotFound();
@@ -140,15 +152,14 @@ namespace PainTrackerPT.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var analyticsLog = await _context.AnalyticsLog.FindAsync(id);
-            _context.AnalyticsLog.Remove(analyticsLog);
-            await _context.SaveChangesAsync();
+            _gateway.Delete(id);
+            _gateway.Save();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AnalyticsLogExists(Guid id)
         {
-            return _context.AnalyticsLog.Any(e => e.Id == id);
+            return _gateway.Exist(id);
         }
     }
 }
