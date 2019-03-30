@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.AccessControl;
 using System.Threading.Tasks;
 
 namespace PainTrackerPT.Models.Followups
 {
-    public class Question
+    public class Question : BaseEntity
     {
-        public Guid QuestionId { get; set; }
-        public Answer Answer { get; set; }
-        public string Description { get; set; }
-        public DateTime DateGenerated { get; set; }
+        private String Description { get => Description; set => Description = value; }
+        private DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; }
     }
 }

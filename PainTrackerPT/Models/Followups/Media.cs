@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Models.Followups
 {
-    public class Advice : BaseEntity
+    public class Media : BaseEntity
     {
         private Guid AnswerId { get => AnswerId; set => AnswerId = value; }
         [Required]
-        private String Description { get => Description; set => Description = value; }
-        private DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; }
-
-
+        private String MediaUrl { get => MediaUrl; set => MediaUrl = value; }
     }
 }

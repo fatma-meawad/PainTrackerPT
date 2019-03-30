@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PainTrackerPT.Models.Followups
 {
-    public class FollowUp 
+    public class FollowUp : BaseEntity
     {
-        public Guid FollowUpId { get; set; }
-        public int State { get; set; }
-        public List<Advice> Advice { get; set; }
-        public string Description { get; set; }
-        public DateTime DateGenerated { get; set; }
-        public List<Question> Questions { get; set; }
+        private Guid PatientId { get => PatientId; set => PatientId = value; }
+        private Guid DoctorID { get => DoctorID; set => DoctorID = value; }
+        [Required]
+        private int State { get => State; set => State = value; }
+        [Required]
+        private string Description { get => Description; set => Description = value; }
+        private DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; } 
     }
 }
