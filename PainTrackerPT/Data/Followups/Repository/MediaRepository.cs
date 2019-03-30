@@ -12,19 +12,19 @@ namespace PainTrackerPT.Data.Followups
 {
     public interface IMediaRepository
     {
-        void Create(AbstractMedia media);
-        Task<IEnumerable<AbstractMedia>> SelectAll();
-        Task<AbstractMedia> SelectById(Guid id);
-        void Update(AbstractMedia media);
+        void Create(Media media);
+        Task<IEnumerable<Media>> SelectAll();
+        Task<Media> SelectById(Guid id);
+        void Update(Media media);
         void Remove(Guid id);
         Task<int> Save();
     }
 
     public class MediaRepository : IMediaRepository
     {
-        private DbSet<AbstractMedia> _mediaDbSet;
+        private DbSet<Media> _mediaDbSet;
 
-        public void Create(AbstractMedia media)
+        public void Create(Media media)
         {
             throw new NotImplementedException();
         }
@@ -39,17 +39,17 @@ namespace PainTrackerPT.Data.Followups
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<AbstractMedia>> SelectAll()
+        public Task<IEnumerable<Media>> SelectAll()
         {
             throw new NotImplementedException();
         }
 
-        public Task<AbstractMedia> SelectById(Guid id)
+        public Task<Media> SelectById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(AbstractMedia media)
+        public void Update(Media media)
         {
             throw new NotImplementedException();
         }

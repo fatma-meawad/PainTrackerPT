@@ -19,7 +19,7 @@ namespace PainTrackerPT.Data.Followups
             this._mediaRepository = new MediaRepository();
         }
 
-        public void CreateNewMedia(AbstractMedia media)
+        public void CreateNewMedia(Media media)
         {
             throw new NotImplementedException();
         }
@@ -29,17 +29,17 @@ namespace PainTrackerPT.Data.Followups
             throw new NotImplementedException();
         }
 
-        public Task<AbstractMedia> Select(Guid id)
+        public Task<Media> Select(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<AbstractMedia>> SelectAll()
+        public Task<IEnumerable<Media>> SelectAll()
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateMedia(Guid id, AbstractMedia media)
+        public void UpdateMedia(Guid id, Media media)
         {
             throw new NotImplementedException();
         }

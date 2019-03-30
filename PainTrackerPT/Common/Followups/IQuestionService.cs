@@ -11,7 +11,7 @@ namespace PainTrackerPT.Common.Followups
         void CreateNewQuestion(Question question);
         void UpdateQuestion(Guid id, Question question);
         void DeleteQuestion(Guid id);
-        Task<AbstractMedia> Select(Guid id);
-        Task<IEnumerable<AbstractMedia>> SelectAll();
+        Task<Question> Select(Guid id);
+        Task<IEnumerable<Question>> SelectAll();
     }
 }
