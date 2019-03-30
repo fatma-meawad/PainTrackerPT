@@ -10,7 +10,7 @@ namespace PainTrackerPT.Data.Followups.Services
     {
         private IBaseRepository baseRepository;
 
-        public BaseService(BaseRepository baseRepository)
+        public BaseService(IBaseRepository baseRepository)
         {
             this.baseRepository = baseRepository;
         }
