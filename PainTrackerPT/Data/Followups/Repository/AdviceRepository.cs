@@ -7,49 +7,53 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
+using PainTrackerPT.Data.Followups.Repository;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IAdviceRepository
-    {
-        void Create(Advice advice);
-        Task<IEnumerable<Advice>> SelectAll();
-        Task<Advice> SelectById(Guid id);
-        void Update(Advice advice);
-        void Remove(Guid id);
-        Task<int> Save();
-    }
+   
 
-    public class AdviceRepository : IAdviceRepository
+    public class AdviceRepository : BaseRepository
     {
+
+        DbSet<Advice> AdviceSet;
+
+        public AdviceRepository(PainTrackerPTContext db) : base(db)
+        {
+            AdviceSet = db.Set<Advice>();
+        }
         public void Create(Advice advice)
         {
-            throw new NotImplementedException();
+            this.AdviceSet.Add(advice);
+            db.SaveChanges();
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            Advice advice = AdviceSet.Find(id);
+            if (advice != null)
+            {
+                AdviceSet.Remove(advice);
+                this.Save();
+            }
         }
 
-        public Task<int> Save()
+
+        public async Task<IEnumerable<Advice>> SelectAll()
         {
-            throw new NotImplementedException();
+            return await AdviceSet.ToArrayAsync();
         }
 
-        public Task<IEnumerable<Advice>> SelectAll()
+        public async Task<Advice> Select(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Advice> SelectById(Guid id)
-        {
-            throw new NotImplementedException();
+            return AdviceSet.Find(id);
         }
 
         public void Update(Advice advice)
         {
-            throw new NotImplementedException();
+            Advice ExistingAdvice = AdviceSet.Find(advice.id);
+            AdviceSet.Update(advice);
+            this.Save();      
         }
     }
 }
