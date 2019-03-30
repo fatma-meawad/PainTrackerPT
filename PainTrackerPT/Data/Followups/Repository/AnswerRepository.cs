@@ -7,49 +7,53 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
+using PainTrackerPT.Data.Followups.Repository;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IAnswerRepository
+    public class AnswerRepository : BaseRepository
     {
-        void Create(Answer answer);
-        Task<IEnumerable<Answer>> SelectAll();
-        Task<FollowUp> SelectById(Guid id);
-        void Update(Answer answer);
-        void Remove(Guid id);
-        Task<int> Save();
-    }
+        DbSet<Answer> AnswerSet;
 
-    public class AnswerRepository : IAnswerRepository
-    {
+        public AnswerRepository(PainTrackerPTContext db) : base(db)
+        {
+            AnswerSet = db.Set<Answer>();
+        }
+
+
         public void Create(Answer answer)
         {
-            throw new NotImplementedException();
+            this.AnswerSet.Add(answer);
+            db.SaveChanges();
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+
+            Answer answer = AnswerSet.Find(id);
+            if (answer != null)
+            {
+                AnswerSet.Remove(answer);
+                this.Save();
+            }
         }
 
-        public Task<int> Save()
+        public async Task<IEnumerable<Answer>> SelectAll()
         {
-            throw new NotImplementedException();
+            return await AnswerSet.ToArrayAsync();
+
         }
 
-        public Task<IEnumerable<Answer>> SelectAll()
+        public async Task<Answer> Select(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<FollowUp> SelectById(Guid id)
-        {
-            throw new NotImplementedException();
+            return AnswerSet.Find(id);
         }
 
         public void Update(Answer answer)
         {
-            throw new NotImplementedException();
+            Answer ExistingAnswer = AnswerSet.Find(answer.id);
+            AnswerSet.Update(answer);
+            this.Save();
         }
     }
 }

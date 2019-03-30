@@ -11,10 +11,11 @@ using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
-
+using PainTrackerPT.Data.Followups.Repository;
 
 namespace PainTrackerPT.Data.Followups
 {
+
     public class MediaRepository : BaseRepository
     {
         private DbSet<Media> _mediaSet;
@@ -53,7 +54,7 @@ namespace PainTrackerPT.Data.Followups
 
         public void Update(Media media)
         {
-            Media existingMedia = _mediaSet.Find(media.Id);
+            Media existingMedia = _mediaSet.Find(media.id);
             _mediaSet.Update(media);
             this.Save();
         }
