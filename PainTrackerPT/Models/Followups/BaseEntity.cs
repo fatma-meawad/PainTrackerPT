@@ -9,6 +9,6 @@ namespace PainTrackerPT.Models.Followups
     public class BaseEntity
     {
         [Key]
-        private Guid id { get => id; set => id = value; }
+        public Guid id { get => id; set => id = value; }
     }
 }

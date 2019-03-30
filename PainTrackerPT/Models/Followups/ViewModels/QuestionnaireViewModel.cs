@@ -7,15 +7,15 @@ namespace PainTrackerPT.Models.Followups.ViewModels
 {
     public class QuestionnaireViewModel
     {
-        private Guid PatientId { get => PatientId; set => PatientId = value; }
-        private Guid DoctorId { get => DoctorId; set => DoctorId = value; }
-        private int State { get => State; set => State = value; }
-        private String Description { get => Description; set => Description = value; }
-        private DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; }
-        private String Question { get => Question; set => Question = value; }
-        private String Answer { get => Answer; set => Answer = value; }
-        private String Advice { get => Advice; set => Advice = value; }
-        private String Recommendation { get => Recommendation; set => Recommendation = value; }
-        private String Media { get => Media; set => Media = value; }
+        public Guid PatientId { get => PatientId; set => PatientId = value; }
+        public Guid DoctorId { get => DoctorId; set => DoctorId = value; }
+        public int State { get => State; set => State = value; }
+        public String Description { get => Description; set => Description = value; }
+        public DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; }
+        public String Question { get => Question; set => Question = value; }
+        public String Answer { get => Answer; set => Answer = value; }
+        public String Advice { get => Advice; set => Advice = value; }
+        public String Recommendation { get => Recommendation; set => Recommendation = value; }
+        public String Media { get => Media; set => Media = value; }
     }
 }
