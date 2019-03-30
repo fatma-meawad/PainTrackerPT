@@ -5,51 +5,52 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IQuestionRepository
+    public class QuestionRepository : BaseRepository
     {
-        void Create(Question question);
-        Task<IEnumerable<Question>> SelectAll();
-        Task<Question> SelectById(Guid id);
-        void Update(Question question);
-        void Remove(Guid id);
-        Task<int> Save();
-    }
+        DbSet<Question> questionsSet;
 
-    public class QuestionRepository : IQuestionRepository
-    {
+        public QuestionRepository(PainTrackerPTContext db) : base(db)
+        {
+            questionsSet = db.Set<Question>();
+        }
+
         public void Create(Question question)
         {
-            throw new NotImplementedException();
+            this.questionsSet.Add(question);
+            db.SaveChanges();
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            Question question = questionsSet.Find(id);
+            if (question != null)
+            {
+                questionsSet.Remove(question);
+                this.Save();
+            }
         }
 
-        public Task<int> Save()
+        public async Task<IEnumerable<Question>> SelectAll()
         {
-            throw new NotImplementedException();
+            return await questionsSet.ToArrayAsync();
         }
 
-        public Task<IEnumerable<Question>> SelectAll()
+        public async Task<Question> Select(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Question> SelectById(Guid id)
-        {
-            throw new NotImplementedException();
+            return questionsSet.Find(id);
         }
 
         public void Update(Question question)
         {
-            throw new NotImplementedException();
+            Question existingQuestion = questionsSet.Find(question.id);
+            questionsSet.Update(question);
+            this.Save();
         }
     }
 }
