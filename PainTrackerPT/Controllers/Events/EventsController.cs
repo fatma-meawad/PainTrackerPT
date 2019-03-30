@@ -17,6 +17,11 @@ namespace PainTrackerPT.Controllers
             _eRepo = eRepo;
         }
 
+        public void exportToCSVfile()
+        {
+            _eRepo.exportToCSVfile();
+        }
+
         [HttpGet]
         public async Task<ActionResult> Get()
         {

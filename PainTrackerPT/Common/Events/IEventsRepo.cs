@@ -14,5 +14,6 @@ namespace PainTrackerPT.Common.Events
         Task<JArray> getAllFollowUp();
         Task<JArray> getAllMedicineIntake();
         void addEvent(EventsLog e);
+        void exportToCSVfile();
     }
 }
