@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using PainTrackerPT.Common.Events;
 using PainTrackerPT.Models.Events;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,6 +21,14 @@ namespace PainTrackerPT.Controllers
         public void exportToCSVfile()
         {
             _eRepo.exportToCSVfile();
+        }
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public ActionResult Edit(Guid id, [Bind("Id, eventTitle,eventStartDate,eventEndDate,eventDesc,moduleType")] EventsLog e)
+        {
+            _eRepo.editDesc(id, e);
+            return View("Index");
         }
 
         [HttpGet]

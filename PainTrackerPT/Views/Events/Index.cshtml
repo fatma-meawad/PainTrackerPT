@@ -1,11 +1,12 @@
-﻿@model IEnumerable<PainTrackerPT.Models.Events.EventsLog>
+﻿@*@model IEnumerable<PainTrackerPT.Models.Events.EventsLog>*@
+@model PainTrackerPT.Models.Events.EventsLog
 
 @{
     ViewData["Title"] = "Home Page";
 }
 <h5>Filters</h5>
 <div class="row">
-    <div class="col row">
+    <div class="col-9 row" style="margin-left: 10px;">
         <div class="col">
             <label class="switch col-4">
                 <input type="checkbox" class="primary" id="eventType" value="typePD" checked>
@@ -30,13 +31,64 @@
     </div>
 </div>
 
-<div class="ExportSection">
-    @Html.ActionLink("Export to CSV", "exportToCSVfile")
+<h5>Export</h5>
+<div class="ExportSection" style="margin-left: 20px">
+    <button class="btn btn-sm" style="background:#2196F3; color: white"><i class="fas fa-share-square" style="color: white"></i>
+        <a href="/Events/exportToCSVfile" id="exportCSV" style="color: white; text-decoration: none;">Export to Google/Outlook Format(*.csv)</a>
+    </button>
 </div>
-
 
 <hr />
 
 <div class="text-center">
     <div id="calendar"></div>
+    <div id="editDescAndSave">
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" id="idForEvent" />
+            @*<button class="close btn" onclick="closeEdit()"><i class="fa fa-window-close" aria-hidden="true"></i></button>*@
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <label id="eventTitle"></label>
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <h6 class="text-left">Edit Description: </h6>
+                    <textarea class="form-control" asp-for="eventDesc" id='eventDesc' name='eventDesc' rows="3"></textarea>
+                    <span validation-for="eventDesc" class="text-danger"></span>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Save changes" class="btn btn-primary" />
+                    <input type="button" value="Close" class="btn btn-secondary" onclick="closeEdit()" />
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
+<script>
+    function openExportOptions() {
+        document.getElementById("exportOptions").style.display = "block";
+    }
+
+    function closeOptions() {
+        document.getElementById("exportOptions").style.display = "none";
+    }
+
+    function editYou() {
+        document.getElementById("editDescAndSave").style.display = "block";
+        //$('#eventId').text(id);
+        $('#idForEvent').val(id);
+        //$('#eventStartDate').text(start);
+        //$('#eventEndDate').text(end);
+        //$('#moduleType').text(type);
+        $('#eventDesc').text(desc);
+        $('#eventTitle').text(title);
+
+    }
+
+    function closeEdit() {
+        document.getElementById("editDescAndSave").style.display = "none";
+    }
+</script>

@@ -12,7 +12,7 @@ using System.IO;
 
 namespace PainTrackerPT.Controllers.Events
 {
-    public class EventsRepo: IEventsRepo
+    public class EventsRepo: Controller, IEventsRepo
     {
         internal PainTrackerPTContext db = new PainTrackerPTContext();
 
@@ -24,6 +24,11 @@ namespace PainTrackerPT.Controllers.Events
             e.timeStamp = DateTime.Now;
             db.Add(e);
             await db.SaveChangesAsync();
+        }
+
+        private bool EventsLogExists(Guid id)
+        {
+            return db.EventsLog.Any(e => e.Id == id);
         }
 
         public async Task<JArray> getAllEvents()
@@ -147,6 +152,34 @@ namespace PainTrackerPT.Controllers.Events
 
         }
 
+        public async void editDesc(Guid id, EventsLog e)
+        {
+            if (id != e.Id)
+            {
+                return;
+            }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var eventLog = await db.EventsLog.FirstOrDefaultAsync(m => m.Id == e.Id);
+                    eventLog.eventDesc = e.eventDesc;
+                    db.Update(eventLog);
+                    await db.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EventsLogExists(e.Id))
+                    {
+                        return; // Not found
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+        }
 
     }
 }

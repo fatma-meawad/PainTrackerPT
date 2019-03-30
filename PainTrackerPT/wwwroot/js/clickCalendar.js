@@ -24,19 +24,32 @@
         var month = month[date.getUTCMonth()];
         var day = date.getUTCDate();
         var year = date.getUTCFullYear();
+
+        id = event.id;
+        start = event.start;
+        end = event.end;
+        type = event.type;
+        desc = event.desc;
+        title = event.title;
+
         document.getElementById('wrapContent').style.backgroundColor = "#e9faff";
-        document.getElementById('title').innerHTML = "<h4>" + title + "</h4>";
-        document.getElementById('date').innerHTML = "<h5>" + day + " " + month + " " + year + "</h5>";
-        //document.getElementById('type').innerHTML = "<br><h5>" + "Type:" + " " + month + "</h5>";
+        document.getElementById('title').innerHTML = "<h6>" + title + "</h6>";
+        document.getElementById('edit').innerHTML = "</button><button class='btn col' onclick='editYou()' style='color: dimgray; font-weight: bold; margin-bottom: 10px;'><i class='far fa-edit' style='color: dimgray'></i> Edit description</button>";
+        document.getElementById('date').innerHTML = "<h8><br>" + day + " " + month + " " + year + "</h8>";
+        document.getElementById('description').innerHTML = "<h8>" + desc + "</h8>";
     });
+
     //when out of event, display blank
     $(document).mouseup(function (e) {
-        var container = $("fc-event-container");
-        var hideyou = $("wrapContent");
+        var container = $(".fc-event-container");
+        var editContainter = $("#wrapContent");
 
         // if the target of the click isn't the container nor a descendant of the container
-        if (!container.is(e.target) && container.has(e.target).length === 0) {
-            hideyou.hide();
+        if (!container.is(e.target) && container.has(e.target).length === 0 && !editContainter.is(e.target) && editContainter.has(e.target).length === 0) {
+            editContainter.hide();
+        }
+        else {
+            editContainter.show();
         }
     });
 
