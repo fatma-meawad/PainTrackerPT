@@ -5,53 +5,52 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IMediaRepository
+    public class MediaRepository : BaseRepository
     {
-        void Create(AbstractMedia media);
-        Task<IEnumerable<AbstractMedia>> SelectAll();
-        Task<AbstractMedia> SelectById(Guid id);
-        void Update(AbstractMedia media);
-        void Remove(Guid id);
-        Task<int> Save();
-    }
+        DbSet<Media> mediaSet;
 
-    public class MediaRepository : IMediaRepository
-    {
-        private DbSet<AbstractMedia> _mediaDbSet;
-
-        public void Create(AbstractMedia media)
+        public MediaRepository(PainTrackerPTContext db) : base(db)
         {
-            throw new NotImplementedException();
+            mediaSet = db.Set<Media>();
         }
 
-        public void Remove(Guid id)
+        public void Create(Media media)
         {
-            throw new NotImplementedException();
+            this.mediaSet.Add(media);
+            db.SaveChanges();
         }
 
-        public Task<int> Save()
+        public async Task<IEnumerable<Media>> SelectAll()
         {
-            throw new NotImplementedException();
+            return await mediaSet.ToArrayAsync();
         }
 
-        public Task<IEnumerable<AbstractMedia>> SelectAll()
+        public async Task<Media> Select(Guid mediaId)
         {
-            throw new NotImplementedException();
+            return mediaSet.Find(mediaId);
         }
 
-        public Task<AbstractMedia> SelectById(Guid id)
+        public void Remove(Guid mediaId)
         {
-            throw new NotImplementedException();
+            Media media = mediaSet.Find(mediaId);
+            if (media != null)
+            {
+                mediaSet.Remove(media);
+                this.Save();
+            }
         }
 
-        public void Update(AbstractMedia media)
+        public void Update(Media media)
         {
-            throw new NotImplementedException();
+            Media existingMedia = mediaSet.Find(media.id);
+            mediaSet.Update(media);
+            this.Save();
         }
     }
 }
