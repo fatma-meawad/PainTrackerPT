@@ -8,12 +8,12 @@ namespace PainTrackerPT.Models.Followups
 {
     public class FollowUp : BaseEntity
     {
-        public Guid PatientId { get => PatientId; set => PatientId = value; }
-        public Guid DoctorId { get => DoctorId; set => DoctorId = value; }
+        public Guid PatientId { get; set; }
+        public Guid DoctorId { get; set; }
         [Required]
-        public int State { get => State; set => State = value; }
+        public int State { get; set; }
         [Required]
-        public string Description { get => Description; set => Description = value; }
-        public DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; } 
+        public string Description { get; set; }
+        public DateTime DateGenerated { get; set; } 
     }
 }
