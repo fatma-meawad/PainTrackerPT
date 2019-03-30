@@ -23,7 +23,7 @@ namespace PainTrackerPT.Controllers
             _patientGateway = _patient;
         }
 
-        public async Task<ActionResult> Trends()
+        public async Task<ActionResult> PatientTrend()
         {
             return View(_patientGateway.SelectById(1));
         }
