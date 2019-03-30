@@ -12,7 +12,7 @@ namespace PainTrackerPT.Common.Medicine
         T GetLogAt(DateTime dt);
         T GetLogFromTo(DateTime start_dt, DateTime end_dt);
         IEnumerable<T> SelectAll();
-        IEnumerable<MedicineLog> GetMedicineNameList();
+        IEnumerable<MedicineEvent> GetMedicineEventList(int id);
         IEnumerable<MedicineEvent> SelectMedEventById(int medicineID);
         IEnumerable<MedicineLog> SelectMedLogById(int patientID, int medicineID);
         void Insert(T obj);

@@ -54,7 +54,12 @@ namespace PainTrackerPT.Controllers.Medicine
         public ActionResult Edit(int id, int medID)
         {
             ViewBag.medID = medID;
-            ViewBag.eventID = id; 
+            ViewBag.eventID = id;
+
+            //enze's function
+            var eventList = _medService.GetMedicineEventList(medID);
+            ViewBag.eventList = eventList;
+
             return View();
         }
 
@@ -66,13 +71,13 @@ namespace PainTrackerPT.Controllers.Medicine
         public async Task<IActionResult> Edit(int id, [Bind("EventId,Dosage,TimeStamp, MedId")] MedicineEvent medicineEvent)
         {
             if (id != medicineEvent.EventId)
-            {
+            {                
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
                 try
-                {
+                {                   
                     _medService.Update(medicineEvent);
                 }
                 catch (DbUpdateConcurrencyException)
@@ -117,5 +122,6 @@ namespace PainTrackerPT.Controllers.Medicine
         {
             return null;
         }
+                
     }
 }

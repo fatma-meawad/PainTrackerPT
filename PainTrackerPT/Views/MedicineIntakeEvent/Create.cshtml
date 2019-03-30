@@ -12,16 +12,26 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MedId" value=@ViewBag.MedID/>
+            <input type="hidden" asp-for="MedId" value=@ViewBag.MedID />
             <div class="form-group">
                 <label asp-for="Dosage" class="control-label"></label>
-                <input asp-for="Dosage" class="form-control" />
+                <input asp-for="Dosage" class="form-control" required="required"/>
                 <span asp-validation-for="Dosage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TimeStamp" class="control-label"></label>
-                <input asp-for="TimeStamp" class="form-control" />
-                <span asp-validation-for="TimeStamp" class="text-danger"></span>
+                <label asp-for="Intervals" class="control-label">Number of hours</label>
+                <input asp-for="Intervals" class="form-control" required="required"/>
+                <span asp-validation-for="Intervals" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumOfRecurringTimes" class="control-label">Number of intakes per day</label>
+                <input asp-for="NumOfRecurringTimes" class="form-control" required="required"/>
+                <span asp-validation-for="NumOfRecurringTimes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartTime" class="control-label"></label>
+                <input asp-for="StartTime" class="form-control" required="required"/>
+                <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

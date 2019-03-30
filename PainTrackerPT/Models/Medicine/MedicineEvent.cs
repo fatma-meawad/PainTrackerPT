@@ -13,8 +13,10 @@ namespace PainTrackerPT.Models.Medicine
         public int EventId { get; set; }
         [Required]
         public int Dosage { get; set; }
-        public DateTime TimeStamp { get; set; }
-
+        public DateTime StartTime { get; set; }
+        public int Intervals { get; set; }
+        public int NumOfRecurringTimes { get; set; }
+        
         [Required]
         [ForeignKey("MedicineLog")]
         public int MedId { get; set; }

@@ -17,8 +17,14 @@
                     @Html.DisplayNameFor(model => model.Dosage)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.TimeStamp)
-                </th>                 
+                    @Html.DisplayNameFor(model => model.Intervals)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumOfRecurringTimes)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -26,19 +32,25 @@
             {
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Dosage)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TimeStamp)
-                        </td>                       
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID }) |
-                            <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                            @Html.ActionLink("Delete", "Delete", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID })
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dosage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Intervals)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfRecurringTimes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartTime)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID }) |
+                    <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
+                    @Html.ActionLink("Delete", "Delete", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID })
+                </td>
+            </tr>
                 }
             }
         </tbody>

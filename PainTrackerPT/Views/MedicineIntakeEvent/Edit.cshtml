@@ -8,22 +8,44 @@
 
 <h4>MedicineEvent</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
+<div class="row" >
+    <div class="col-md-4" >
+        <form asp-action="Edit" id="forms">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="EventId" value=@ViewBag.eventID />
             <input type="hidden" asp-for="MedId" value=@ViewBag.medID />
             <div class="form-group">
                 <label asp-for="Dosage" class="control-label"></label>
-                <input asp-for="Dosage" class="form-control" />
+                <input asp-for="Dosage" class="form-control" value="@ViewBag.eventList[0].Dosage" required="required" />
                 <span asp-validation-for="Dosage" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="TimeStamp" class="control-label"></label>
-                <input asp-for="TimeStamp" class="form-control" />
-                <span asp-validation-for="TimeStamp" class="text-danger"></span>
+                <label asp-for="Intervals" class="control-label"></label>
+                <input asp-for="Intervals" class="form-control" value="@ViewBag.eventList[0].Intervals" required="required" />
+                <span asp-validation-for="Intervals" class="text-danger"></span>
             </div>
+            
+            <div class="form-group">
+                <label asp-for="NumOfRecurringTimes" class="control-label"></label>
+                <input asp-for="NumOfRecurringTimes" class="form-control" value="@ViewBag.eventList[0].NumOfRecurringTimes" required="required" />
+                <span asp-validation-for="NumOfRecurringTimes" class="text-danger"></span>
+            </div>
+
+            <div class="form-group" id="timestamp">
+                <label asp-for="StartTime" class="control-label" value="@ViewBag.eventList[0].StartTime"></label>                
+                <input asp-for="StartTime" value="@ViewBag.eventList[0].TimeStamp" required="required" />
+                @*<input type="button" value="Update" class="btn btn-primary" onclick="ChangeDateTime()" />*@
+            </div>
+
+
+            @*<div class="form-group">
+            <label asp-for="TimeStamp" class="control-label"></label>
+            <input asp-for="TimeStamp" class="form-control" />
+            <input asp-for="TimeStamp" class="form-control" name="30/3/2019 2:01:00 AM" value="@ViewBag.eventList[0].TimeStamp"/>
+            <span asp-validation-for="TimeStamp" class="text-danger"></span>
+        </div>*@
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -35,6 +57,27 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    var eventList = @Json.Serialize(ViewBag.eventList);
+    console.log(eventList);
+
+    function addDTForm() {
+        return '<div class="form-group"><label asp-for="TimeStamp">TimeStamp: </label>\
+                <input type="datetime-local" input asp-for="TimeStamp" class="form-control" required="required" />\
+                <span asp-validation-for= "TimeStamp" class= "text-danger"></span >\
+                </div>';
+    }
+
+    function ChangeDateTime() {
+        var div = document.createElement('div');
+        div.innerHTML = addDTForm();        
+        var original = document.getElementById("timestamp");        
+        document.getElementById("forms").replaceChild(div, original);
+    }
+</script>

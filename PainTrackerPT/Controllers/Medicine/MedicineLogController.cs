@@ -39,7 +39,7 @@ namespace PainTrackerPT.Controllers.Medicine
         // GET: MedicineLogs/Create
         public IActionResult Create()
         {
-            var medNameList = _medService.GetMedicineNameList();
+            var medNameList = _medService.SelectAll();
             ViewData["medNameList"] = medNameList;
             return View();
         }
