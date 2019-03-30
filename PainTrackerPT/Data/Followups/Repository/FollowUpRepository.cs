@@ -13,38 +13,42 @@ namespace PainTrackerPT.Data.Followups
 {
     public class FollowUpRepository : BaseRepository
     {
-        public FollowUpRepository(PainTrackerPTContext db) : base(db){}
+        DbSet<FollowUp> followUpsSet;
+
+        public FollowUpRepository(PainTrackerPTContext db) : base(db){
+            followUpsSet = db.Set<FollowUp>();
+        }
 
         public void Create(FollowUp followUp)
         {
-            this.db.Add(followUp);
+            this.followUpsSet.Add(followUp);
             db.SaveChanges();
         }
         
         public async Task<IEnumerable<FollowUp>> SelectAll()
         {
-            return await db.FollowUp.ToArrayAsync();
+            return await followUpsSet.ToArrayAsync();
         }
 
         public async Task<FollowUp> Select(Guid followUpId)
         {
-            return db.FollowUp.Find(followUpId);
+            return followUpsSet.Find(followUpId);
         }
 
         public void Remove(Guid followUpId)
         {
-            FollowUp followUp = db.FollowUp.Find(followUpId);
+            FollowUp followUp = followUpsSet.Find(followUpId);
             if (followUp != null)
             {
-                db.FollowUp.Remove(followUp);
+                followUpsSet.Remove(followUp);
                 this.Save();
             } 
         }
 
         public void Update(FollowUp followUp)
         {
-            FollowUp existingFollowUp = db.FollowUp.Find(followUp.id);
-            db.FollowUp.Update(followUp);
+            FollowUp existingFollowUp = followUpsSet.Find(followUp.id);
+            followUpsSet.Update(followUp);
             this.Save();
         }
     }
