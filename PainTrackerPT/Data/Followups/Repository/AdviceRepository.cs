@@ -51,7 +51,7 @@ namespace PainTrackerPT.Data.Followups
 
         public void Update(Advice advice)
         {
-            Advice ExistingAdvice = AdviceSet.Find(advice.id);
+            Advice ExistingAdvice = AdviceSet.Find(advice.Id);
             AdviceSet.Update(advice);
             this.Save();      
         }

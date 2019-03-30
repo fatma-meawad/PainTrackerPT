@@ -51,7 +51,7 @@ namespace PainTrackerPT.Data.Followups
 
         public void Update(Answer answer)
         {
-            Answer ExistingAnswer = AnswerSet.Find(answer.id);
+            Answer ExistingAnswer = AnswerSet.Find(answer.Id);
             AnswerSet.Update(answer);
             this.Save();
         }

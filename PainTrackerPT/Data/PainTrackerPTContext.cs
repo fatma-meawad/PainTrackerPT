@@ -19,6 +19,16 @@ namespace PainTrackerPT.Models
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                //To be edited to your own database
+                optionsBuilder.UseSqlServer(
+                    "Server=(localdb)MSSQLLocalDB;Initial Catalog=PainTrackerPTContext-b0b2ee36-cc0a-4b14-ac34-368168252e49;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            }
+        }
+
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.Doctors.DoctorsLog> DoctorsLog { get; set; }
