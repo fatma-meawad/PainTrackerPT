@@ -5,51 +5,51 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IRecommendationRepository
+    public class RecommendationRepository : BaseRepository
     {
-        void Create(Recommendation recommendation);
-        Task<IEnumerable<Recommendation>> SelectAll();
-        Task<Recommendation> SelectById(Guid id);
-        void Update(Recommendation recommendation);
-        void Remove(Guid id);
-        Task<int> Save();
-    }
+        DbSet<Recommendation> recommendationsSet;
 
-    public class RecommendationRepository : IRecommendationRepository
-    {
+        public RecommendationRepository(PainTrackerPTContext db) : base(db)
+        {
+            recommendationsSet = db.Set<Recommendation>();
+        }
+
         public void Create(Recommendation recommendation)
         {
-            throw new NotImplementedException();
+            recommendationsSet = db.Set<Recommendation>();
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
+            Recommendation recommendation = recommendationsSet.Find(id);
+            if (recommendation != null)
+            {
+                recommendationsSet.Remove(recommendation);
+                this.Save();
+            }
         }
 
-        public Task<int> Save()
+        public async Task<IEnumerable<Recommendation>> SelectAll()
         {
-            throw new NotImplementedException();
+            return await recommendationsSet.ToArrayAsync();
         }
 
-        public Task<IEnumerable<Recommendation>> SelectAll()
+        public async Task<Recommendation> Select(Guid id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<Recommendation> SelectById(Guid id)
-        {
-            throw new NotImplementedException();
+            return recommendationsSet.Find(id);
         }
 
         public void Update(Recommendation recommendation)
         {
-            throw new NotImplementedException();
+            Recommendation existingRecommendation = recommendationsSet.Find(recommendation.id);
+            recommendationsSet.Update(recommendation);
+            this.Save();
         }
     }
 }

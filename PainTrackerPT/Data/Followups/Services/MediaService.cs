@@ -13,7 +13,7 @@ namespace PainTrackerPT.Data.Followups
         {
             this._mediaRepository.Create(media);
         }
-
+        
         public void DeleteMedia(Guid id)
         {
             this._mediaRepository.Remove(id);
@@ -29,7 +29,8 @@ namespace PainTrackerPT.Data.Followups
             return this._mediaRepository.SelectAll();
         }
 
-        public void UpdateMedia(Media media)
+   
+        public void UpdateMedia(Guid id, Media media)
         {
             this._mediaRepository.Update(media);
         }

@@ -9,15 +9,16 @@ using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Common.Followups;
+using PainTrackerPT.Data.Followups.Repository;
+using PainTrackerPT.Data.Followups.Services;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public class AnswerService : IAnswerService{
-        private IAnswerRepository _answerRepsitory;
-
-        public AnswerService()
+    public class AnswerService : BaseService
+    {
+        // TODO: DI THIS
+        public AnswerService(IBaseRepository baseRepository) : base(baseRepository)
         {
-            this._answerRepsitory = new AnswerRepository();
         }
 
         public void CreateNewAnswer(Answer answer)

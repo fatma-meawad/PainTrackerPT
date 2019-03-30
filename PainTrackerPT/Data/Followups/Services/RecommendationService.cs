@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Common.Followups;
+using PainTrackerPT.Data.Followups.Repository;
+using PainTrackerPT.Data.Followups.Services;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public class RecommendationService : IRecommendationService
+    public class RecommendationService : BaseService
     {
-        private IRecommendationRepository _recommendationRepository;
-
-        public RecommendationService()
+        // TODO: DI THIS
+        public RecommendationService(IBaseRepository baseRepository) : base(baseRepository)
         {
-            this._recommendationRepository = new RecommendationRepository();
         }
         
         public void CreateNewRecommendation(Recommendation recommendation)
