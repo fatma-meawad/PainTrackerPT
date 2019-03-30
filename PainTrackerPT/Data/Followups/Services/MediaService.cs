@@ -1,47 +1,38 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Common.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
     public class MediaService : IMediaService{
-        private IMediaRepository _mediaRepository;
+        private MediaRepository _mediaRepository;
 
-        public MediaService()
+        public void CreateNewMedia(Media media)
         {
-            this._mediaRepository = new MediaRepository();
+            this._mediaRepository.Create(media);
         }
-
-        public void CreateNewMedia(AbstractMedia media)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void DeleteMedia(Guid id)
         {
-            throw new NotImplementedException();
+            this._mediaRepository.Remove(id);
         }
 
-        public Task<AbstractMedia> Select(Guid id)
+        public Task<Media> Select(Guid id)
         {
-            throw new NotImplementedException();
+            return this._mediaRepository.Select(id);
         }
 
-        public Task<IEnumerable<AbstractMedia>> SelectAll()
+        public Task<IEnumerable<Media>> SelectAll()
         {
-            throw new NotImplementedException();
+            return this._mediaRepository.SelectAll();
         }
 
-        public void UpdateMedia(Guid id, AbstractMedia media)
+   
+        public void UpdateMedia(Guid id, Media media)
         {
-            throw new NotImplementedException();
+            this._mediaRepository.Update(media);
         }
     }
 }

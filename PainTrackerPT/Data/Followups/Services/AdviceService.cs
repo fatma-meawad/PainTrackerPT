@@ -9,15 +9,16 @@ using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Common.Followups;
+using PainTrackerPT.Data.Followups.Repository;
+using PainTrackerPT.Data.Followups.Services;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public class AdviceService : IAdviceService{
-        private IAdviceRepository _adviceRepsitory;
+    public class AdviceService : BaseService{
 
-        public AdviceService()
+        // TODO: DI This
+        public AdviceService(IBaseRepository baseRepository) : base(baseRepository)
         {
-            this._adviceRepsitory = new AdviceRepository();
         }
     
         public void CreateNewAdvice(Advice advice)

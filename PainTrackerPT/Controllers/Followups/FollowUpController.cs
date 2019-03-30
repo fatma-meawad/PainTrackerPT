@@ -12,5 +12,10 @@ namespace PainTrackerPT.Controllers.Followups
         {
             return View();
         }
+
+        public IActionResult Details(Guid? id)
+        {
+            return View();
+        }
     }
 }
