@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PainTrackerPT.Migrations
 {
-    public partial class initialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +19,24 @@ namespace PainTrackerPT.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AnalyticsLog", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Appointment",
+                columns: table => new
+                {
+                    AppointmentId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PatientID = table.Column<int>(nullable: false),
+                    DoctorID = table.Column<int>(nullable: false),
+                    Message = table.Column<string>(nullable: true),
+                    AppDate = table.Column<string>(nullable: true),
+                    ProposedDate = table.Column<string>(nullable: true),
+                    ApptLocation = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointment", x => x.AppointmentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -108,6 +126,9 @@ namespace PainTrackerPT.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AnalyticsLog");
+
+            migrationBuilder.DropTable(
+                name: "Appointment");
 
             migrationBuilder.DropTable(
                 name: "DoctorsLog");

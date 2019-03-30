@@ -33,6 +33,29 @@ namespace PainTrackerPT.Migrations
                     b.ToTable("AnalyticsLog");
                 });
 
+            modelBuilder.Entity("PainTrackerPT.Models.Doctors.Appointment", b =>
+                {
+                    b.Property<int>("AppointmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AppDate");
+
+                    b.Property<string>("ApptLocation");
+
+                    b.Property<int>("DoctorID");
+
+                    b.Property<string>("Message");
+
+                    b.Property<int>("PatientID");
+
+                    b.Property<string>("ProposedDate");
+
+                    b.HasKey("AppointmentId");
+
+                    b.ToTable("Appointment");
+                });
+
             modelBuilder.Entity("PainTrackerPT.Models.Doctors.DoctorsLog", b =>
                 {
                     b.Property<Guid>("Id")

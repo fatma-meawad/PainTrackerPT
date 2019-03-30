@@ -1,0 +1,65 @@
+﻿@model IEnumerable<PainTrackerPT.Models.Doctors.Appointment>
+
+@{
+    ViewData["Title"] = "PatientAppointment_Index";
+}
+
+<h1>PatientAppointment_Index</h1>
+
+<p>
+    <a asp-action="PatientAppointment_Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoctorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProposedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApptLocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoctorID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProposedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ApptLocation)
+            </td>
+            <td>
+                <a asp-action="PatientAppointment_Edit" asp-route-id="@item.AppointmentId">Edit</a> |
+                <a asp-action="PatientAppointment_Details" asp-route-id="@item.AppointmentId">Details</a> |
+                <a asp-action="PatientAppointment_Delete" asp-route-id="@item.AppointmentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

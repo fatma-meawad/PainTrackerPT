@@ -9,6 +9,7 @@ namespace PainTrackerPT.Models.Doctors
     public class Appointment
     {
         [Key]
+        public int AppointmentId { get; set; }
         public int PatientID { get; set; }
         public int DoctorID { get; set; }
 

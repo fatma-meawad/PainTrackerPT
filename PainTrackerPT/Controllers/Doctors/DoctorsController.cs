@@ -53,7 +53,7 @@ namespace PainTrackerPT.Controllers.Doctors
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PatientId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
+        public async Task<IActionResult> PatientAccount_Create([Bind("PatientId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
         {
             if (ModelState.IsValid)
             {

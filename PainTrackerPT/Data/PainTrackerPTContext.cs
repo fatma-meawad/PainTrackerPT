@@ -24,6 +24,7 @@ namespace PainTrackerPT.Models
 
         public DbSet<Patient> Patients { get; set; }
 
+
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.Doctors.DoctorsLog> DoctorsLog { get; set; }
@@ -35,6 +36,8 @@ namespace PainTrackerPT.Models
         public DbSet<PainTrackerPT.Models.Medicine.MedicineLog> MedicineLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.PainDiary.PainDiaryLog> PainDiaryLog { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Doctors.Appointment> Appointments { get; set; }
 
 
     }
