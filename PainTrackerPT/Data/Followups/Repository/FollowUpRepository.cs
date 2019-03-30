@@ -10,16 +10,6 @@ using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public interface IFollowUpRepository
-    {
-        void Create(FollowUp followUp);
-        Task<IEnumerable<FollowUp>> SelectAll();
-        Task<FollowUp> SelectById(Guid id);
-        void Update(FollowUp followUp);
-        void Remove(Guid id);
-        Task<int> Save();
-    }
-
     public class FollowUpRepository : IFollowUpRepository
     {
         public void Create(FollowUp followUp)

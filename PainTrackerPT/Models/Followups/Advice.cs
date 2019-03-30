@@ -12,7 +12,5 @@ namespace PainTrackerPT.Models.Followups
         [Required]
         private String Description { get => Description; set => Description = value; }
         private DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; }
-
-
     }
 }
