@@ -53,7 +53,7 @@ namespace PainTrackerPT.Data.Followups
 
         public void Update(Media media)
         {
-            Media existingMedia = _mediaSet.Find(media.id);
+            Media existingMedia = _mediaSet.Find(media.Id);
             _mediaSet.Update(media);
             this.Save();
         }

@@ -9,7 +9,7 @@ namespace PainTrackerPT.Models.Followups
     public class FollowUp : BaseEntity
     {
         public Guid PatientId { get => PatientId; set => PatientId = value; }
-        public Guid DoctorID { get => DoctorID; set => DoctorID = value; }
+        public Guid DoctorId { get => DoctorId; set => DoctorId = value; }
         [Required]
         public int State { get => State; set => State = value; }
         [Required]

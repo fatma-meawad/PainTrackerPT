@@ -48,7 +48,7 @@ namespace PainTrackerPT.Data.Followups
 
         public void Update(Question question)
         {
-            Question existingQuestion = questionsSet.Find(question.id);
+            Question existingQuestion = questionsSet.Find(question.Id);
             questionsSet.Update(question);
             this.Save();
         }

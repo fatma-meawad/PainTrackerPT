@@ -47,7 +47,7 @@ namespace PainTrackerPT.Data.Followups
 
         public void Update(Recommendation recommendation)
         {
-            Recommendation existingRecommendation = recommendationsSet.Find(recommendation.id);
+            Recommendation existingRecommendation = recommendationsSet.Find(recommendation.Id);
             recommendationsSet.Update(recommendation);
             this.Save();
         }

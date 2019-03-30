@@ -1,28 +1,31 @@
 ﻿@model PainTrackerPT.Models.Followups.FollowUp
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>FollowUp</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <!-- TODO: Maybe plug in form some where-->
                 <label asp-for="PatientId" class="control-label"></label>
-                <input asp-for="PatientId" class="form-control"/>
+                <input asp-for="PatientId" class="form-control" />
                 <span asp-validation-for="PatientId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <!-- TODO: Maybe plug in form some where-->
                 <label asp-for="DoctorId" class="control-label"></label>
-                <input asp-for="DoctorId" class="form-control"/>
+                <input asp-for="DoctorId" class="form-control" />
                 <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -30,7 +33,13 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="DateGenerated" class="control-label"></label>
+                <input asp-for="DateGenerated" class="form-control" />
+                <span asp-validation-for="DateGenerated" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

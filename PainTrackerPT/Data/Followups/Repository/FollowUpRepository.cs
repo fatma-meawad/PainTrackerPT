@@ -47,7 +47,7 @@ namespace PainTrackerPT.Data.Followups
 
         public void Update(FollowUp followUp)
         {
-            FollowUp existingFollowUp = followUpsSet.Find(followUp.id);
+            FollowUp existingFollowUp = followUpsSet.Find(followUp.Id);
             followUpsSet.Update(followUp);
             this.Save();
         }
