@@ -32,5 +32,6 @@ namespace PainTrackerPT.Models
         public DbSet<PainTrackerPT.Models.PainDiary.PainDiaryLog> PainDiaryLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.Followups.FollowUp> FollowUp { get; set; }
+     
     }
 }

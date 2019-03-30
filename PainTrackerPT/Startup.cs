@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
+using System.Data.SqlClient;
 
 namespace PainTrackerPT
 {
@@ -41,6 +42,9 @@ namespace PainTrackerPT
                     //options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
                     // Just for testing use the in memory database but in real testing, create  your own one.
                     options.UseInMemoryDatabase("PainTrackerPTContext"));
+
+            services.AddScoped<SqlConnection>(db => new SqlConnection(Configuration.GetConnectionString("PainTrackerPTContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -5,41 +5,42 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public class FollowUpRepository : IFollowUpRepository
+    public class FollowUpRepository : BaseRepository
     {
         public void Create(FollowUp followUp)
         {
-            throw new NotImplementedException();
+
+        }
+        
+        public Task<IEnumerable<FollowUp>> SelectAll()
+        {
+
+        }
+
+        public Task<FollowUp> Select(Guid followUpId)
+        {
+
         }
 
         public void Remove(Guid id)
         {
-            throw new NotImplementedException();
-        }
 
-        public Task<int> Save()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<FollowUp>> SelectAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<FollowUp> SelectById(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public void Update(FollowUp followUp)
         {
-            throw new NotImplementedException();
+
+        }
+
+        public Task<int> Save()
+        {
+
         }
     }
 }
