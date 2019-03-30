@@ -7,5 +7,6 @@ namespace PainTrackerPT.Common.PainDiary
 {
     interface IPainDiaryLog
     {
+
     }
 }

@@ -50,13 +50,14 @@
         </div>
         <!-- end row -->
         <div class="note-content">
-            <h4>Log Notes <button style="margin-left:70%" class="btn" onclick='window.location.href = ""'><i class="flaticon-edit-1 fa-2x"></i><br /></button></h4>
+            <h4>Log Notes <button style="margin-left:70%" class="btn" onclick='window.location.href = "@Url.Action("LogCreate", "PainDiaryLogs")"'><i class="flaticon-edit-1 fa-2x"></i><br /></button></h4>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Log ID</th>
+                        
                         <th>Type</th>
-                        <th>Last Modified</th>
+                        <th>Written Notes</th>
+                        <th>Audio Notes</th>
                         <th>Mood</th>
                         <th>Actions</th>
                     </tr>
@@ -68,13 +69,13 @@
                         if (Model.entryID == log.entryId)
                         {
                             <tr>
-                                <td>@log.logID</td>
+                                
                                 <td>@log.logTime</td>
                                 <td>@log.writtenNotes</td>
+                                <td>@log.audioNotes</td>
                                 <td>@log.mood</td>
                                 <td>
-                                    <a asp-action="logView" asp-route-id="@log.logID">View</a> |
-                                    <a asp-action="Delete" asp-route-id="@log.logID">Delete</a>
+                                    <a asp-action="LogDelete" asp-route-id="@log.logID">Delete</a>
                                 </td>
 
 
@@ -86,6 +87,6 @@
             </table>
         </div>
     </div>
-    <a asp-action="Index">Back to List</a>
+    
 </div>
 

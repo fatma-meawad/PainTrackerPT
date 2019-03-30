@@ -20,14 +20,14 @@ namespace PainTrackerPT.Models.PainDiary
         public String entryDescription { get; set; }
 
         [Display(Name = "Entry Time")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public DateTime entryTime { get; set; }
 
         [Display(Name = "Pain Area")]
         public String painArea { get; set; }
 
         [Display(Name ="Pain Intensity")]
-        [Range(1,5)]
+        [Range(1,10)]
         public String painIntensity { get; set; }
 
         [Display(Name = "Pain Time")]

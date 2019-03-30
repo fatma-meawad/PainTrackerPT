@@ -38,20 +38,20 @@
                 <div class="form-group">
                     <label asp-for="painArea" class="control-label"></label>
                     <select asp-for="painArea" class="form-control" >
-                        <option value="head">HEAD</option>
-                        <option value="neck">NECK</option>
-                        <option value="shoulder">SHOULDER</option>
-                        <option value="hand">HAND</option>
-                        <option value="chest">CHEST</option>
-                        <option value="stomach">STOMACH</option>
-                        <option value="leg">LEG</option>
+                        <option value="HEAD">HEAD</option>
+                        <option value="NECK">NECK</option>
+                        <option value="SHOULDER">SHOULDER</option>
+                        <option value="HAND">HAND</option>
+                        <option value="CHEST">CHEST</option>
+                        <option value="STOMACH">STOMACH</option>
+                        <option value="LEG">LEG</option>
                     </select>
                     <span asp-validation-for="painArea" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="painIntensity" class="control-label"></label> <br />
-                    <label class="pull-left">1</label><label class="pull-right">5</label>
-                    <input type="range" min="1" max="5" asp-for="painIntensity" class="form-control" />
+                    <label class="pull-left">1</label><label class="pull-right">10</label>
+                    <input type="range" min="1" max="10" asp-for="painIntensity" class="form-control" />
                     
                     <span asp-validation-for="painIntensity" class="text-danger"></span>
                 </div>
@@ -61,8 +61,8 @@
                     <span asp-validation-for="painTime" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="diaryId" class="control-label"></label>
-                    <input asp-for="diaryId" readonly class="form-control" value="1" />
+                    <label asp-for="diaryId" hidden class="control-label">Diary ID</label>
+                    <input asp-for="diaryId" hidden class="form-control" value="1" />
                     <span asp-validation-for="diaryId" class="text-danger"></span>
                 </div>
                 <div class="form-group">

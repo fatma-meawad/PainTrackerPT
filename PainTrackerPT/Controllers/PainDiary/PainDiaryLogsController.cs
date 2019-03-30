@@ -22,6 +22,9 @@ namespace PainTrackerPT.Controllers.PainDiary
             return log.ToList();
         }
 
+        /*
+         * Entry Controller 
+         */
 
         // GET: Entry
         public ActionResult Index()
@@ -144,5 +147,132 @@ namespace PainTrackerPT.Controllers.PainDiary
             ViewBag.logs = GetLogs();
             return View(selected);
         }
+
+        /*
+         * End Entry Controller
+         * Start Diary Controller
+         */
+         
+        // GET: Diary/Create
+        public ActionResult DiaryCreate()
+        {
+            return View();
+        }
+
+        // POST: Diary/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DiaryCreate(Diary diary)
+        {
+            try
+            {
+                // Insert Logic here
+                uow.DiaryRepository.Insert(diary);
+                uow.Save();
+                return RedirectToAction(nameof(DiaryDetails), new { id = diary.diaryID });
+            }
+            catch
+            {
+                return View(diary);
+            }
+        }
+
+        // GET: Diary/Details/5
+        public ActionResult DiaryDetails(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Diary diary = uow.DiaryRepository.GetByID(id);
+            if (diary == null)
+            {
+                return NotFound();
+            }
+            return View(diary);
+        }
+
+
+        /*
+         * End of Diary Controller
+         * Start of Log Controller
+         */
+         
+        // GET: Log/Create
+        public ActionResult LogCreate(int id)
+        {
+            return View(id);
+        }
+
+        // POST: Diary/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogCreate(Log log)
+        {
+            try
+            {
+                // Insert Logic here
+                uow.LogRepository.Insert(log);
+                uow.Save();
+                return RedirectToAction(nameof(LogDetails), new { id = log.logID });
+            }
+            catch
+            {
+                return View(log);
+            }
+        }
+
+        // GET: Log/Details/5
+        public ActionResult LogDetails(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Log log = uow.LogRepository.GetByID(id);
+            if (log == null)
+            {
+                return NotFound();
+            }
+            return View(log);
+        }
+
+        // GET: Log/Delete/5
+        public ActionResult LogDelete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            Log log = uow.LogRepository.GetByID(id);
+
+            if (log == null)
+            {
+                return NotFound();
+            }
+
+            return View(log);
+        }
+
+        // POST: Log/Delete/5
+        [HttpPost, ActionName("LogDelete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogDelete(int id)
+        {
+            // Delete logic here
+            Log log = uow.LogRepository.GetByID(id);
+            uow.LogRepository.Delete(id);
+            uow.Save();
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }
