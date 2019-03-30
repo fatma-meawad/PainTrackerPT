@@ -47,7 +47,16 @@ namespace PainTrackerPT.Models
 
         public DbSet<PainTrackerPT.Models.Followups.FollowUp> FollowUp { get; set; }
 
-        public DbSet<PainTrackerPT.Models.Followups.FollowUp> FollowUp { get; set; }
+        public DbSet<PainTrackerPT.Models.Followups.Question> Question { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Answer> Answer { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Advice> Advice { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Recommendation> Recommendation { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Media> Media { get; set; }
+
 
     }
 }
