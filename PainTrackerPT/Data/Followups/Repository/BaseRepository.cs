@@ -14,5 +14,10 @@ namespace PainTrackerPT.Data.Followups.Repository
         {
             this.db = db;
         }
+
+        public async Task<int> Save()
+        {
+            return await db.SaveChangesAsync();
+        }
     }
 }
