@@ -61,6 +61,33 @@ namespace PainTrackerPT.Migrations
                     b.ToTable("EventsLog");
                 });
 
+            modelBuilder.Entity("PainTrackerPT.Models.Followups.Advice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("AnswerId");
+
+                    b.Property<DateTime>("DateGenerated");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Advice");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Followups.Answer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Answer");
+                });
+
             modelBuilder.Entity("PainTrackerPT.Models.Followups.FollowUp", b =>
                 {
                     b.Property<Guid>("Id")
@@ -96,6 +123,57 @@ namespace PainTrackerPT.Migrations
                     b.ToTable("FollowupsLog");
                 });
 
+            modelBuilder.Entity("PainTrackerPT.Models.Followups.Media", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("AnswerId");
+
+                    b.Property<string>("MediaUrl")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Media");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Followups.Question", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateGenerated");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.Property<Guid>("FollowUpId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FollowUpId");
+
+                    b.ToTable("Question");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Followups.Recommendation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("AnswerId");
+
+                    b.Property<DateTime>("DateGenerated");
+
+                    b.Property<string>("Description")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recommendation");
+                });
+
             modelBuilder.Entity("PainTrackerPT.Models.Medicine.MedicineLog", b =>
                 {
                     b.Property<Guid>("Id")
@@ -122,6 +200,14 @@ namespace PainTrackerPT.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PainDiaryLog");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Followups.Question", b =>
+                {
+                    b.HasOne("PainTrackerPT.Models.Followups.FollowUp", "FollowUp")
+                        .WithMany("Questions")
+                        .HasForeignKey("FollowUpId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

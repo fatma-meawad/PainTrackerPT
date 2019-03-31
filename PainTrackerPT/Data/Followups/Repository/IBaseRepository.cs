@@ -13,7 +13,7 @@ namespace PainTrackerPT.Data.Followups.Repository
         Task<T> Select(Guid id);
         void Update(T entity);
         void Remove(Guid id);
-        Task<int> Save();
+        Task<int> SaveAsync();
         bool Exists(Guid id);
     }
 }

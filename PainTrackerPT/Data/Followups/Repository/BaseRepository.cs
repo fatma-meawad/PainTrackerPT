@@ -35,11 +35,11 @@ namespace PainTrackerPT.Data.Followups.Repository
             if (entity != null)
             {
                 dbSet.Remove(entity);
-                this.Save();
+                this.SaveAsync();
             }
         }
 
-        public Task<int> Save()
+        public async Task<int> SaveAsync()
         {
             return await db.SaveChangesAsync();
         }
@@ -59,7 +59,7 @@ namespace PainTrackerPT.Data.Followups.Repository
         {
             T existingEntity = dbSet.Find(entity.Id);
             dbSet.Update(entity);
-            this.Save();
+            this.SaveAsync();
         }
     }
 }
