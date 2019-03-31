@@ -11,6 +11,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
+using PainTrackerPT.Common.Doctors;
+using PainTrackerPT.Models.Doctors;
 
 namespace PainTrackerPT
 {
@@ -36,7 +38,7 @@ namespace PainTrackerPT
          
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
+            services.AddScoped< IDoctorService, DoctorService>();
             services.AddDbContext<PainTrackerPTContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
                     // Just for testing use the in memory database but in real testing, create  your own one.

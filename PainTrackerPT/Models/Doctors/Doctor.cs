@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using PainTrackerPT.Common.Doctors;
 
 namespace PainTrackerPT.Models.Doctors
 {
-    public class Doctor
+    public class Doctor: IDoctorService
     {
         [Key]
         public int DoctorId { get; set; }
