@@ -10,40 +10,28 @@ using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Common.Followups;
 using PainTrackerPT.Data.Followups.Services;
+using PainTrackerPT.Data.Followups.Repository;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public class FollowUpService : BaseService, IFollowUpService
+    public class FollowUpService : BaseService <FollowUp>, IFollowUpService
     {
-        private FollowUpRepository _followUpRepository;
-
-        public FollowUpService(FollowUpRepository fup): base(fup) {
-            this._followUpRepository = fup;
+        public FollowUpService(IBaseRepository<FollowUp> fup): base(fup) {
         }
-       
+
         public void CreateNewFollowUp(FollowUp followUp)
         {
-            this._followUpRepository.Create(followUp);
+            this.Create(followUp);
         }
 
         public void DeleteFollowUp(Guid id)
         {
-            this._followUpRepository.Remove(id);
-        }
-
-        public Task<FollowUp> Select(Guid id)
-        {
-            return this._followUpRepository.Select(id);
-        }
-
-        public Task<IEnumerable<FollowUp>> SelectAll()
-        {
-            return this._followUpRepository.SelectAll();
+            this.Delete(id);
         }
 
         public void UpdateFollowUp(FollowUp followUp)
         {
-            this._followUpRepository.Update(followUp);
+            this.Update(followUp);
         }
     }
 }

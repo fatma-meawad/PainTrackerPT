@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using System.Data.SqlClient;
+using PainTrackerPT.Data.Followups.Repository;
+using PainTrackerPT.Data.Followups.Services;
 
 namespace PainTrackerPT
 {
@@ -42,7 +44,7 @@ namespace PainTrackerPT
                     options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
 
             services.AddScoped<SqlConnection>(db => new SqlConnection(Configuration.GetConnectionString("PainTrackerPTContext")));
-
+            services.AddScoped(typeof(IBaseService <>), typeof(BaseService <>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

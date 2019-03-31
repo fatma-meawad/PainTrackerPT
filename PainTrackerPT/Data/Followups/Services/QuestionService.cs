@@ -14,36 +14,11 @@ using PainTrackerPT.Data.Followups.Services;
 
 namespace PainTrackerPT.Data.Followups
 {
-    public class QuestionService : BaseService
+    public class QuestionService : BaseService <Question>
     {
         // TODO: DI THIS
-        public QuestionService(IBaseRepository baseRepository) : base(baseRepository)
+        public QuestionService(IBaseRepository<Question> baseRepository) : base(baseRepository)
         {
-        }
-
-        public void CreateNewQuestion(Question question)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteQuestion(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Question> Select(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Question>> SelectAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateQuestion(Guid id, Question question)
-        {
-            throw new NotImplementedException();
-        }
+        }            
     }
 }
