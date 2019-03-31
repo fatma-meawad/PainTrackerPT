@@ -41,9 +41,9 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="EventId" value=@Model.EventId/>
-        <input type="hidden" asp-for="MedId" value=@Model.MedId/>
+        <input type="hidden" asp-for="EventId" value=@Model.EventId />
+        <input type="hidden" asp-for="MedId" value=@Model.MedId />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        @Html.ActionLink("Index", "Index", "MedicineIntakeEvent", new { id = @Model.MedId })
     </form>
 </div>

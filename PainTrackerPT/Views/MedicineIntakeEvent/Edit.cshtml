@@ -34,18 +34,9 @@
 
             <div class="form-group" id="timestamp">
                 <label asp-for="StartTime" class="control-label" value="@ViewBag.eventList[0].StartTime"></label>                
-                <input asp-for="StartTime" value="@ViewBag.eventList[0].TimeStamp" required="required" />
-                @*<input type="button" value="Update" class="btn btn-primary" onclick="ChangeDateTime()" />*@
+                <input asp-for="StartTime" required="required" />               
             </div>
-
-
-            @*<div class="form-group">
-            <label asp-for="TimeStamp" class="control-label"></label>
-            <input asp-for="TimeStamp" class="form-control" />
-            <input asp-for="TimeStamp" class="form-control" name="30/3/2019 2:01:00 AM" value="@ViewBag.eventList[0].TimeStamp"/>
-            <span asp-validation-for="TimeStamp" class="text-danger"></span>
-        </div>*@
-
+            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -54,7 +45,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Index", "Index", "MedicineIntakeEvent", new { id = @ViewBag.medID })
 </div>
 
 

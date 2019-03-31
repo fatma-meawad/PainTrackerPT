@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -49,7 +50,7 @@ namespace PainTrackerPT.Controllers.Medicine
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("Id,Name,Type,timeStamp")] MedicineLog medicineLog)
+        public async Task<IActionResult> Create(int id, [Bind("Id,Name,Type")] MedicineLog medicineLog)
         {
             if (ModelState.IsValid)
             {               
@@ -81,21 +82,16 @@ namespace PainTrackerPT.Controllers.Medicine
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,[Bind("Id,Name,Type,timeStamp")] MedicineLog medicineLog)
-        {
-            if (id != medicineLog.Id)
-            {
-                return NotFound();
-            }
-
+        public async Task<IActionResult> Edit([Bind("Id,Name,Type")] MedicineLog medicineLog)
+        {            
             if (ModelState.IsValid)
             {
                 try
-                {
+                {                   
                     _medService.Update(medicineLog);                   
                 }
                 catch (DbUpdateConcurrencyException)
-                {                    
+                {           
                     throw;                    
                 }
                 return RedirectToAction(nameof(Index));

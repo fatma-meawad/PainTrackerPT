@@ -43,10 +43,9 @@ namespace PainTrackerPT.Controllers.Medicine
         // POST: MedicineIntakeEvent/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int medID, [Bind("EventId,Dosage,TimeStamp,MedId")] MedicineEvent medicineEvent)
+        public async Task<IActionResult> Create(int medID, [Bind("EventId,Dosage,Intervals,NumOfRecurringTimes,StartTime,MedId")] MedicineEvent medicineEvent)
         {
-            _medService.Insert(medicineEvent);
-            //return RedirectToAction(nameof(Index)); 
+            _medService.Insert(medicineEvent);     
             return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId });            
         }
 
@@ -56,8 +55,8 @@ namespace PainTrackerPT.Controllers.Medicine
             ViewBag.medID = medID;
             ViewBag.eventID = id;
 
-            //enze's function
-            var eventList = _medService.GetMedicineEventList(medID);
+            //retrieve Event data by passing medicine id and event id
+            var eventList = _medService.GetMedicineEventList(medID, id);
             ViewBag.eventList = eventList;
 
             return View();
@@ -68,12 +67,8 @@ namespace PainTrackerPT.Controllers.Medicine
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EventId,Dosage,TimeStamp, MedId")] MedicineEvent medicineEvent)
-        {
-            if (id != medicineEvent.EventId)
-            {                
-                return NotFound();
-            }
+        public async Task<IActionResult> Edit([Bind("EventId,Dosage,Intervals,NumOfRecurringTimes,StartTime,MedId")] MedicineEvent medicineEvent)
+        {            
             if (ModelState.IsValid)
             {
                 try
@@ -110,7 +105,7 @@ namespace PainTrackerPT.Controllers.Medicine
         // POST: Medicines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed([Bind("EventId,Dosage,TimeStamp, MedId")] MedicineEvent medicineEvent)
+        public ActionResult DeleteConfirmed([Bind("EventId,Dosage,Intervals,NumOfRecurringTimes,StartTime,MedId")] MedicineEvent medicineEvent)
             //int id, int medID)
         {
             _medService.Delete(medicineEvent.EventId);

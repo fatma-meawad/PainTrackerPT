@@ -5,28 +5,21 @@ using PainTrackerPT.Models.Medicine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PainTrackerPT.Repository
 {
     public class MedicineRepository<T> : IMedicineLog<T> where T: class
     {
-        PainTrackerPTContext context = new PainTrackerPTContext();
-        DbSet<T> data = null;
-        DbSet<MedicineEvent> medEventData = null;
-        DbSet<MedicineLog> medLogData = null;
+        PainTrackerPTContext context = new PainTrackerPTContext();   
+        DbSet<T> data = null;    
 
         public MedicineRepository()
-        {
-            this.data = context.Set<T>();
-            this.medEventData = context.Set<MedicineEvent>();
-            this.medLogData = context.Set<MedicineLog>();
+        {            
+            this.data = context.Set<T>();            
         }
 
         public T GetLogAt(DateTime dt)
-        {
-            //var dbEntry = context.MedicineLog.FirstOrDefault(acc => acc.timeStamp == dt);
-            //return dbEntry;
+        {          
             return null;
         }
 
@@ -35,10 +28,11 @@ namespace PainTrackerPT.Repository
             return data.ToList();
         }
 
-        public IEnumerable<MedicineEvent> GetMedicineEventList(int id)
+        public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
         {
             var query = (from medEvent in context.MedicineEvent                   
-                         where medEvent.MedId == id
+                         where medEvent.MedId == medID 
+                         & medEvent.EventId == eventID
                          select medEvent).ToList();
             return query;
         }
@@ -79,7 +73,7 @@ namespace PainTrackerPT.Repository
 
         public void Save()
         {
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
         public void Update(T obj)
