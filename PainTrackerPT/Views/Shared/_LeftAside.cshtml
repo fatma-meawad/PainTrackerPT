@@ -29,8 +29,8 @@
                                     <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span class="m-menu__link"><span class="m-menu__link-text">Tours</span></span></li>
                                     <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Create", "DoctorsLogs")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">Dashboard</span></a></li>
                                     <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("PatientAccount_Index", "Doctors")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">View / Create Patient</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Create", "Patients")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">View Appt Request</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("Index", "DoctorsLogs")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">View Appt</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("DoctorAppointment_Index", "Doctors")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">View Appt Request</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("DoctorAppointmentAccepted_Index", "Doctors")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">View My Appt</span></a></li>
                                     
                                 </ul>
                             </div>
@@ -43,9 +43,10 @@
                                 <span class="m-menu__arrow"></span>
                                 <ul class="m-menu__subnav">
                                     <li class="m-menu__item  m-menu__item--parent" aria-haspopup="true"><span class="m-menu__link"><span class="m-menu__link-text">Tours</span></span></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("PatientAppointment_Index", "Patients")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">Dashboard</span></a></li>
-                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("PatientAppointment_Index", "Patients")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">---</span></a></li>
-                                </ul>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("PatientAppointment_Dashboard", "Patients")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">Dashboard</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("PatientAppointment_Create", "Patients")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">Request Appointment</span></a></li>
+                                    <li class="m-menu__item " aria-haspopup="true"><a href="@Url.Action("PatientAppointment", "Patients")" class="m-menu__link "><i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span class="m-menu__link-text">View Appointment</span></a></li>
+ </ul>
                             </div>
                         </li>
                         <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" m-menu-submenu-toggle="hover">
