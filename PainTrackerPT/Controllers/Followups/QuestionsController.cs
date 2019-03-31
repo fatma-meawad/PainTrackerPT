@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
@@ -12,17 +13,17 @@ namespace PainTrackerPT.Controllers.Followups
 {
     public class QuestionsController : Controller
     {
-        private readonly PainTrackerPTContext _context;
+        private readonly IBaseService<Question> _questionService;
 
-        public QuestionsController(PainTrackerPTContext context)
+        public QuestionsController(IBaseService<Question> questionService)
         {
-            _context = context;
+            _questionService = questionService;
         }
 
         // GET: Questions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Question.ToListAsync());
+            return View(await _questionService.SelectAll());
         }
 
         // GET: Questions/Details/5
@@ -33,8 +34,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var question = await _context.Question
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var question = _questionService.Select(id.Value);
             if (question == null)
             {
                 return NotFound();
@@ -59,8 +59,7 @@ namespace PainTrackerPT.Controllers.Followups
             if (ModelState.IsValid)
             {
                 question.Id = Guid.NewGuid();
-                _context.Add(question);
-                await _context.SaveChangesAsync();
+                _questionService.Create(question);
                 return RedirectToAction(nameof(Index));
             }
             return View(question);
@@ -74,7 +73,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var question = await _context.Question.FindAsync(id);
+            var question = await _questionService.Select(id.Value);
             if (question == null)
             {
                 return NotFound();
@@ -98,8 +97,7 @@ namespace PainTrackerPT.Controllers.Followups
             {
                 try
                 {
-                    _context.Update(question);
-                    await _context.SaveChangesAsync();
+                    _questionService.Update(question);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,8 +123,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var question = await _context.Question
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var question = await _questionService.Select(id.Value);
             if (question == null)
             {
                 return NotFound();
@@ -140,15 +137,14 @@ namespace PainTrackerPT.Controllers.Followups
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var question = await _context.Question.FindAsync(id);
-            _context.Question.Remove(question);
-            await _context.SaveChangesAsync();
+            var question = await _questionService.Select(id);
+            _questionService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool QuestionExists(Guid id)
         {
-            return _context.Question.Any(e => e.Id == id);
+            return _questionService.Exists(id);
         }
     }
 }

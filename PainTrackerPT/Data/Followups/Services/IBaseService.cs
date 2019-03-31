@@ -11,5 +11,6 @@ namespace PainTrackerPT.Data.Followups.Repository
         void Delete(Guid id);
         Task<T> Select(Guid id);
         Task<IEnumerable<T>> SelectAll();
+        bool Exists(Guid id);
     }
 }
