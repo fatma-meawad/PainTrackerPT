@@ -1,4 +1,5 @@
 ﻿using PainTrackerPT.Data.Followups.Repository;
+using PainTrackerPT.Models.Followups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,38 +7,38 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Data.Followups.Services
 {
-    public class BaseService : IBaseService
+    public class BaseService <T> : IBaseService <T> where T: BaseEntity
     {
-        private IBaseRepository <T> baseRepository;
+        private IBaseRepository <T> _baseRepository;
 
-        public BaseService(IBaseRepository baseRepository)
+        public BaseService(IBaseRepository<T> baseRepository)
         {
-            this.baseRepository = baseRepository;
+            this._baseRepository = baseRepository;
         }
 
-        public void Create(entity 1, T 2)
+        public void Create(T entity)
         {
-            throw new NotImplementedException();
+            _baseRepository.Create(entity);
         }
 
-        public void Delete(id 1, Guid 2)
+        public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            _baseRepository.Remove(id);
         }
 
-        public void Select(id 1, Guid 2)
+        public Task<T> Select(Guid id)
         {
-            throw new NotImplementedException();
+            return _baseRepository.Select(id);
         }
 
-        public Task<T> SelectAll()
+        public Task<IEnumerable<T>> SelectAll()
         {
-            throw new NotImplementedException();
+            return _baseRepository.SelectAll();
         }
 
-        public void Update(entity 1, T 2)
+        public void Update(T entity)
         {
-            throw new NotImplementedException();
+            _baseRepository.Update(entity);
         }
     }
 }
