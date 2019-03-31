@@ -184,10 +184,7 @@ namespace PainTrackerPT.Controllers.Doctors
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DoctorAppointment_Edit(int id, [Bind("AppointmentId,PatientID,DoctorID,Message,AppDate,ProposedDate,ApptLocation,docCfm,patCfm,pdAttach,miAttach,status")] Appointment appointment)
         {
-            if (id != appointment.AppointmentId)
-            {
-                return NotFound();
-            }
+
 
             if (ModelState.IsValid)
             {
@@ -219,7 +216,7 @@ namespace PainTrackerPT.Controllers.Doctors
 
 
         // GET: Doctors
-        public async Task<IActionResult> PatientAccountAccepted_Index()
+        public async Task<IActionResult> DoctorAppointmentAccepted_Index()
         {
             var id = 666;
             var appointment = await _context.Appointments.Where(u => u.DoctorID == id).ToListAsync();
@@ -227,20 +224,67 @@ namespace PainTrackerPT.Controllers.Doctors
             return View(appointment);
         }
 
-        // GET: Appointments/Edit/5
-        public async Task<IActionResult> DoctorAppointmentAccepted_Edit(int? id)
+        public async Task<ActionResult> DoctorAppointmentAccepted_Edit()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var doctorId = 666;
 
-            var appointment = await _context.Appointments.FindAsync(id);
-            if (appointment == null)
+            var appointment = await _context.Appointments.Where(u => u.DoctorID == doctorId).ToListAsync();
+
+            foreach (var item in appointment)
             {
-                return NotFound();
+                if (item.DoctorID == 666)
+                {
+                    if (item.status == "AwaitingPatCfm")
+                    {
+                        return View("DoctorAppointmentAcceptedAwaitingPatCfm_Edit", item);
+                    }
+                    else if(item.status == "AwaitingDocCfm")
+                    {
+                        return View("DoctorAppointmentAcceptedAwaitingDocCfm_Edit", item);
+                    }
+                    else if (item.status == "ApptCfm")
+                    {
+                        return View("DoctorAppointmentAcceptedApptCfm_Edit", item);
+                    }
+                }
             }
+           return NotFound();
+        }
+
+        // GET: Appointments/Edit/5
+        public ActionResult DoctorAppointmentAcceptedAwaitingDocCfm_Edit(Appointment appointment)
+        {
             return View(appointment);
         }
+
+        // GET: Appointments/Edit/5
+        public ActionResult DoctorAppointmentAcceptedAwaitingPatCfm_Edit(Appointment appointment)
+        {
+            return View(appointment);
+        }
+
+        // GET: Appointments/Edit/5
+        public ActionResult DoctorAppointmentAcceptedApptCfm_Edit(Appointment appointment)
+        {
+            return View(appointment);
+        }
+
+        // GET: Appointments/Edit/5
+        public async Task<ActionResult> DoctorAppointmentAcceptedProposeNewDate_Edit()
+        {
+            var doctorId = 666;
+
+            var appointment = await _context.Appointments.Where(u => u.DoctorID == doctorId).ToListAsync();
+            foreach (var item in appointment)
+            {
+                if (item.DoctorID == 666)
+                {
+                    return View(item);
+                }
+            }
+            return NotFound();
+        }
+
+
     }
 }

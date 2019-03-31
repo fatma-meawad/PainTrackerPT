@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<PainTrackerPT.Models.Doctors.Appointment>
 
 @{
-    ViewData["Title"] = "PatientAccountAccepted_Index";
+    ViewData["Title"] = "DoctorAppointmentAccepted_Index";
 }
 
-<h1>PatientAccountAccepted_Index</h1>
+<h1>DoctorAppointmentAccepted_Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -91,7 +91,7 @@
                 @Html.DisplayFor(modelItem => item.status)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.AppointmentId">View</a> |
+                <a asp-action="DoctorAppointmentAccepted_Edit" asp-route-id="@item.AppointmentId">View</a> |
             </td>
         </tr>
 }

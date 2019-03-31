@@ -1,46 +1,54 @@
 ﻿@model PainTrackerPT.Models.Doctors.Appointment
 
 @{
-    ViewData["Title"] = "DoctorAppointmentAccepted_Edit";
+    ViewData["Title"] = "DoctorAppointmentAcceptedAccept_Edit";
 }
 
 <h1>DoctorAppointmentAccepted_Edit</h1>
 
 <h4>Appointment</h4>
 <hr />
+
+<p style="font-family:Consolas">
+    Pending-------------AwaitingCfm-------------Appointment Confirmed<br />
+    ____________________===========__________________________________
+</p>
+
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="DoctorAppointmentAccepted_Edit">
+        <form asp-action="DoctorAppointment_Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AppointmentId" />
             <div class="form-group">
                 <label asp-for="PatientID" class="control-label"></label>
-                <input asp-for="PatientID" class="form-control" />
+                <input asp-for="PatientID" class="form-control" readonly/>
                 <span asp-validation-for="PatientID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DoctorID" class="control-label"></label>
-                <input asp-for="DoctorID" class="form-control" />
+                <input asp-for="DoctorID" class="form-control" readonly/>
                 <span asp-validation-for="DoctorID" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
-                <input asp-for="Message" class="form-control" />
+                <input asp-for="Message" class="form-control" readonly/>
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="AppDate" class="control-label"></label>
-                <input asp-for="AppDate" class="form-control" />
+                <input asp-for="AppDate" class="form-control" readonly/>
                 <span asp-validation-for="AppDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ProposedDate" class="control-label"></label>
-                <input asp-for="ProposedDate" class="form-control" />
+                <input asp-for="ProposedDate" class="form-control" readonly />
                 <span asp-validation-for="ProposedDate" class="text-danger"></span>
+                <a asp-action="DoctorAppointmentAcceptedProposeNewDate_Edit">Propose a new date</a>
             </div>
             <div class="form-group">
                 <label asp-for="ApptLocation" class="control-label"></label>
-                <input asp-for="ApptLocation" class="form-control" />
+                <input asp-for="ApptLocation" class="form-control" readonly/>
                 <span asp-validation-for="ApptLocation" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
@@ -65,17 +73,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="status" class="control-label"></label>
-                <input asp-for="status" class="form-control" />
+                <input asp-for="status" class="form-control" value="ApptCfm" readonly/>
                 <span asp-validation-for="status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Accept" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="PatientAccountAccepted_Index">Back to List</a>
 </div>
 
