@@ -1,0 +1,94 @@
+﻿@model PainTrackerPT.Models.Doctors.Appointment
+
+@{
+    ViewData["Title"] = "DoctorAppointment_Edit";
+}
+
+
+<h4>Appointment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DoctorAppointment_Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="AppointmentId" />
+            <div class="form-group">
+                <label asp-for="PatientID" class="control-label"></label>
+                <input asp-for="PatientID" class="form-control" readonly />
+                <span asp-validation-for="PatientID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorID" class="control-label"></label>
+                <input asp-for="DoctorID" class="form-control" />
+                <span asp-validation-for="DoctorID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Message" class="control-label"></label>
+                <input asp-for="Message" class="form-control" readonly />
+                <span asp-validation-for="Message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppDate" class="control-label"></label>
+                <input asp-for="AppDate" class="form-control" readonly />
+                <span asp-validation-for="AppDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProposedDate" class="control-label"></label>
+                <input asp-for="ProposedDate" class="form-control" />
+                <span asp-validation-for="ProposedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ApptLocation" class="control-label"></label>
+                @*<input asp-for="ApptLocation" class="form-control" />*@
+                @*<span asp-validation-for="ApptLocation" class="text-danger"></span>*@
+                <select asp-for="ApptLocation" name="ApptLocation">
+                    <option value="Alexandra Hospital">Alexandra Hospital</option>
+                    <option value="Changi General Hospital">Changi General Hospital</option>
+                    <option value="KK Women's and Children's Hospital">KK Women's and Children's Hospital</option>
+                    <option value="Khoo Teck Puat Hospital">Khoo Teck Puat Hospital</option>
+                    <option value="National University Hospital">National University Hospital</option>
+                    <option value="Ng Teng Fong General Hospital">Ng Teng Fong General Hospital</option>
+                    <option value="Sengkang General Hospital">Sengkang General Hospital</option>
+                    <option value="Singapore General Hospital">Singapore General Hospital</option>
+                    <option value="Tan Tock Seng Hospital">Tan Tock Seng Hospital</option>
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="docCfm" readonly /> @Html.DisplayNameFor(model => model.docCfm)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="patCfm" readonly /> @Html.DisplayNameFor(model => model.patCfm)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="pdAttach" readonly /> @Html.DisplayNameFor(model => model.pdAttach)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="miAttach" readonly /> @Html.DisplayNameFor(model => model.miAttach)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="status" readonly value="AwaitingPatCfm"/> @Html.DisplayNameFor(model => model.status)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Accept" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="DoctorAppointment_Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
