@@ -8,9 +8,9 @@ namespace PainTrackerPT.Common.Followups
 {
     public interface IFollowUpService
     {
-        void CreateNewFollowUp(FollowUp followUp);
-        void UpdateFollowUp(FollowUp followUp);
-        void DeleteFollowUp(Guid id);
+        void Create(FollowUp followUp);
+        void Update(FollowUp followUp);
+        void Delete(Guid id);
         Task<FollowUp> Select(Guid id);
         Task<IEnumerable<FollowUp>> SelectAll();
     }
