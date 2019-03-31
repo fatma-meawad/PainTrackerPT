@@ -9,6 +9,8 @@ namespace PainTrackerPT.Models.Followups
 {
     public class Question : BaseEntity
     {
+        private Int64 FollowUpId { get => FollowUpId; set => FollowUpId = value; }
+        [Required]
         public String Description { get => Description; set => Description = value; }
         public DateTime DateGenerated { get => DateGenerated; set => DateGenerated = value; }
     }

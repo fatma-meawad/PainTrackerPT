@@ -7,5 +7,6 @@ namespace PainTrackerPT.Data.Followups.Repository
 {
     public interface IBaseService
     {
+
     }
 }

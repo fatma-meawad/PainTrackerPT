@@ -8,7 +8,7 @@ namespace PainTrackerPT.Models.Followups
 {
     public class Media : BaseEntity
     {
-        public Guid RelatedID { get => RelatedID; set => RelatedID = value; }
+        public Int64 AnswerId { get => AnswerId; set => AnswerId = value; }
         [Required]
         public String MediaUrl { get => MediaUrl; set => MediaUrl = value; }
     }

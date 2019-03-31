@@ -8,7 +8,6 @@ namespace PainTrackerPT.Models.Followups
 {
     public class BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; }
+        public Int64 Id { get; set; }
     }
 }
