@@ -26,6 +26,11 @@ namespace PainTrackerPT.Data.Followups.Services
             _baseRepository.Remove(id);
         }
 
+        public bool Exists(Guid id)
+        {
+            return _baseRepository.Exists(id);
+        }
+
         public Task<T> Select(Guid id)
         {
             return _baseRepository.Select(id);
