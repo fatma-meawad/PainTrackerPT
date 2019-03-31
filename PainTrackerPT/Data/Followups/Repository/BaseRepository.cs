@@ -24,6 +24,11 @@ namespace PainTrackerPT.Data.Followups.Repository
             db.SaveChanges();
         }
 
+        public bool Exists(Guid id)
+        {
+            return dbSet.Any(e => e.Id == id);
+        }
+
         public void Remove(Guid id)
         {
             T entity = dbSet.Find(id);
