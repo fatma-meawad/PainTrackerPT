@@ -8,9 +8,9 @@ namespace PainTrackerPT.Common.Followups
 {
     public interface IMediaService
     {
-        void CreateNewMedia(Media media);
-        void UpdateMedia(Media media);
-        void DeleteMedia(Guid id);
+        void Create(Media media);
+        void Update(Media media);
+        void Delete(Guid id);
         Task<Media> Select(Guid id);
         Task<IEnumerable<Media>> SelectAll();
     }

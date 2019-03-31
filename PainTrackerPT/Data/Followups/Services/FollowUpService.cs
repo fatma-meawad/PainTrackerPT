@@ -18,20 +18,5 @@ namespace PainTrackerPT.Data.Followups
     {
         public FollowUpService(IBaseRepository<FollowUp> fup): base(fup) {
         }
-
-        public void CreateNewFollowUp(FollowUp followUp)
-        {
-            this.Create(followUp);
-        }
-
-        public void DeleteFollowUp(Guid id)
-        {
-            this.Delete(id);
-        }
-
-        public void UpdateFollowUp(FollowUp followUp)
-        {
-            this.Update(followUp);
-        }
     }
 }

@@ -13,20 +13,5 @@ namespace PainTrackerPT.Data.Followups
         public MediaService(IBaseRepository<Media> baseRepository): base(baseRepository)
         {       
         }
-
-        public void CreateNewMedia(Media media)
-        {
-            this.Create(media);
-        }
-
-        public void DeleteMedia(Guid id)
-        {
-            this.Delete(id);
-        }
-
-        public void UpdateMedia(Media media)
-        {
-            this.Update(media);
-        }
     }
 }
