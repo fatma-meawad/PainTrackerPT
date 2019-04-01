@@ -9,6 +9,7 @@ using PainTrackerPT.Common.Followups;
 using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
+using PainTrackerPT.Data.Followups.Services;
 
 namespace PainTrackerPT.Controllers.Followups
 {
@@ -25,6 +26,12 @@ namespace PainTrackerPT.Controllers.Followups
         public async Task<IActionResult> Index()
         {
             return View(await _followUpService.SelectAll());
+        }
+
+        public async Task<IActionResult> FilteredIndex(Int64 id)
+        {
+            return View(await ((FollowUpService)_followUpService).SelectAllByPatientId(id));
+
         }
 
         // GET: FollowUps/Details/5

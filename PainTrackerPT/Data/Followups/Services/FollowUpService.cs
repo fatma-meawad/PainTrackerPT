@@ -12,11 +12,21 @@ using PainTrackerPT.Common.Followups;
 using PainTrackerPT.Data.Followups.Services;
 using PainTrackerPT.Data.Followups.Repository;
 
-namespace PainTrackerPT.Data.Followups
+namespace PainTrackerPT.Data.Followups.Services
 {
     public class FollowUpService : BaseService <FollowUp>, IFollowUpService
     {
         public FollowUpService(IBaseRepository<FollowUp> fup): base(fup) {
+        }
+
+        public async Task<IEnumerable<FollowUp>> SelectAllByDoctorId(Int64 doctorId)
+        {
+            return await ((FollowUpRepository)_baseRepository).SelectAllByDoctorId(doctorId);
+        }
+
+        public async Task<IEnumerable<FollowUp>> SelectAllByPatientId(Int64 patientId)
+        {
+            return await ((FollowUpRepository)_baseRepository).SelectAllByPatientId(patientId);
         }
     }
 }
