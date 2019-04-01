@@ -15,6 +15,7 @@ namespace PainTrackerPT.Controllers.Followups
     public class QuestionsController : Controller
     {
         private readonly IBaseService<Question> _questionService;
+        private int followUpId; 
 
         public QuestionsController(IBaseService<Question> questionService)
         {
@@ -46,9 +47,11 @@ namespace PainTrackerPT.Controllers.Followups
 
         // GET: Questions/Create
 
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
-//            System.Diagnostics.Debug.WriteLine("GUID IS " + followUpId.ToString());
+                
+            System.Diagnostics.Debug.WriteLine("GUID IS " + id);
+            ViewBag.id = id;
             return View();
         }
 
@@ -57,14 +60,18 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Description,DateGenerated,Id")] Question question)
+        public async Task<IActionResult> Create(int id, [Bind("Description,DateGenerated,Id,FollowUpId")] Question question)
         {
             if (ModelState.IsValid)
             {
                System.Diagnostics.Debug.WriteLine("THE FK IS :" + question.FollowUpId.ToString());
+                question.FollowUpId = id;
                 _questionService.Create(question);
                 return RedirectToAction(nameof(Index));
             }
+
+            ViewBag.id = question.FollowUpId;
+        
             return View(question);
         }
 
