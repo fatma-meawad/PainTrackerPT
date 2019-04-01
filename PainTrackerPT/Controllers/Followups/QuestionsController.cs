@@ -60,7 +60,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("Description,DateGenerated,Id,FollowUpId")] Question question)
+        public async Task<IActionResult> Create(int id, [Bind("Description,DateGenerated,FollowUpId")] Question question)
         {
             if (ModelState.IsValid)
             {
