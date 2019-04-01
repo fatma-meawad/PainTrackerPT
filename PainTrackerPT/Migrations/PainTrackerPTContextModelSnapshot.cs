@@ -85,6 +85,12 @@ namespace PainTrackerPT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateGenerated");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long>("QuestionId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Answer");
