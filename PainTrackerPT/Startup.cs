@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,8 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using System.Data.SqlClient;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Net.Http.Headers;
+using PainTrackerPT.Data.Followups;
 using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Data.Followups.Services;
+using PainTrackerPT.Models.Followups;
+using SameSiteMode = Microsoft.AspNetCore.Http.SameSiteMode;
 
 namespace PainTrackerPT
 {
@@ -44,7 +48,22 @@ namespace PainTrackerPT
                     options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
 
             services.AddScoped<SqlConnection>(db => new SqlConnection(Configuration.GetConnectionString("PainTrackerPTContext")));
-            services.AddScoped(typeof(IBaseService <>), typeof(BaseService <>));
+
+            /** Team Team's (FollowUps) Services**/
+//            services.AddScoped(typeof(IBaseService <>), typeof(BaseService <>));
+            services.TryAddTransient<IBaseService<Advice>, AdviceService>();
+            services.TryAddTransient<IBaseService<Answer>, AnswerService>();
+            services.TryAddTransient<IBaseService<FollowUp>, FollowUpService>();
+            services.TryAddTransient<IBaseService<Media>, MediaService>();
+            services.TryAddTransient<IBaseService<Question>, QuestionService>();
+            services.TryAddTransient<IBaseService<Recommendation>, RecommendationService>();
+
+            services.TryAddTransient<IBaseRepository<Advice>, AdviceRepository>();
+            services.TryAddTransient<IBaseRepository<Answer>, AnswerRepository>();
+            services.TryAddTransient<IBaseRepository<FollowUp>, FollowUpRepository>();
+            services.TryAddTransient<IBaseRepository<Media>, MediaRepository>();
+            services.TryAddTransient<IBaseRepository<Question>, QuestionRepository>();
+            services.TryAddTransient<IBaseRepository<Recommendation>, RecommendationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

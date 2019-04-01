@@ -10,55 +10,56 @@ namespace PainTrackerPT.Data.Followups.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        internal PainTrackerPTContext db;
-        private DbSet<T> dbSet;
+        internal PainTrackerPTContext _db;
+        private DbSet<T> _dbSet;
 
         public BaseRepository(PainTrackerPTContext db)
         {
-            dbSet = db.Set<T>();
+            _db = db;
+            _dbSet = db.Set<T>();
         }
 
         public void Create(T entity)
         {
-            this.dbSet.Add(entity);
-            db.SaveChanges();
+            this._dbSet.Add(entity);
+            _db.SaveChanges();
         }
 
         public bool Exists(Guid id)
         {
-            return dbSet.Any(e => e.Id == id);
+            return _dbSet.Any(e => e.Id == id);
         }
 
         public void Remove(Guid id)
         {
-            T entity = dbSet.Find(id);
+            T entity = _dbSet.Find(id);
             if (entity != null)
             {
-                dbSet.Remove(entity);
+                _dbSet.Remove(entity);
                 this.SaveAsync();
             }
         }
 
         public async Task<int> SaveAsync()
         {
-            return await db.SaveChangesAsync();
+            return await _db.SaveChangesAsync();
         }
 
         public async Task<T> Select(Guid id)
         {
-            return dbSet.Find(id);
+            return _dbSet.Find(id);
 
         }
 
         public async Task<IEnumerable<T>> SelectAll()
         {
-            return await dbSet.ToArrayAsync();
+            return await _dbSet.ToArrayAsync();
         }
 
         public void Update(T entity)
         {
-            T existingEntity = dbSet.Find(entity.Id);
-            dbSet.Update(entity);
+            T existingEntity = _dbSet.Find(entity.Id);
+            _dbSet.Update(entity);
             this.SaveAsync();
         }
     }

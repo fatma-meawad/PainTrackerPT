@@ -60,6 +60,8 @@ namespace PainTrackerPT.Controllers.Followups
             if (ModelState.IsValid)
             {
                 followUp.Id = Guid.NewGuid();
+                followUp.DoctorId = Guid.NewGuid();
+                followUp.PatientId = Guid.NewGuid();
                 _followUpService.Create(followUp);
                 return RedirectToAction(nameof(Index));
             }
