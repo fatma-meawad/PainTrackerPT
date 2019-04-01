@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PainTrackerPT.Migrations
 {
-    public partial class PLSWORK : Migration
+    public partial class FollowUpInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -98,7 +98,9 @@ namespace PainTrackerPT.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
-                    timeStamp = table.Column<DateTime>(nullable: false)
+                    timeStamp = table.Column<DateTime>(nullable: false),
+                    DateGenerated = table.Column<DateTime>(nullable: false),
+                    FollowUpId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {

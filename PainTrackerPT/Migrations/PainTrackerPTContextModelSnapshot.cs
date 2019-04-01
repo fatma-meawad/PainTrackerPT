@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PainTrackerPT.Models;
+using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Migrations
 {
@@ -118,7 +119,11 @@ namespace PainTrackerPT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateGenerated");
+
                     b.Property<string>("Description");
+
+                    b.Property<Guid>("FollowUpId");
 
                     b.Property<DateTime>("timeStamp");
 
@@ -216,6 +221,9 @@ namespace PainTrackerPT.Migrations
                         .HasForeignKey("FollowUpId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
+
+            modelBuilder.Entity<BaseEntity>().Property(e => e.Id).ValueGeneratedOnAdd();
+
 #pragma warning restore 612, 618
         }
     }

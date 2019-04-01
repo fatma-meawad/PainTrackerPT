@@ -10,8 +10,8 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190401123901_PLSWORK")]
-    partial class PLSWORK
+    [Migration("20190401130711_FollowUpInit")]
+    partial class FollowUpInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,7 +120,11 @@ namespace PainTrackerPT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateGenerated");
+
                     b.Property<string>("Description");
+
+                    b.Property<Guid>("FollowUpId");
 
                     b.Property<DateTime>("timeStamp");
 
