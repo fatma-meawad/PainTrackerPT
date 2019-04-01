@@ -19,6 +19,13 @@ namespace PainTrackerPT.Controllers.Doctors
             _context = context;
         }
 
+        // GET: Dashboard
+        public ActionResult DoctorAppointment_Dashboard()
+        {
+
+            return View();
+        }
+
         // GET: Doctors
         public async Task<IActionResult> PatientAccount_Index()
         {
@@ -248,7 +255,8 @@ namespace PainTrackerPT.Controllers.Doctors
                     }
                 }
             }
-           return NotFound();
+            ViewBag.Error = "appointmentError";
+            return View("PatientAppointment_Dashboard");
         }
 
         // GET: Appointments/Edit/5

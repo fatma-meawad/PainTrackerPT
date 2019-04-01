@@ -1,7 +1,16 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "PatientAppointment_Dashboard";
 }
 
 <h1>PatientAppointment_Dashboard</h1>
 
+    @if (ViewBag.Error == "createError") {
+    <script>
+        alert('You have an existing appointment. Error in create a new appointment');
+    </script>
+    }
+    @if (ViewBag.Error == "appointmentError") {
+    <script>
+        alert('You have no appointment');
+    </script>
+    }

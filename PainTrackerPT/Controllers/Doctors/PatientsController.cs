@@ -60,7 +60,8 @@ namespace PainTrackerPT.Controllers.Doctors
                 }
             }
             // return error message AwaitingPatCfm
-            return NotFound();
+            ViewBag.Error = "appointmentError";
+            return View("PatientAppointment_Dashboard");
         }
 
         // GET: Appointments/Edit/5
@@ -195,8 +196,20 @@ namespace PainTrackerPT.Controllers.Doctors
         }
 
         // GET: Appointments/Create
-        public IActionResult PatientAppointment_Create()
+        public async Task<IActionResult> PatientAppointment_Create()
         {
+            var id = 123;
+            var appointment = await _context.Appointments.ToListAsync();
+
+            foreach (var item in appointment)
+            {
+                if (item.PatientID == id)
+                {
+                    ViewBag.Error = "createError";
+                    return View("PatientAppointment_Dashboard");
+                }
+            }
+
             return View();
         }
 
@@ -298,6 +311,11 @@ namespace PainTrackerPT.Controllers.Doctors
                 return RedirectToAction(nameof(PatientAppointment_Index));
             }
             return View(appointment);
+        }
+
+        public ActionResult errorModalPopUp()
+        {
+            return View();
         }
 
         private bool AppointmentExists(int id)

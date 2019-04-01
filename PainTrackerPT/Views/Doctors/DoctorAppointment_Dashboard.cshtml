@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "DoctorAppointment_Dashboard";
+}
+
+<h1>DoctorAppointment_Dashboard</h1>
+
+@if (ViewBag.Error == "appointmentError")
+{
+    <script>
+        alert('You have no appointment');
+    </script>
+}
