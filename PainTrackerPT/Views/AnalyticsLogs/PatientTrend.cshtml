@@ -6,6 +6,108 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
 <script type="text/javascript">
+<<<<<<< HEAD
+=======
+
+    //$(function () {
+    //    var chartName = "chart";
+    //    var ctx = document.getElementById(chartName).getContext('2d');
+
+    //    var myChart = new Chart(ctx, {
+    //        options: options,
+    //        data: data,
+    //        type: 'line'
+    //    });
+    //});
+
+    //var data = {
+    //    datasets: [
+    //        {
+    //            label: "Pain Intensity",
+    //            backgroundColor: [
+    //                'rgba(244, 86, 66, 0.2)'
+    //            ],
+    //            borderColor: [
+    //                'rgba(244, 86, 66,1)',
+    //            ],
+    //            borderWidth: 1,
+    //            data: [
+    //                {
+    //                    x: new Date("03-31-2019 12:00:00 AM"),
+    //                    y: 7
+    //                },
+    //                {
+    //                    x: new Date("04-02-2019 12:00:00 AM"),
+    //                    y: 5
+    //                },
+    //                {
+    //                    x: new Date("04-03-2019 12:00:00 AM"),
+    //                    y: 1
+    //                },
+    //                {
+    //                    x: new Date("04-04-2019 12:00:00 AM"),
+    //                    y: 5
+    //                },
+    //                {
+    //                    x: new Date("04-05-2019 12:00:00 AM"),
+    //                    y: 1
+    //                },
+    //                {
+    //                    x: new Date("04-06-2019 12:00:00 AM"),
+    //                    y: 12
+    //                },
+    //                {
+    //                    x: new Date("04-07-2019 12:00:00 AM"),
+    //                    y: 8
+    //                },
+    //                {
+    //                    x: new Date("04-9-2019 12:00:00 AM"),
+    //                    y: 15
+    //                }
+    //            ]
+                  
+    //        }
+    //    ]
+    //};
+
+    //var options = {
+    //    maintainAspectRatio: false,
+    //    scales: {
+    //        yAxes: [{
+    //            ticks: {
+    //                min: 0,
+    //                beginAtZero: true
+    //            },
+    //            gridLines: {
+    //                display: true,
+    //                color: "rgba(255,99,164,0.2)"
+    //            }
+    //        }],
+    //        xAxes: [{
+    //            type: 'time',
+    //            distribution: 'linear',
+    //            time:
+    //            {   
+    //                parse: 'DD/MM/YYYY HH:mm:ss',
+    //                unit: 'week',
+    //                min: new Date("03/31/2019"),
+    //                max: new Date("04/07/2019")
+    //            },
+
+    //            ticks: {
+    //                min: 0,
+    //                beginAtZero: true
+    //            },
+    //            gridLines: {
+    //                display: false
+    //            }
+    //        }]
+    //    }
+    //};
+
+
+
+>>>>>>> 751b809aebeb8f659665cf9e0405c8571af2e540
 </script>
 
 <br /><br />
@@ -29,7 +131,11 @@
                             <li class="m-nav__section m-nav__section--first m--hide">
                                 <span class="m-nav__section-text">Quick Actions</span>
                             </li>
+<<<<<<< HEAD
                             <li class="m-nav__item" onclick="showYear()">
+=======
+                            <li class="m-nav__item"  onclick="showYear()">
+>>>>>>> 751b809aebeb8f659665cf9e0405c8571af2e540
                                 <a href="#" class="m-nav__link">
                                     <i class="m-nav__link-icon flaticon-calendar-1"></i>
                                     <span class="m-nav__link-text">Year</span>
@@ -42,7 +148,11 @@
                                 </a>
                             </li>
                             <li class="m-nav__item">
+<<<<<<< HEAD
                                 <a href="#" class="m-nav__link" onclick="showDay()">
+=======
+                                <a href="#" class="m-nav__link"  onclick="showDay()">
+>>>>>>> 751b809aebeb8f659665cf9e0405c8571af2e540
                                     <i class="m-nav__link-icon flaticon-calendar-3"></i>
                                     <span class="m-nav__link-text">Day</span>
                                 </a>
@@ -71,6 +181,7 @@
             <button type="button" class="btn btn-secondary">Interference</button>
         </div>
     </div>
+<<<<<<< HEAD
     <table class="table">
         <tbody>
         </tbody>
@@ -82,10 +193,13 @@
             </tr>
         </thead>
     </table>
+=======
+>>>>>>> 751b809aebeb8f659665cf9e0405c8571af2e540
 
 </div>
 
 <script>
+<<<<<<< HEAD
     function toDate(dateStr) {
         var empty = dateStr.split(" ");
         var parts = empty[0].split("-");
@@ -108,6 +222,158 @@
         @:dicDate = dicDate.replace(/\//g, '-');
         @:moodData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
     }
+=======
+
+    //Set canvas of graph
+    var ctx = document.getElementById("chart").getContext("2d");
+
+    //Date for range of graph
+    var startDate = new Date();
+    var tempDate = new Date();
+    var endDate = new Date(tempDate.setTime(tempDate.getTime() + 6 * 86400000));
+
+    //Define dataset
+    var data = {
+        datasets: [
+
+            /**
+                * Dataset 1 - Pain Intensity 
+                * X value = Date, Y = Intensity
+            **/
+            {
+                label: "Pain Intensity",
+                backgroundColor: 'rgba(244, 86, 66, 0.2)',
+                borderColor:'rgba(244, 86, 66,1)',
+                borderWidth: 1,
+                data: [
+                    {
+                        x: new Date("03-30-2019 12:00:00 AM"),
+                        y: 7
+                    },
+                    {
+                        x: new Date("04-02-2019 12:00:00 AM"),
+                        y: 5
+                    },
+                    {
+                        x: new Date("04-03-2019 12:00:00 AM"),
+                        y: 1
+                    },
+                    {
+                        x: new Date("04-04-2019 12:00:00 AM"),
+                        y: 5
+                    },
+                    {
+                        x: new Date("04-05-2019 12:00:00 AM"),
+                        y: 1
+                    },
+                    {
+                        x: new Date("04-06-2019 12:00:00 AM"),
+                        y: 12
+                    },
+                    {
+                        x: new Date("04-07-2019 12:00:00 AM"),
+                        y: 8
+                    },
+                    {
+                        x: new Date("04-9-2019 12:00:00 AM"),
+                        y: 15
+                    }
+                ]
+
+            },
+
+            /**
+                * Dataset 2 - Mood
+                * X value = Date, Y = Moodtype
+            **/
+            {
+                label: "Mood",
+                backgroundColor: 'rgba(66, 244, 125, 0.2)',
+                borderColor: 'rgba(66, 244, 125, 1)',
+                borderWidth: 1,
+                hidden: true,
+                data: [
+                    {
+                        x: new Date("03-30-2019 12:00:00 AM"),
+                        y: 1
+                    },
+                    {
+                        x: new Date("04-02-2019 12:00:00 AM"),
+                        y: 2
+                    },
+                    {
+                        x: new Date("04-03-2019 12:00:00 AM"),
+                        y: 3
+                    }
+                ]
+
+            }
+        ]
+    };
+
+    //Define graph options 
+    var options = {
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    beginAtZero: true
+                },
+                gridLines: {
+                    display: true,
+                    color: "rgba(255,99,164,0.2)"
+                }
+            }],
+            xAxes: [{
+                type: 'time',
+                distribution: 'linear',
+                time:
+                {   
+                    parse: 'DD/MM/YYYY HH:mm:ss',
+                    unit: 'day',
+                    min: startDate,
+                    max: endDate
+                },
+
+                ticks: {
+                    min: 0,
+                    beginAtZero: true
+                },
+                gridLines: {
+                    display: false
+                }
+            }]
+        }
+    };
+
+    //Init chart on page
+    var myChart = new Chart(ctx, {
+        options: options,
+        data: data,
+        type: 'line'
+    });
+
+    function showDay() {
+        myChart.options.scales.xAxes[0].time.unit = 'day';
+        myChart.update();
+    }
+
+    function showMonth() {
+        myChart.options.scales.xAxes[0].time.unit = 'month';
+        myChart.update();
+    }
+
+    function showYear() {
+        myChart.options.scales.xAxes[0].time.unit = 'year';
+        myChart.update();
+    }
+
+
+
+</script>
+
+>>>>>>> 751b809aebeb8f659665cf9e0405c8571af2e540
 
 
     //Set canvas of graph
