@@ -13,7 +13,7 @@ namespace PainTrackerPT.Models.Analytics.GFPatient
         public int id { get; set; }
 
         [Column("Date")]
-        public DateTime date;
+        public DateTime date { get; set; }
 
         [Column("Description")]
         public string description { get; set; }

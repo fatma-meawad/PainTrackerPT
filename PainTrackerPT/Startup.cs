@@ -70,7 +70,7 @@ namespace PainTrackerPT
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=AnalyticsLogs}/{action=Index}/{id?}");
+                    template: "{controller=AnalyticsLogs}/{action=PatientTrend}/{id?}");
             });
         }
     }

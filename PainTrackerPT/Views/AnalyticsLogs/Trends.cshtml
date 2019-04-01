@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Trends";
+}
+
+<h1>Trends</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach (var kv in ViewBag.PainIntensityPlots)
+            {
+                <tr>
+                    <td>
+                        @kv.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

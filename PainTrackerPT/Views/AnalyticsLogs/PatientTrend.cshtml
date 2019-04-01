@@ -1,7 +1,200 @@
 ﻿
 @{
     ViewData["Title"] = "PatientTrend";
+
 }
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+<script type="text/javascript">
+</script>
 
-<h1>PatientTrend</h1>
+<br /><br />
+<h1 class="mx-4">PatientTrend</h1>
 
+<div class="mx-5" style="float:right;">
+    <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
+        <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
+            <i class="la la-plus m--hide"></i>
+            <i class="la la-ellipsis-h"></i>
+        </a>
+        <div class="m-dropdown__wrapper" style="z-index: 101;">
+            <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+            <div class="m-dropdown__inner">
+                <div class="m-dropdown__body">
+                    <div class="m-dropdown__content">
+                        <ul class="m-nav">
+                            <li class="m-nav__section m-nav__section--first">
+                                <span class="m-nav__section-text">Filter view</span>
+                            </li>
+                            <li class="m-nav__section m-nav__section--first m--hide">
+                                <span class="m-nav__section-text">Quick Actions</span>
+                            </li>
+                            <li class="m-nav__item" onclick="showYear()">
+                                <a href="#" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-calendar-1"></i>
+                                    <span class="m-nav__link-text">Year</span>
+                                </a>
+                            </li>
+                            <li class="m-nav__item" onclick="showMonth()">
+                                <a href="#" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-calendar-2"></i>
+                                    <span class="m-nav__link-text">Month</span>
+                                </a>
+                            </li>
+                            <li class="m-nav__item">
+                                <a href="#" class="m-nav__link" onclick="showDay()">
+                                    <i class="m-nav__link-icon flaticon-calendar-3"></i>
+                                    <span class="m-nav__link-text">Day</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-body px-4">
+
+    <div class="chart-container" style="height:500px">
+        <canvas id="chart"></canvas>
+    </div>
+
+    <br />
+
+    <div style="width:100%; text-align:center; margin-top:50px;margin-bottom:50px;">
+        <div class="btn-group btn-group" role="group">
+            <button id="moodBtn" type="button" class="btn btn-secondary" onclick="setXAxis()">Pain Intensity</button>
+            <button type="button" class="btn btn-secondary">Sleep</button>
+            <button type="button" class="btn btn-secondary">Mood</button>
+            <button type="button" class="btn btn-secondary">Interference</button>
+        </div>
+    </div>
+    <table class="table">
+        <tbody>
+        </tbody>
+        <thead>
+            <tr>
+                <th>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+<script>
+    function toDate(dateStr) {
+        var empty = dateStr.split(" ");
+        var parts = empty[0].split("-");
+        return (parts[1] + "-" + parts[0] + "-" + parts[2] + " " + empty[1] +" AM");
+    }
+    var painIntensityData = [];
+    var moodData = [];
+    var sleepData = [];
+    
+    @foreach (var d in ViewBag.PainIntensityPlots)
+    {
+        @:var dicDate = '@d.Key';
+        @:dicDate = dicDate.replace(/\//g, '-');
+        @:painIntensityData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
+    }
+
+    @foreach (var d in ViewBag.MoodPlots)
+    {
+        @:var dicDate = '@d.Key';
+        @:dicDate = dicDate.replace(/\//g, '-');
+        @:moodData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
+    }
+
+
+    //Set canvas of graph
+    var ctx = document.getElementById("chart").getContext("2d");
+    //Date for range of graph
+    var startDate = new Date();
+    var tempDate = new Date();
+    var endDate = new Date(tempDate.setTime(tempDate.getTime() + 6 * 86400000));
+    //Define dataset
+    var data = {
+        datasets: [
+            /**
+                * Dataset 1 - Pain Intensity
+                * X value = Date, Y = Intensity
+            **/
+            {
+                label: "Pain Intensity",
+                backgroundColor: 'rgba(244, 86, 66, 0.2)',
+                borderColor:'rgba(244, 86, 66,1)',
+                borderWidth: 1,
+                data: painIntensityData
+            },
+            /**
+                * Dataset 2 - Mood
+                * X value = Date, Y = Moodtype
+            **/
+            {
+                label: "Mood",
+                backgroundColor: 'rgba(66, 244, 125, 0.2)',
+                borderColor: 'rgba(66, 244, 125, 1)',
+                borderWidth: 1,
+                hidden: true,
+                data: moodData
+            }
+        ]
+    };
+    //Define graph options
+    var options = {
+        maintainAspectRatio: false,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    beginAtZero: true
+                },
+                gridLines: {
+                    display: true,
+                    color: "rgba(255,99,164,0.2)"
+                }
+            }],
+            xAxes: [{
+                type: 'time',
+                distribution: 'linear',
+                time:
+                {
+                    parse: 'DD/MM/YYYY HH:mm:ss',
+                    unit: 'day',
+                    min: startDate,
+                    max: endDate
+                },
+                ticks: {
+                    min: 0,
+                    beginAtZero: true
+                },
+                gridLines: {
+                    display: false
+                }
+            }]
+        }
+    };
+    //Init chart on page
+    var myChart = new Chart(ctx, {
+        options: options,
+        data: data,
+        type: 'line'
+    });
+    function showDay() {
+        myChart.options.scales.xAxes[0].time.unit = 'day';
+        myChart.update();
+    }
+    function showMonth() {
+        myChart.options.scales.xAxes[0].time.unit = 'month';
+        myChart.update();
+    }
+    function showYear() {
+        myChart.options.scales.xAxes[0].time.unit = 'year';
+        myChart.options.scales.xAxes[0].time.min = new Date("01-01-2019");
+        myChart.update();
+    }
+</script>

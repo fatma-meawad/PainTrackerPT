@@ -14,7 +14,8 @@ namespace PainTrackerPT.Models.Analytics.GFPatient
 
         [ForeignKey("Patient")]
         public int PatientID { get; set; }
-     
+       
+
 
         public virtual List<Interference> Interference { get; set; }
         public virtual List<Mood> Mood { get; set; }

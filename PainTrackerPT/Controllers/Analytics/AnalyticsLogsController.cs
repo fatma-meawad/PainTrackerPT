@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Data.Analytics;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Analytics;
+using PainTrackerPT.Trends;
 
 namespace PainTrackerPT.Controllers
 {
@@ -23,9 +24,15 @@ namespace PainTrackerPT.Controllers
             _patientGateway = _patient;
         }
 
-        public async Task<ActionResult> Trends()
+        public async Task<ActionResult> PatientTrend()
         {
-            return View(_patientGateway.SelectById(1));
+            var painDiary = _patientGateway.SelectById(1);
+            IPatientTrend calculate = new PatientTrend();            
+
+            ViewBag.PainIntensityPlots = calculate.PlotPainIntensity(painDiary.PainIntensity);
+            ViewBag.InterferencePlots = calculate.PlotInterference(painDiary.Interference);
+            ViewBag.MoodPlots = calculate.PlotMood(painDiary.Mood);
+            return View();
         }
 
         // GET: AnalyticsLogs
