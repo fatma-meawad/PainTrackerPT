@@ -44,13 +44,9 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Questions/Create
-        public IActionResult Create(Guid? id)
+        public IActionResult Create()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
+//            System.Diagnostics.Debug.WriteLine("GUID IS " + followUpId.ToString());
             return View();
         }
 
