@@ -5,18 +5,19 @@ using System.Threading.Tasks;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using PainTrackerPT.Common.Doctors;
 
 namespace PainTrackerPT.Models.Doctors
 {
-    public class Doctor
+    public class Login
     {
         [Key]
-        public int DoctorId { get; set; }
+        public int UserID { get; set; }
         public string Username { get; set; }
+        
+        [DataType(DataType.Password)]
         public int Pin { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
-        public string EmailAdd { get; set; }
+
+
+        public string LoginError { get; set; }
     }
 }

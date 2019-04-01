@@ -39,6 +39,8 @@ namespace PainTrackerPT.Models
 
         public DbSet<PainTrackerPT.Models.Doctors.Appointment> Appointments { get; set; }
 
+        public DbSet<PainTrackerPT.Models.Doctors.Login> Login { get; set; }
+
 
     }
 
