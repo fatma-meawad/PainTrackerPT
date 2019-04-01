@@ -9,8 +9,10 @@ namespace PainTrackerPT.Models.Medicine
     public class MedicineLog
     {
         public int Id { get; set; }
-        public String Type { get; set; }
-        public String Name { get; set; }
-        public String Img { get; set; }        
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public string Img { get; set; }        
+        public Guid MedGuid { get; set; }
+
     }
 }

@@ -64,7 +64,7 @@ namespace PainTrackerPT.Controllers.Medicine
         {
             if (ModelState.IsValid)
             {
-                //medicineLog.medGuid = Guid.NewGuid();
+                medicineLog.MedGuid = Guid.NewGuid();
                 //createImage(medicineLog.Img);
                 _medService.Insert(medicineLog);
 

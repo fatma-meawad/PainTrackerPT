@@ -67,7 +67,9 @@ namespace PainTrackerPT.Migrations
                     EventId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Dosage = table.Column<int>(nullable: false),
-                    TimeStamp = table.Column<DateTime>(nullable: false),
+                    StartTime = table.Column<DateTime>(nullable: false),
+                    Intervals = table.Column<int>(nullable: false),
+                    NumOfRecurringTimes = table.Column<int>(nullable: false),
                     MedId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -83,7 +85,8 @@ namespace PainTrackerPT.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Type = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Img = table.Column<string>(nullable: true)
+                    Img = table.Column<string>(nullable: true),
+                    MedGuid = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {

@@ -23,6 +23,7 @@ namespace PainTrackerPT.Models
         {
         }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -42,6 +43,7 @@ namespace PainTrackerPT.Models
         public DbSet<PainTrackerPT.Models.Followups.FollowupsLog> FollowupsLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.Medicine.MedicineLog> MedicineLog { get; set; }
+
 
         public DbSet<PainTrackerPT.Models.Medicine.MedicineEvent> MedicineEvent { get; set; }
 

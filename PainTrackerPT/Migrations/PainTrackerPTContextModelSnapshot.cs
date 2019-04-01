@@ -104,6 +104,8 @@ namespace PainTrackerPT.Migrations
 
                     b.Property<string>("Img");
 
+                    b.Property<Guid>("MedGuid");
+
                     b.Property<string>("Name");
 
                     b.Property<string>("Type");

@@ -10,8 +10,8 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190330115609_UpdatedMedEvent")]
-    partial class UpdatedMedEvent
+    [Migration("20190401123332_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -105,6 +105,8 @@ namespace PainTrackerPT.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Img");
+
+                    b.Property<Guid>("MedGuid");
 
                     b.Property<string>("Name");
 
