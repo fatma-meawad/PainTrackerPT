@@ -259,3 +259,10 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+PainTrackerPT/Migrations/PainTrackerPTContextModelSnapshot.cs
+PainTrackerPT/Migrations/20190401152908_Followups.Designer.cs
+PainTrackerPT/Migrations/20190401152908_Followups.cs
+PainTrackerPT/Migrations/20190401130711_FollowUpInit.Designer.cs
+PainTrackerPT/Migrations/20190401130711_FollowUpInit.cs
+PainTrackerPT/Migrations/20190401130546_InitialCreate.Designer.cs
+PainTrackerPT/Migrations/20190401130546_InitialCreate.cs
