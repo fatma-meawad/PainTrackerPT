@@ -27,7 +27,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Recommendations/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Int64? id)
         {
             if (id == null)
             {
@@ -58,7 +58,6 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
-                recommendation.Id = Guid.NewGuid();
                 _recommendationService.Create(recommendation);
                 return RedirectToAction(nameof(Index));
             }
@@ -66,7 +65,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Recommendations/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Int64? id)
         {
             if (id == null)
             {
@@ -86,7 +85,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("AnswerId,Description,DateGenerated,Id")] Recommendation recommendation)
+        public async Task<IActionResult> Edit(Int64 id, [Bind("AnswerId,Description,DateGenerated,Id")] Recommendation recommendation)
         {
             if (id != recommendation.Id)
             {
@@ -116,7 +115,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Recommendations/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Int64? id)
         {
             if (id == null)
             {
@@ -135,14 +134,14 @@ namespace PainTrackerPT.Controllers.Followups
         // POST: Recommendations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Int64 id)
         {
             var recommendation = await _recommendationService.Select(id);
             _recommendationService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RecommendationExists(Guid id)
+        private bool RecommendationExists(Int64 id)
         {
             return _recommendationService.Exists(id);
         }

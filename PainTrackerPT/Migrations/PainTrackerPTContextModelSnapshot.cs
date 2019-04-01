@@ -63,10 +63,11 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Followups.Advice", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("AnswerId");
+                    b.Property<long>("AnswerId");
 
                     b.Property<DateTime>("DateGenerated");
 
@@ -80,8 +81,9 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Followups.Answer", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("Id");
 
@@ -90,17 +92,18 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Followups.FollowUp", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateGenerated");
 
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<Guid>("DoctorId");
+                    b.Property<long>("DoctorId");
 
-                    b.Property<Guid>("PatientId");
+                    b.Property<long>("PatientId");
 
                     b.Property<int>("State");
 
@@ -111,8 +114,9 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Followups.FollowupsLog", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Description");
 
@@ -125,10 +129,11 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Followups.Media", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("AnswerId");
+                    b.Property<long>("AnswerId");
 
                     b.Property<string>("MediaUrl")
                         .IsRequired();
@@ -140,15 +145,16 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Followups.Question", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateGenerated");
 
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<Guid>("FollowUpId");
+                    b.Property<long>("FollowUpId");
 
                     b.HasKey("Id");
 
@@ -159,10 +165,11 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Followups.Recommendation", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<Guid>("AnswerId");
+                    b.Property<long>("AnswerId");
 
                     b.Property<DateTime>("DateGenerated");
 

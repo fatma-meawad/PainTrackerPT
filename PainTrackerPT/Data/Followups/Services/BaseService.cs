@@ -21,17 +21,17 @@ namespace PainTrackerPT.Data.Followups.Services
             _baseRepository.Create(entity);
         }
 
-        public void Delete(Guid id)
+        public void Delete(Int64 id)
         {
             _baseRepository.Remove(id);
         }
 
-        public bool Exists(Guid id)
+        public bool Exists(Int64 id)
         {
             return _baseRepository.Exists(id);
         }
 
-        public Task<T> Select(Guid id)
+        public Task<T> Select(Int64 id)
         {
             return _baseRepository.Select(id);
         }

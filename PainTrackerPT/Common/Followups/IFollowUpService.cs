@@ -10,8 +10,8 @@ namespace PainTrackerPT.Common.Followups
     {
         void Create(FollowUp followUp);
         void Update(FollowUp followUp);
-        void Delete(Guid id);
-        Task<FollowUp> Select(Guid id);
+        void Delete(Int64 id);
+        Task<FollowUp> Select(Int64 id);
         Task<IEnumerable<FollowUp>> SelectAll();
     }
 }

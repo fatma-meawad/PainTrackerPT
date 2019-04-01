@@ -25,12 +25,12 @@ namespace PainTrackerPT.Data.Followups.Repository
             _db.SaveChanges();
         }
 
-        public bool Exists(Guid id)
+        public bool Exists(Int64 id)
         {
             return _dbSet.Any(e => e.Id == id);
         }
 
-        public void Remove(Guid id)
+        public void Remove(Int64 id)
         {
             T entity = _dbSet.Find(id);
             if (entity != null)
@@ -40,12 +40,12 @@ namespace PainTrackerPT.Data.Followups.Repository
             }
         }
 
-        public async Task<int> SaveAsync()
+        public async Task<Int64> SaveAsync()
         {
             return await _db.SaveChangesAsync();
         }
 
-        public async Task<T> Select(Guid id)
+        public async Task<T> Select(Int64 id)
         {
             return _dbSet.Find(id);
 

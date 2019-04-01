@@ -27,7 +27,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Answers/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -58,7 +58,6 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
-                answer.Id = Guid.NewGuid();
                 _answerService.Create(answer);
                 return RedirectToAction(nameof(Index));
             }
@@ -66,7 +65,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Answers/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +85,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id")] Answer answer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id")] Answer answer)
         {
             if (id != answer.Id)
             {
@@ -101,7 +100,7 @@ namespace PainTrackerPT.Controllers.Followups
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnswerExists(answer.Id))
+                    if (!AnswerExist(answer.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +115,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Answers/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -135,14 +134,14 @@ namespace PainTrackerPT.Controllers.Followups
         // POST: Answers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var answer = await _answerService.Select(id);
             _answerService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AnswerExists(Guid id)
+        private bool AnswerExist(Int64 id)
         {
             return _answerService.Exists(id);
         }

@@ -27,7 +27,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Media/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -58,7 +58,6 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
-                media.Id = Guid.NewGuid();
                 _followUpService.Create(media);
                 return RedirectToAction(nameof(Index));
             }
@@ -66,7 +65,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Media/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Int64? id)
         {
             if (id == null)
             {
@@ -86,7 +85,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("AnswerId,MediaUrl,Id")] Media media)
+        public async Task<IActionResult> Edit(Int64 id, [Bind("AnswerId,MediaUrl,Id")] Media media)
         {
             if (id != media.Id)
             {
@@ -116,7 +115,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Media/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Int64? id)
         {
             if (id == null)
             {
@@ -135,14 +134,14 @@ namespace PainTrackerPT.Controllers.Followups
         // POST: Media/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Int64 id)
         {
             var media = await _followUpService.Select(id);
             _followUpService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MediaExists(Guid id)
+        private bool MediaExists(Int64 id)
         {
             return _followUpService.Exists(id);
         }

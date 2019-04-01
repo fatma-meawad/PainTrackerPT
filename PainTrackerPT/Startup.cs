@@ -43,7 +43,6 @@ namespace PainTrackerPT
          
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
             services.AddDbContext<PainTrackerPTContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
 

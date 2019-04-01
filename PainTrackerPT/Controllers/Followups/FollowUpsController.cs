@@ -28,7 +28,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: FollowUps/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Int64? id)
         {
             if (id == null)
             {
@@ -59,9 +59,6 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
-                followUp.Id = Guid.NewGuid();
-                followUp.DoctorId = Guid.NewGuid();
-                followUp.PatientId = Guid.NewGuid();
                 _followUpService.Create(followUp);
                 return RedirectToAction(nameof(Index));
             }
@@ -69,7 +66,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: FollowUps/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Int64? id)
         {
             if (id == null)
             {
@@ -89,7 +86,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("PatientId,DoctorId,State,Description,DateGenerated,Id")] FollowUp followUp)
+        public async Task<IActionResult> Edit(Int64 id, [Bind("PatientId,DoctorId,State,Description,DateGenerated,Id")] FollowUp followUp)
         {
             if (id != followUp.Id)
             {
@@ -119,7 +116,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: FollowUps/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Int64? id)
         {
             if (id == null)
             {
@@ -138,14 +135,14 @@ namespace PainTrackerPT.Controllers.Followups
         // POST: FollowUps/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Int64 id)
         {
             var followUp = await _followUpService.Select(id);
             _followUpService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FollowUpExists(Guid id)
+        private bool FollowUpExists(Int64 id)
         {
             return _followUpService.Exists(id);
         }

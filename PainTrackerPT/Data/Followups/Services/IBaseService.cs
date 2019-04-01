@@ -9,9 +9,9 @@ namespace PainTrackerPT.Data.Followups.Repository
     {
         void Create(T entity);
         void Update(T entity);
-        void Delete(Guid id);
-        Task<T> Select(Guid id);
+        void Delete(Int64 id);
+        Task<T> Select(Int64 id);
         Task<IEnumerable<T>> SelectAll();
-        bool Exists(Guid id);
+        bool Exists(Int64 id);
     }
 }

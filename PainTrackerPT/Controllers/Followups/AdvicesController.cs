@@ -29,14 +29,14 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Advices/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(Int64 id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var advice = await _adviceService.Select(id.Value);
+            var advice = await _adviceService.Select(id);
             if (advice == null)
             {
                 return NotFound();
@@ -60,7 +60,6 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
-                advice.Id = Guid.NewGuid();
                 _adviceService.Create(advice);
                 return RedirectToAction(nameof(Index));
             }
@@ -68,7 +67,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Advices/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(Int64? id)
         {
             if (id == null)
             {
@@ -88,7 +87,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("AnswerId,Description,DateGenerated,Id")] Advice advice)
+        public async Task<IActionResult> Edit(Int64 id, [Bind("AnswerId,Description,DateGenerated,Id")] Advice advice)
         {
             if (id != advice.Id)
             {
@@ -118,7 +117,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Advices/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(Int64? id)
         {
             if (id == null)
             {
@@ -137,14 +136,14 @@ namespace PainTrackerPT.Controllers.Followups
         // POST: Advices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(Int64 id)
         {
             var advice = await _adviceService.Select(id);
             _adviceService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AdviceExists(Guid id)
+        private bool AdviceExists(Int64 id)
         {
             return _adviceService.Exists(id);
         }

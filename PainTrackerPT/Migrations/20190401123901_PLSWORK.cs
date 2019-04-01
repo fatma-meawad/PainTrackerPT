@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PainTrackerPT.Migrations
 {
-    public partial class FollowUps : Migration
+    public partial class PLSWORK : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +12,9 @@ namespace PainTrackerPT.Migrations
                 name: "Advice",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    AnswerId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AnswerId = table.Column<long>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     DateGenerated = table.Column<DateTime>(nullable: false)
                 },
@@ -38,7 +40,8 @@ namespace PainTrackerPT.Migrations
                 name: "Answer",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
@@ -75,9 +78,10 @@ namespace PainTrackerPT.Migrations
                 name: "FollowUp",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    PatientId = table.Column<Guid>(nullable: false),
-                    DoctorId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    PatientId = table.Column<long>(nullable: false),
+                    DoctorId = table.Column<long>(nullable: false),
                     State = table.Column<int>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     DateGenerated = table.Column<DateTime>(nullable: false)
@@ -91,7 +95,8 @@ namespace PainTrackerPT.Migrations
                 name: "FollowupsLog",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
                     timeStamp = table.Column<DateTime>(nullable: false)
                 },
@@ -104,8 +109,9 @@ namespace PainTrackerPT.Migrations
                 name: "Media",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    AnswerId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AnswerId = table.Column<long>(nullable: false),
                     MediaUrl = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -143,8 +149,9 @@ namespace PainTrackerPT.Migrations
                 name: "Recommendation",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    AnswerId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AnswerId = table.Column<long>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     DateGenerated = table.Column<DateTime>(nullable: false)
                 },
@@ -157,8 +164,9 @@ namespace PainTrackerPT.Migrations
                 name: "Question",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
-                    FollowUpId = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FollowUpId = table.Column<long>(nullable: false),
                     Description = table.Column<string>(nullable: false),
                     DateGenerated = table.Column<DateTime>(nullable: false)
                 },

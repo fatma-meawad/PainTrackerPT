@@ -1,12 +1,17 @@
-﻿@model PainTrackerPT.Models.Followups.Question
+﻿@using PainTrackerPT.Models.Followups
+@model PainTrackerPT.Models.Followups.Question
 
 @{
     ViewData["Title"] = "Create";
+    int id = ViewBag.MyForeignKey;
+
+    Question qns = new Question();
+    qns.FollowUpId = id;
 }
 
 <h1>Create</h1>
 
-<h4>Question</h4>
+<h4>a Question For Follow Up @qns.FollowUpId </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">

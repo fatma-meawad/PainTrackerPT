@@ -26,7 +26,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: FollowupsLogs/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -58,7 +58,6 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
-                followupsLog.Id = Guid.NewGuid();
                 _context.Add(followupsLog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,7 +86,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Description,timeStamp")] FollowupsLog followupsLog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,timeStamp")] FollowupsLog followupsLog)
         {
             if (id != followupsLog.Id)
             {
@@ -118,7 +117,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: FollowupsLogs/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -146,7 +145,7 @@ namespace PainTrackerPT.Controllers.Followups
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FollowupsLogExists(Guid id)
+        private bool FollowupsLogExists(int id)
         {
             return _context.FollowupsLog.Any(e => e.Id == id);
         }

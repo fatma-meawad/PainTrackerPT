@@ -10,8 +10,8 @@ namespace PainTrackerPT.Common.Followups
     {
         void Create(Media media);
         void Update(Media media);
-        void Delete(Guid id);
-        Task<Media> Select(Guid id);
+        void Delete(Int64 id);
+        Task<Media> Select(Int64 id);
         Task<IEnumerable<Media>> SelectAll();
     }
 }
