@@ -10,5 +10,8 @@ namespace PainTrackerPT.Models.Followups
         public int Id { get; set; }
         public String Description { get; set; }
         public DateTime timeStamp { get; set; }
+        public DateTime DateGenerated { get; set; }
+        public Guid FollowUpId { get; set; }
+
     }
 }
