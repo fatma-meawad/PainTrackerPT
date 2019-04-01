@@ -24,6 +24,7 @@ namespace PainTrackerPT.Models
 
         public DbSet<Patient> Patients { get; set; }
 
+        public DbSet<Notification> Notifications { get; set; }
 
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
 

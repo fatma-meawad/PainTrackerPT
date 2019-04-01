@@ -10,7 +10,7 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190330181102_InitialCreate")]
+    [Migration("20190401171508_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,9 +53,19 @@ namespace PainTrackerPT.Migrations
 
                     b.Property<string>("ProposedDate");
 
+                    b.Property<bool>("docCfm");
+
+                    b.Property<bool>("miAttach");
+
+                    b.Property<bool>("patCfm");
+
+                    b.Property<bool>("pdAttach");
+
+                    b.Property<string>("status");
+
                     b.HasKey("AppointmentId");
 
-                    b.ToTable("Appointment");
+                    b.ToTable("Appointments");
                 });
 
             modelBuilder.Entity("PainTrackerPT.Models.Doctors.DoctorsLog", b =>
@@ -70,6 +80,44 @@ namespace PainTrackerPT.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DoctorsLog");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Doctors.Login", b =>
+                {
+                    b.Property<int>("UserID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LoginError");
+
+                    b.Property<int>("Pin");
+
+                    b.Property<string>("Username");
+
+                    b.HasKey("UserID");
+
+                    b.ToTable("Login");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Doctors.Notification", b =>
+                {
+                    b.Property<int>("NotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Header");
+
+                    b.Property<string>("Message");
+
+                    b.Property<string>("Role");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<bool>("Viewed");
+
+                    b.HasKey("NotificationId");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("PainTrackerPT.Models.Doctors.Patient", b =>

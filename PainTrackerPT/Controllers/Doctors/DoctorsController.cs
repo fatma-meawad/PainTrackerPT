@@ -197,6 +197,14 @@ namespace PainTrackerPT.Controllers.Doctors
             {
                 try
                 {
+                    Notification notification = new Notification();
+                    notification.Role = "Doctor";
+                    notification.UserId = appointment.DoctorID;
+                    notification.Header = "Alert";
+                    notification.Message = "Doctor has propose an appointment date";
+
+                    _context.Add(notification);
+
                     _context.Update(appointment);
                     await _context.SaveChangesAsync();
                 }

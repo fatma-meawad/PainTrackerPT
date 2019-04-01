@@ -22,7 +22,7 @@ namespace PainTrackerPT.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointment",
+                name: "Appointments",
                 columns: table => new
                 {
                     AppointmentId = table.Column<int>(nullable: false)
@@ -32,11 +32,16 @@ namespace PainTrackerPT.Migrations
                     Message = table.Column<string>(nullable: true),
                     AppDate = table.Column<string>(nullable: true),
                     ProposedDate = table.Column<string>(nullable: true),
-                    ApptLocation = table.Column<string>(nullable: true)
+                    ApptLocation = table.Column<string>(nullable: true),
+                    docCfm = table.Column<bool>(nullable: false),
+                    patCfm = table.Column<bool>(nullable: false),
+                    pdAttach = table.Column<bool>(nullable: false),
+                    miAttach = table.Column<bool>(nullable: false),
+                    status = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Appointment", x => x.AppointmentId);
+                    table.PrimaryKey("PK_Appointments", x => x.AppointmentId);
                 });
 
             migrationBuilder.CreateTable(
@@ -79,6 +84,21 @@ namespace PainTrackerPT.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Login",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Username = table.Column<string>(nullable: true),
+                    Pin = table.Column<int>(nullable: false),
+                    LoginError = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Login", x => x.UserID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MedicineLog",
                 columns: table => new
                 {
@@ -89,6 +109,23 @@ namespace PainTrackerPT.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicineLog", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    NotificationId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Role = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
+                    Header = table.Column<string>(nullable: true),
+                    Message = table.Column<string>(nullable: true),
+                    Viewed = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.NotificationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,7 +165,7 @@ namespace PainTrackerPT.Migrations
                 name: "AnalyticsLog");
 
             migrationBuilder.DropTable(
-                name: "Appointment");
+                name: "Appointments");
 
             migrationBuilder.DropTable(
                 name: "DoctorsLog");
@@ -140,7 +177,13 @@ namespace PainTrackerPT.Migrations
                 name: "FollowupsLog");
 
             migrationBuilder.DropTable(
+                name: "Login");
+
+            migrationBuilder.DropTable(
                 name: "MedicineLog");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "PainDiaryLog");
