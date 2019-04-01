@@ -65,6 +65,12 @@ namespace PainTrackerPT.Controllers.Followups
             if (ModelState.IsValid)
             {
                System.Diagnostics.Debug.WriteLine("THE FK IS :" + question.FollowUpId.ToString());
+                question.FollowUp.DoctorId = 1;
+                question.FollowUp.PatientId = 1;
+                question.FollowUp.DateGenerated = DateTime.Now;
+                question.FollowUp.Description = "Hello";
+                question.FollowUp.Id = 2;
+
                 question.FollowUpId = id;
                 _questionService.Create(question);
                 return RedirectToAction(nameof(Index));
