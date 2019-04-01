@@ -36,7 +36,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var question = _questionService.Select(id.Value);
+            Question question = await _questionService.Select(id.Value);
             if (question == null)
             {
                 return NotFound();
