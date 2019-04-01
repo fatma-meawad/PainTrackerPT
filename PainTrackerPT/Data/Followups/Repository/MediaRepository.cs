@@ -15,48 +15,8 @@ using PainTrackerPT.Data.Followups.Repository;
 
 namespace PainTrackerPT.Data.Followups
 {
-
-    public class MediaRepository : BaseRepository
+    public class MediaRepository : BaseRepository<Media>
     {
-        private DbSet<Media> _mediaSet;
-
-        public MediaRepository(PainTrackerPTContext db) : base(db)
-        {
-            _mediaSet = db.Set<Media>();
-        }
-
-        public void Create(Media media)
-        {
-            this._mediaSet.Add(media);
-            db.SaveChanges();
-        }
-
-        public async Task<IEnumerable<Media>> SelectAll()
-        {
-            return await _mediaSet.ToArrayAsync();
-        }
-
-        public async Task<Media> Select(Guid mediaId)
-        {
-            return _mediaSet.Find(mediaId);
-
-        }
-
-        public void Remove(Guid mediaId)
-        {
-            Media media = _mediaSet.Find(mediaId);
-            if (media != null)
-            {
-                _mediaSet.Remove(media);
-                this.Save();
-            }
-        }
-
-        public void Update(Media media)
-        {
-            Media existingMedia = _mediaSet.Find(media.Id);
-            _mediaSet.Update(media);
-            this.Save();
-        }
+        public MediaRepository(PainTrackerPTContext db) : base(db) { }
     }
 }

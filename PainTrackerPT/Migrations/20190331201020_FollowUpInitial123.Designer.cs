@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PainTrackerPT.Models;
 
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    partial class PainTrackerPTContextModelSnapshot : ModelSnapshot
+    [Migration("20190331201020_FollowUpInitial123")]
+    partial class FollowUpInitial123
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

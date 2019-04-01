@@ -10,10 +10,11 @@ namespace PainTrackerPT.Models.Followups
     {
         public Guid PatientId { get; set; }
         public Guid DoctorId { get; set; }
-        [Required]
         public int State { get; set; }
         [Required]
         public string Description { get; set; }
-        public DateTime DateGenerated { get; set; } 
+        public DateTime DateGenerated { get; set; }
+
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

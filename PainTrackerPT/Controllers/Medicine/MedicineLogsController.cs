@@ -5,28 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
-using PainTrackerPT.Models.Followups;
+using PainTrackerPT.Models.Medicine;
 
-namespace PainTrackerPT.Controllers.Followups
+namespace PainTrackerPT.Controllers.Medicine
 {
-    public class QuestionsController : Controller
+    public class MedicineLogsController : Controller
     {
-        private readonly IBaseService<Question> _questionService;
+        private readonly PainTrackerPTContext _context;
 
-        public QuestionsController(IBaseService<Question> questionService)
+        public MedicineLogsController(PainTrackerPTContext context)
         {
-            _questionService = questionService;
+            _context = context;
         }
 
-        // GET: Questions
+        // GET: MedicineLogs
         public async Task<IActionResult> Index()
         {
-            return View(await _questionService.SelectAll());
+            return View(await _context.MedicineLog.ToListAsync());
         }
 
-        // GET: Questions/Details/5
+        // GET: MedicineLogs/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -34,38 +33,40 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var question = _questionService.Select(id.Value);
-            if (question == null)
+            var medicineLog = await _context.MedicineLog
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (medicineLog == null)
             {
                 return NotFound();
             }
 
-            return View(question);
+            return View(medicineLog);
         }
 
-        // GET: Questions/Create
+        // GET: MedicineLogs/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Questions/Create
+        // POST: MedicineLogs/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Description,DateGenerated,Id")] Question question)
+        public async Task<IActionResult> Create([Bind("Id,Description,timeStamp")] MedicineLog medicineLog)
         {
             if (ModelState.IsValid)
             {
-                question.Id = Guid.NewGuid();
-                _questionService.Create(question);
+                medicineLog.Id = Guid.NewGuid();
+                _context.Add(medicineLog);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(question);
+            return View(medicineLog);
         }
 
-        // GET: Questions/Edit/5
+        // GET: MedicineLogs/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -73,22 +74,22 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var question = await _questionService.Select(id.Value);
-            if (question == null)
+            var medicineLog = await _context.MedicineLog.FindAsync(id);
+            if (medicineLog == null)
             {
                 return NotFound();
             }
-            return View(question);
+            return View(medicineLog);
         }
 
-        // POST: Questions/Edit/5
+        // POST: MedicineLogs/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Description,DateGenerated,Id")] Question question)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Description,timeStamp")] MedicineLog medicineLog)
         {
-            if (id != question.Id)
+            if (id != medicineLog.Id)
             {
                 return NotFound();
             }
@@ -97,11 +98,12 @@ namespace PainTrackerPT.Controllers.Followups
             {
                 try
                 {
-                    _questionService.Update(question);
+                    _context.Update(medicineLog);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!QuestionExists(question.Id))
+                    if (!MedicineLogExists(medicineLog.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +114,10 @@ namespace PainTrackerPT.Controllers.Followups
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(question);
+            return View(medicineLog);
         }
 
-        // GET: Questions/Delete/5
+        // GET: MedicineLogs/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -123,28 +125,30 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var question = await _questionService.Select(id.Value);
-            if (question == null)
+            var medicineLog = await _context.MedicineLog
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (medicineLog == null)
             {
                 return NotFound();
             }
 
-            return View(question);
+            return View(medicineLog);
         }
 
-        // POST: Questions/Delete/5
+        // POST: MedicineLogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var question = await _questionService.Select(id);
-            _questionService.Delete(id);
+            var medicineLog = await _context.MedicineLog.FindAsync(id);
+            _context.MedicineLog.Remove(medicineLog);
+            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool QuestionExists(Guid id)
+        private bool MedicineLogExists(Guid id)
         {
-            return _questionService.Exists(id);
+            return _context.MedicineLog.Any(e => e.Id == id);
         }
     }
 }

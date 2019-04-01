@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.DatabaseConfiguration;
 using PainTrackerPT.Models.Analytics;
 using PainTrackerPT.Models.Doctors;
 using PainTrackerPT.Models.Events;
@@ -39,6 +40,8 @@ namespace PainTrackerPT.Models
             base.OnModelCreating(modelBuilder);
             //new MedicineEvent(modelBuilder.Entity<MedicineEvent>());
             //new QuestionMap(modelBuilder.Entity<Question>());
+            new FollowUpMap(modelBuilder.Entity<FollowUp>());
+            new QuestionMap(modelBuilder.Entity<Question>());
         }
 
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
@@ -51,9 +54,7 @@ namespace PainTrackerPT.Models
 
         public DbSet<PainTrackerPT.Models.Medicine.MedicineLog> MedicineLog { get; set; }
 
-        public DbSet<PainTrackerPT.Models.Medicine.MedicineEvent> MedicineEvent { get; set; }
-
-        public DbSet<PainTrackerPT.Models.PainDiary.PainDiaryLog> PainDiaryLog { get; set; }     
+        public DbSet<PainTrackerPT.Models.PainDiary.PainDiaryLog> PainDiaryLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.Followups.FollowUp> FollowUp { get; set; }
 

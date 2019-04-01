@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PainTrackerPT.Models.Followups.Media>
+﻿@model IEnumerable<PainTrackerPT.Models.Medicine.MedicineLog>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,10 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.AnswerId)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MediaUrl)
+                @Html.DisplayNameFor(model => model.timeStamp)
             </th>
             <th></th>
         </tr>
@@ -25,10 +25,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AnswerId)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MediaUrl)
+                @Html.DisplayFor(modelItem => item.timeStamp)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
@@ -12,17 +13,17 @@ namespace PainTrackerPT.Controllers.Followups
 {
     public class MediaController : Controller
     {
-        private readonly PainTrackerPTContext _context;
+        private readonly IBaseService<Media> _followUpService;
 
-        public MediaController(PainTrackerPTContext context)
+        public MediaController(IBaseService<Media> followUpService)
         {
-            _context = context;
+            _followUpService = followUpService;
         }
 
         // GET: Media
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Media.ToListAsync());
+            return View(await _followUpService.SelectAll());
         }
 
         // GET: Media/Details/5
@@ -33,8 +34,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var media = await _context.Media
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var media = await _followUpService.Select(id.Value);
             if (media == null)
             {
                 return NotFound();
@@ -59,8 +59,7 @@ namespace PainTrackerPT.Controllers.Followups
             if (ModelState.IsValid)
             {
                 media.Id = Guid.NewGuid();
-                _context.Add(media);
-                await _context.SaveChangesAsync();
+                _followUpService.Create(media);
                 return RedirectToAction(nameof(Index));
             }
             return View(media);
@@ -74,7 +73,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var media = await _context.Media.FindAsync(id);
+            var media = await _followUpService.Select(id.Value);
             if (media == null)
             {
                 return NotFound();
@@ -98,8 +97,7 @@ namespace PainTrackerPT.Controllers.Followups
             {
                 try
                 {
-                    _context.Update(media);
-                    await _context.SaveChangesAsync();
+                    _followUpService.Update(media);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,8 +123,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var media = await _context.Media
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var media = await _followUpService.Select(id.Value);
             if (media == null)
             {
                 return NotFound();
@@ -140,15 +137,14 @@ namespace PainTrackerPT.Controllers.Followups
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var media = await _context.Media.FindAsync(id);
-            _context.Media.Remove(media);
-            await _context.SaveChangesAsync();
+            var media = await _followUpService.Select(id);
+            _followUpService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool MediaExists(Guid id)
         {
-            return _context.Media.Any(e => e.Id == id);
+            return _followUpService.Exists(id);
         }
     }
 }

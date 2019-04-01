@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
@@ -12,17 +13,17 @@ namespace PainTrackerPT.Controllers.Followups
 {
     public class RecommendationsController : Controller
     {
-        private readonly PainTrackerPTContext _context;
+        private readonly IBaseService<Recommendation> _recommendationService;
 
-        public RecommendationsController(PainTrackerPTContext context)
+        public RecommendationsController(IBaseService<Recommendation> recommendationService)
         {
-            _context = context;
+            _recommendationService = recommendationService;
         }
 
         // GET: Recommendations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Recommendation.ToListAsync());
+            return View(await _recommendationService.SelectAll());
         }
 
         // GET: Recommendations/Details/5
@@ -33,8 +34,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var recommendation = await _context.Recommendation
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var recommendation = await _recommendationService.Select(id.Value);
             if (recommendation == null)
             {
                 return NotFound();
@@ -59,8 +59,7 @@ namespace PainTrackerPT.Controllers.Followups
             if (ModelState.IsValid)
             {
                 recommendation.Id = Guid.NewGuid();
-                _context.Add(recommendation);
-                await _context.SaveChangesAsync();
+                _recommendationService.Create(recommendation);
                 return RedirectToAction(nameof(Index));
             }
             return View(recommendation);
@@ -74,7 +73,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var recommendation = await _context.Recommendation.FindAsync(id);
+            var recommendation = await _recommendationService.Select(id.Value);
             if (recommendation == null)
             {
                 return NotFound();
@@ -98,8 +97,7 @@ namespace PainTrackerPT.Controllers.Followups
             {
                 try
                 {
-                    _context.Update(recommendation);
-                    await _context.SaveChangesAsync();
+                    _recommendationService.Update(recommendation);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,8 +123,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
-            var recommendation = await _context.Recommendation
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var recommendation = await _recommendationService.Select((id.Value));
             if (recommendation == null)
             {
                 return NotFound();
@@ -140,15 +137,14 @@ namespace PainTrackerPT.Controllers.Followups
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var recommendation = await _context.Recommendation.FindAsync(id);
-            _context.Recommendation.Remove(recommendation);
-            await _context.SaveChangesAsync();
+            var recommendation = await _recommendationService.Select(id);
+            _recommendationService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool RecommendationExists(Guid id)
         {
-            return _context.Recommendation.Any(e => e.Id == id);
+            return _recommendationService.Exists(id);
         }
     }
 }
