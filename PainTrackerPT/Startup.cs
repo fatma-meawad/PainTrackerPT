@@ -46,7 +46,7 @@ namespace PainTrackerPT
             services.AddDbContext<PainTrackerPTContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
 //            services.AddScoped<SqlConnection>(db => new SqlConnection(Configuration.GetConnectionString("PainTrackerPTContext")));
-            services.AddSingleton<PainTrackerPTContext>(db => new PainTrackerPTContext());
+            services.AddScoped<PainTrackerPTContext>(db => new PainTrackerPTContext());
 
 
             /** Team Team's (FollowUps) Services**/
