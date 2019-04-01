@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups;
 using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Data.Followups.Services;
 using PainTrackerPT.Models;
@@ -14,11 +15,11 @@ namespace PainTrackerPT.Controllers.Followups
 {
     public class AdvicesController : Controller
     {
-        private readonly IBaseService<Advice> _adviceService;
+        private readonly AdviceService _adviceService;
 
         public AdvicesController(IBaseService<Advice> baseService)
         {
-            _adviceService = baseService;
+            _adviceService = (AdviceService) baseService;
         }
 
         // GET: Advices

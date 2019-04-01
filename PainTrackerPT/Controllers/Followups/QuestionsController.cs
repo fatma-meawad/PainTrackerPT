@@ -27,7 +27,7 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Questions/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details()
         {
             if (id == null)
             {
@@ -46,6 +46,7 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: Questions/Create
         public IActionResult Create()
         {
+//            System.Diagnostics.Debug.WriteLine("GUID IS " + followUpId.ToString());
             return View();
         }
 

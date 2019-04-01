@@ -19,7 +19,12 @@ namespace PainTrackerPT.Data.Followups
         // TODO: DI This
         public AdviceService(IBaseRepository<Advice> baseRepository) : base(baseRepository) 
         {
-        }    
+        }
+
+        public void Testing()
+        {
+
+        }
         
     }
 }
