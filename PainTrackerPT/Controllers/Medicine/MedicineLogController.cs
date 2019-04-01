@@ -1,13 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Common.Followups;
 using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Models;
+using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Models.Medicine;
 
 namespace PainTrackerPT.Controllers.Medicine
@@ -15,11 +20,16 @@ namespace PainTrackerPT.Controllers.Medicine
     public class MedicineLogController : Controller
     {
         private readonly IMedicineService<MedicineLog> _medService;
+        private readonly IHostingEnvironment _environment;
+        //private readonly IMediaService _mediaService;
         private MedicineLog _medLog;
+        //private Media _media;
 
-        public MedicineLogController(IMedicineService<MedicineLog> medService)
+        public MedicineLogController(IMedicineService<MedicineLog> medService, IHostingEnvironment IHostingEnvironment)//, IMediaService mediaService)
         {
-            _medService = medService;         
+            //_mediaService = mediaService;
+            _medService = medService;
+            _environment = IHostingEnvironment;
         }
               
         
@@ -29,12 +39,12 @@ namespace PainTrackerPT.Controllers.Medicine
             return View(_medService.GetLogAt(dt));
             
         }
-       
+
         //GET: MedicineLogs
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             //return View(_medService.SelectAll());
-            return View(_medService.SelectMedLogById(1,1));
+            return View(_medService.SelectMedLogById(1, 1));
         }
 
         // GET: MedicineLogs/Create
@@ -50,11 +60,19 @@ namespace PainTrackerPT.Controllers.Medicine
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("Id,Name,Type")] MedicineLog medicineLog)
+        public IActionResult Create([Bind("Id,Name,Type,Img")] MedicineLog medicineLog)
         {
             if (ModelState.IsValid)
-            {               
+            {
+                //medicineLog.medGuid = Guid.NewGuid();
+                //createImage(medicineLog.Img);
                 _medService.Insert(medicineLog);
+
+                //using API from FollowUp team
+                //_media.AnswerId = medicineLog.medGuid;
+                //_media.MediaUrl = medicineLog.Img;
+                //_mediaService.Create(_media);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(medicineLog);
@@ -82,17 +100,17 @@ namespace PainTrackerPT.Controllers.Medicine
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit([Bind("Id,Name,Type")] MedicineLog medicineLog)
-        {            
+        public IActionResult Edit([Bind("Id,Name,Type")] MedicineLog medicineLog)
+        {
             if (ModelState.IsValid)
             {
                 try
-                {                   
-                    _medService.Update(medicineLog);                   
+                {
+                    _medService.Update(medicineLog);
                 }
                 catch (DbUpdateConcurrencyException)
-                {           
-                    throw;                    
+                {
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -100,7 +118,7 @@ namespace PainTrackerPT.Controllers.Medicine
         }
 
         // GET: MedicineLogs/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -130,6 +148,46 @@ namespace PainTrackerPT.Controllers.Medicine
         public ActionResult Event(int id)
         {
             return null;
+        }
+
+        public void createImage(string filename)
+        {
+            var newFileName = string.Empty;            
+            var fileName = string.Empty;
+            string PathDB = string.Empty;
+
+            var files = HttpContext.Request.Form.Files;
+
+            foreach (var file in files)
+            {
+                if (file.Length > 0)
+                {
+                    //Getting FileName
+                    fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+
+                    //Assigning Unique Filename (Guid)
+                    var myUniqueFileName = Convert.ToString(Guid.NewGuid());
+
+                    //Getting file Extension
+                    var FileExtension = Path.GetExtension(fileName);
+
+                    // concating  FileName + FileExtension
+                    newFileName = myUniqueFileName + FileExtension;
+
+                    // Combines two strings into a path.
+                    fileName = Path.Combine(_environment.WebRootPath, "demoImages") + $@"\{newFileName}";
+
+                    // if you want to store path of folder in database
+                    PathDB = "demoImages/" + newFileName;
+
+                    using (FileStream fs = System.IO.File.Create(fileName))
+                    {
+                        file.CopyTo(fs);
+                        fs.Flush();
+                    }
+                }
+            }
+                
         }
     }
 }
