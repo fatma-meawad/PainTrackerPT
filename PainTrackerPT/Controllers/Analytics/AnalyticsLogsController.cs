@@ -6,9 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Data.Analytics;
-using PainTrackerPT.Models;
 using PainTrackerPT.Models.Analytics;
+using analyticsModel = PainTrackerPT.Models.Analytics.GFPatient;
 using PainTrackerPT.Trends;
+using PainTrackerPT.Trends.Aggregate;
 
 namespace PainTrackerPT.Controllers
 {
@@ -26,12 +27,12 @@ namespace PainTrackerPT.Controllers
 
         public async Task<ActionResult> PatientTrend()
         {
-            var painDiary = _patientGateway.SelectById(1);
-            IPatientTrend calculate = new PatientTrend(painDiary);            
+            analyticsModel.PainDiary painDiary = _patientGateway.SelectById(1);
+            IPatientTrend calculate = new PainIntensityTrend(painDiary.PainIntensity);            
 
-            ViewBag.PainIntensityPlots = calculate.PlotPainIntensity();
-            ViewBag.InterferencePlots = calculate.PlotInterference();
-            ViewBag.MoodPlots = calculate.PlotMood();
+            ViewBag.PainIntensityPlots = calculate.PlotGraph();
+            //ViewBag.InterferencePlots = calculate.PlotInterference();
+            ViewBag.MoodPlots = calculate.PlotGraph();
             return View();
         }
 

@@ -99,6 +99,7 @@
         @:var dicDate = '@d.Key';
         @:dicDate = dicDate.replace(/\//g, '-');
         @:painIntensityData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
+        @:alert(dicDate);
     }
 
     @foreach (var d in ViewBag.MoodPlots)

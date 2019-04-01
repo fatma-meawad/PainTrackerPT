@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PainTrackerPT.Trends
+namespace PainTrackerPT.Trends.Iterator
 {
-    public class PatientIterator : Iterator
+    public class MoodTrendIterator : IPatientTrend
     {
-        public object Current => throw new NotImplementedException();
-
-        public bool MoveNext()
+        public List<KeyValuePair<DateTime, int>> PlotGraph()
         {
             throw new NotImplementedException();
         }
 
-        public void Reset()
+        public List<KeyValuePair<int, int>> PlotPie()
         {
             throw new NotImplementedException();
         }
