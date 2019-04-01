@@ -73,7 +73,9 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
+
             var followUp = await _followUpService.Select(id.Value);
+            
             if (followUp == null)
             {
                 return NotFound();

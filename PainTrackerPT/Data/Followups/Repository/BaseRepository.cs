@@ -58,9 +58,8 @@ namespace PainTrackerPT.Data.Followups.Repository
 
         public void Update(T entity)
         {
-            T existingEntity = _dbSet.Find(entity.Id);
             _dbSet.Update(entity);
-            this.SaveAsync();
+            _db.SaveChangesAsync();
         }
     }
 }
