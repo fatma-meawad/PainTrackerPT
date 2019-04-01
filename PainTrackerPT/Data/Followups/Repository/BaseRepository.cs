@@ -11,7 +11,7 @@ namespace PainTrackerPT.Data.Followups.Repository
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
         internal PainTrackerPTContext _db;
-        private DbSet<T> _dbSet;
+        protected DbSet<T> _dbSet;
 
         public BaseRepository(PainTrackerPTContext db)
         {
