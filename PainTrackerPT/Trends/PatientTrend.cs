@@ -8,39 +8,62 @@ namespace PainTrackerPT.Trends
 {
     public class PatientTrend : IPatientTrend
     {
-        public List<KeyValuePair<DateTime, int>> PlotInterference(List<Interference> interferencelist)
+        List<Interference> InterferenceList;
+        List<Mood> MoodList;
+        List<PainIntensity> PainIntensities;
+        List<Sleep> SleepList;
+        PainDiary PainDiary;
+
+
+        public PatientTrend(PainDiary PainDiary)
+        {
+            this.PainDiary = PainDiary;
+            InterferenceList = PainDiary.Interference;
+            PainIntensities = PainDiary.PainIntensity;
+            MoodList = PainDiary.Mood;
+            SleepList = PainDiary.Sleep;
+        }
+
+
+
+        public List<KeyValuePair<DateTime, int>> PlotInterference()
         {
             var InterferencePlots = new List<KeyValuePair<DateTime, int>>();
-            foreach(var item in interferencelist)
+            foreach(var item in InterferenceList)
             {   
                 InterferencePlots.Add(new KeyValuePair<DateTime, int>(item.date,item.severity));
             }
             return InterferencePlots;
         }
 
-        public List<KeyValuePair<DateTime, int>> PlotMood(List<Mood> moodlist)
+        public List<KeyValuePair<DateTime, int>> PlotMood()
         {
             var MoodPlots = new List<KeyValuePair<DateTime, int>>();
-            foreach (var item in moodlist)
+            foreach (var item in MoodList)
             {
                 MoodPlots.Add(new KeyValuePair<DateTime, int>(item.date, item.duration));
             }
             return MoodPlots;
         }
 
-        public List<KeyValuePair<DateTime, int>> PlotPainIntensity(List<PainIntensity> painIntensities)
+        public List<KeyValuePair<DateTime, int>> PlotPainIntensity()
         {
-            var painIntensityPlots = new List<KeyValuePair<DateTime, int>>();
-            foreach (var item in painIntensities)
+            var PainIntensityPlots = new List<KeyValuePair<DateTime, int>>();
+            foreach (var item in PainIntensities)
             {
-                painIntensityPlots.Add(new KeyValuePair<DateTime, int>(item.date, item.painRating));
+                PainIntensityPlots.Add(new KeyValuePair<DateTime, int>(item.date, item.painRating));
             }
-            return painIntensityPlots;
+            return PainIntensityPlots;
         }
 
-        public List<KeyValuePair<DateTime, int>> PlotSleep(List<Sleep> sleep)
+        public List<KeyValuePair<DateTime, int>> PlotSleep()
         {
-            throw new NotImplementedException();
+            var SleepPlots = new List<KeyValuePair<DateTime, int>>();
+            foreach (var item in SleepList)
+            {
+                SleepPlots.Add(new KeyValuePair<DateTime, int>(item.date, item.sleepHours));
+            }
+            return SleepPlots;
         }
     }
 }

@@ -27,11 +27,11 @@ namespace PainTrackerPT.Controllers
         public async Task<ActionResult> PatientTrend()
         {
             var painDiary = _patientGateway.SelectById(1);
-            IPatientTrend calculate = new PatientTrend();            
+            IPatientTrend calculate = new PatientTrend(painDiary);            
 
-            ViewBag.PainIntensityPlots = calculate.PlotPainIntensity(painDiary.PainIntensity);
-            ViewBag.InterferencePlots = calculate.PlotInterference(painDiary.Interference);
-            ViewBag.MoodPlots = calculate.PlotMood(painDiary.Mood);
+            ViewBag.PainIntensityPlots = calculate.PlotPainIntensity();
+            ViewBag.InterferencePlots = calculate.PlotInterference();
+            ViewBag.MoodPlots = calculate.PlotMood();
             return View();
         }
 
