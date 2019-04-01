@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PainTrackerPT.Common.Followups
 {
@@ -12,3 +14,4 @@ namespace PainTrackerPT.Common.Followups
         FollowupsLog GetLogFromTo(DateTime start_dt, DateTime end_dt);
     }
 }
+

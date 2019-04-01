@@ -15,6 +15,9 @@ using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Services;
 using PainTrackerPT.Repository;
 using PainTrackerPT.Data.Medicine.APIClasses;
+using System.Data.SqlClient;
+using PainTrackerPT.Common.Followups;
+using PainTrackerPT.Data.Followups;
 
 namespace PainTrackerPT
 {
@@ -42,8 +45,7 @@ namespace PainTrackerPT
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<PainTrackerPTContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));  
-            //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                    options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));           
 
             // Just for testing use the in memory database but in real testing, create  your own one.
             //options.UseInMemoryDatabase("PainTrackerPTContext"));
@@ -52,7 +54,14 @@ namespace PainTrackerPT
             services.AddScoped(typeof(IMedicineService<>), typeof(MedicineService<>));
             services.AddScoped(typeof(IMedicineIntakeEventAPI), typeof(MedicineIntakeEventAPI));
             services.AddScoped(typeof(IMedicineDataAPI), typeof(MedicineDataAPI));
-            services.AddScoped<PainTrackerPTContext>(db => new PainTrackerPTContext());
+            services.AddScoped(typeof(IMediaService), typeof(MediaService));
+           // services.AddScoped<PainTrackerPTContext>(_context => new PainTrackerPTContext());
+
+            // services.AddDbContext<PainTrackerPTContext>(options =>
+            //         options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));
+
+            services.AddScoped<SqlConnection>(db => new SqlConnection(Configuration.GetConnectionString("PainTrackerPTContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

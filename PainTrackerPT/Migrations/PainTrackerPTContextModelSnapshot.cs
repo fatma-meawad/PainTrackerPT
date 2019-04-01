@@ -61,7 +61,7 @@ namespace PainTrackerPT.Migrations
                     b.ToTable("EventsLog");
                 });
 
-            modelBuilder.Entity("PainTrackerPT.Models.Followups.FollowupsLog", b =>
+            modelBuilder.Entity("PainTrackerPT.Models.Followups.FollowUp", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();

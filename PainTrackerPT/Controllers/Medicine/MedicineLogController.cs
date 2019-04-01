@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Common.Followups;
 using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Models;
+using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Models.Medicine;
 
 namespace PainTrackerPT.Controllers.Medicine
@@ -15,10 +17,13 @@ namespace PainTrackerPT.Controllers.Medicine
     public class MedicineLogController : Controller
     {
         private readonly IMedicineService<MedicineLog> _medService;
+        private readonly IMediaService _mediaService;
         private MedicineLog _medLog;
+        private Media _media;
 
-        public MedicineLogController(IMedicineService<MedicineLog> medService)
+        public MedicineLogController(IMedicineService<MedicineLog> medService, IMediaService mediaService)
         {
+            _mediaService = mediaService;
             _medService = medService;         
         }
               
@@ -50,11 +55,18 @@ namespace PainTrackerPT.Controllers.Medicine
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("Id,Name,Type")] MedicineLog medicineLog)
+        public async Task<IActionResult> Create([Bind("Id,Name,Type,Img")] MedicineLog medicineLog)
         {
             if (ModelState.IsValid)
-            {               
+            {
+                medicineLog.medGuid = Guid.NewGuid();
                 _medService.Insert(medicineLog);
+
+                //using API from FollowUp team
+                _media.RelatedID = medicineLog.medGuid;
+                _media.MediaUrl = medicineLog.Img;
+                _mediaService.Create(_media);
+
                 return RedirectToAction(nameof(Index));
             }
             return View(medicineLog);

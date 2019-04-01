@@ -11,10 +11,13 @@ namespace PainTrackerPT.Repository
     public class MedicineRepository<T> : IMedicineLog<T> where T: class
     {
         PainTrackerPTContext context = new PainTrackerPTContext();   
+        //internal PainTrackerPTContext db;
         DbSet<T> data = null;    
 
-        public MedicineRepository()
-        {            
+        public MedicineRepository()//PainTrackerPTContext _context)
+        {
+            //this.db = db;
+            //context = _context;
             this.data = context.Set<T>();            
         }
 

@@ -16,6 +16,7 @@ namespace PainTrackerPT.Models
     {
         public PainTrackerPTContext()
         {
+
         }
 
         public PainTrackerPTContext (DbContextOptions<PainTrackerPTContext> options)
@@ -33,6 +34,13 @@ namespace PainTrackerPT.Models
             }
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            //new MedicineEvent(modelBuilder.Entity<MedicineEvent>());
+            //new QuestionMap(modelBuilder.Entity<Question>());
+        }
+
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
 
         public DbSet<PainTrackerPT.Models.Doctors.DoctorsLog> DoctorsLog { get; set; }
@@ -45,6 +53,20 @@ namespace PainTrackerPT.Models
 
         public DbSet<PainTrackerPT.Models.Medicine.MedicineEvent> MedicineEvent { get; set; }
 
-        public DbSet<PainTrackerPT.Models.PainDiary.PainDiaryLog> PainDiaryLog { get; set; }
+        public DbSet<PainTrackerPT.Models.PainDiary.PainDiaryLog> PainDiaryLog { get; set; }     
+
+        public DbSet<PainTrackerPT.Models.Followups.FollowUp> FollowUp { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Question> Question { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Answer> Answer { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Advice> Advice { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Recommendation> Recommendation { get; set; }
+
+        public DbSet<PainTrackerPT.Models.Followups.Media> Media { get; set; }
+
+
     }
 }
