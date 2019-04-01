@@ -1,5 +1,4 @@
-﻿@*@model IEnumerable<PainTrackerPT.Models.Events.EventsLog>*@
-@model PainTrackerPT.Models.Events.EventsLog
+﻿@model PainTrackerPT.Models.Events.EventsLog
 
 @{
     ViewData["Title"] = "Home Page";
@@ -47,8 +46,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" id="idForEvent" />
-            @*<button class="close btn" onclick="closeEdit()"><i class="fa fa-window-close" aria-hidden="true"></i></button>*@
-            <div class="modal-content">
+            <div class="modal-content" style=" background-color: whitesmoke; box-shadow: 0 0 8px 7px #88888873; ">
                 <div class="modal-header">
                     <h5 class="modal-title">
                         <label id="eventTitle"></label>
@@ -78,11 +76,7 @@
 
     function editYou() {
         document.getElementById("editDescAndSave").style.display = "block";
-        //$('#eventId').text(id);
         $('#idForEvent').val(id);
-        //$('#eventStartDate').text(start);
-        //$('#eventEndDate').text(end);
-        //$('#moduleType').text(type);
         $('#eventDesc').text(desc);
         $('#eventTitle').text(title);
 

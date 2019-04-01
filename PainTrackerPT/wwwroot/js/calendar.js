@@ -27,35 +27,36 @@ $(document).ready(function () {
         }],
         eventRender: function (event, element) {
             // Follow up
-            if (event.type == "typeFU") {
+            if (event.type == "FU") {
                 element.find('.fc-time').prepend('<i class="fas fa-notes-medical"></i> ');
             }
 
             // Medicine Intake
-            if (event.type == "typeMI") {
+            if (event.type == "MI") {
                 element.find('.fc-time').prepend('<i class="fas fa-medkit"></i> ');
             }
 
             // Pain Diary
-            if (event.type == "typePD") {
-                if (event.painLevel == 0) {
-                    element.find('.fc-time').prepend('<i class="fas fa-smile" style="color:olivedrab"></i> ');
-                }
-                if (event.painLevel == 1 || event.painLevel == 2) {
-                    element.find('.fc-time').prepend('<i class="fas fa-meh" style="color:yellowgreen"></i> ');
-                }
-                else if (event.painLevel == 3 || event.painLevel == 4) {
-                    element.find('.fc-time').prepend('<i class="fas fa-frown" style="color:gold"></i> ');
-                }
-                else if (event.painLevel == 5 || event.painLevel == 6) {
-                    element.find('.fc-time').prepend('<i class="fas fa-tired" style="color:darkorange"></i> ');
-                }
-                else if (event.painLevel == 7 || event.painLevel == 8) {
-                    element.find('.fc-time').prepend('<i class="fas fa-sad-tear" style="color:salmon"></i> ');
-                }
-                else if (event.painLevel == 9 || event.painLevel == 10) {
-                    element.find('.fc-time').prepend('<i class="fas fa-sad-cry" style="color:darkred"></i> ');
-                }
+            if (event.type == "PD") {
+                element.find('.fc-time').prepend('<i class="fas fa-smile" style="color:gold"></i> ');
+                //if (event.painLevel == 0) {
+                //    element.find('.fc-time').prepend('<i class="fas fa-smile" style="color:olivedrab"></i> ');
+                //}
+                //if (event.painLevel == 1 || event.painLevel == 2) {
+                //    element.find('.fc-time').prepend('<i class="fas fa-meh" style="color:yellowgreen"></i> ');
+                //}
+                //else if (event.painLevel == 3 || event.painLevel == 4) {
+                //    element.find('.fc-time').prepend('<i class="fas fa-frown" style="color:gold"></i> ');
+                //}
+                //else if (event.painLevel == 5 || event.painLevel == 6) {
+                //    element.find('.fc-time').prepend('<i class="fas fa-tired" style="color:darkorange"></i> ');
+                //}
+                //else if (event.painLevel == 7 || event.painLevel == 8) {
+                //    element.find('.fc-time').prepend('<i class="fas fa-sad-tear" style="color:salmon"></i> ');
+                //}
+                //else if (event.painLevel == 9 || event.painLevel == 10) {
+                //    element.find('.fc-time').prepend('<i class="fas fa-sad-cry" style="color:darkred"></i> ');
+                //}
             }
 
         }

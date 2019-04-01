@@ -24,7 +24,6 @@ namespace PainTrackerPT.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public ActionResult Edit(Guid id, [Bind("Id, eventTitle,eventStartDate,eventEndDate,eventDesc,moduleType")] EventsLog e)
         {
             _eRepo.editDesc(id, e);
