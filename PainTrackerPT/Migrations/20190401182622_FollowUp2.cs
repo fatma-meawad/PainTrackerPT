@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PainTrackerPT.Migrations
 {
-    public partial class FollowUpInit : Migration
+    public partial class FollowUp2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

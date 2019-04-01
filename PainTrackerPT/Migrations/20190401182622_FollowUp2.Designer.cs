@@ -10,8 +10,8 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190401130711_FollowUpInit")]
-    partial class FollowUpInit
+    [Migration("20190401182622_FollowUp2")]
+    partial class FollowUp2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

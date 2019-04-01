@@ -9,10 +9,20 @@ using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 
-namespace PainTrackerPT.Data.Followups
+namespace PainTrackerPT.Data.Followups.Repository
 {
     public class QuestionRepository : BaseRepository<Question>
     {
         public QuestionRepository(PainTrackerPTContext db) : base(db) { }
+
+        /**
+         * Function to retrieve all Questions by Follow Up ID
+         */
+        public async Task<IEnumerable<Question>> SelectAllByFollowUpId(Int64 followUpId)
+        {
+            return await _dbSet.Where(q => q.FollowUpId == followUpId).ToListAsync();
+        }
     }
+
+
 }

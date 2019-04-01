@@ -17,8 +17,11 @@ namespace PainTrackerPT.Data.Followups
     public class QuestionService : BaseService <Question>
     {
         // TODO: DI THIS
-        public QuestionService(IBaseRepository<Question> baseRepository) : base(baseRepository)
+        public QuestionService(IBaseRepository<Question> baseRepository) : base(baseRepository) { }
+
+        public async Task<IEnumerable<Question>> SelectAllByFollowUpId(Int64 followUpId)
         {
-        }            
+            return await ((QuestionRepository) _baseRepository).SelectAllByFollowUpId(followUpId);
+        }
     }
 }

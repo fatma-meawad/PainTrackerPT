@@ -9,7 +9,7 @@ namespace PainTrackerPT.Data.Followups.Services
 {
     public class BaseService <T> : IBaseService <T> where T: BaseEntity
     {
-        private IBaseRepository <T> _baseRepository;
+        protected IBaseRepository <T> _baseRepository;
 
         public BaseService(IBaseRepository<T> baseRepository)
         {

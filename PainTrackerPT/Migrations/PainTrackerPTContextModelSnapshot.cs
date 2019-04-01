@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PainTrackerPT.Models;
-using PainTrackerPT.Models.Followups;
 
 namespace PainTrackerPT.Migrations
 {
@@ -221,9 +220,6 @@ namespace PainTrackerPT.Migrations
                         .HasForeignKey("FollowUpId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
-
-            modelBuilder.Entity<BaseEntity>().Property(e => e.Id).ValueGeneratedOnAdd();
-
 #pragma warning restore 612, 618
         }
     }

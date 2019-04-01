@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups;
 using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
@@ -15,17 +16,20 @@ namespace PainTrackerPT.Controllers.Followups
     public class QuestionsController : Controller
     {
         private readonly IBaseService<Question> _questionService;
-        private int followUpId; 
 
         public QuestionsController(IBaseService<Question> questionService)
         {
             _questionService = questionService;
+            System.Diagnostics.Debug.WriteLine("@@@@ questionService.gettype: " + _questionService.GetType());
+            
         }
 
         // GET: Questions
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View(await _questionService.SelectAll());
+
+            System.Diagnostics.Debug.WriteLine("@@@ Indexid: " + id);
+            return View(await ((QuestionService)_questionService).SelectAllByFollowUpId(id));
         }
 
         // GET: Questions/Details/5
@@ -49,8 +53,6 @@ namespace PainTrackerPT.Controllers.Followups
 
         public IActionResult Create(int id)
         {
-                
-            System.Diagnostics.Debug.WriteLine("GUID IS " + id);
             ViewBag.id = id;
             return View();
         }
@@ -64,7 +66,7 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
-               System.Diagnostics.Debug.WriteLine("THE FK IS :" + question.FollowUpId.ToString());
+                System.Diagnostics.Debug.WriteLine("THE FK IS :" + question.FollowUpId.ToString());
                 question.FollowUpId = id;
                 _questionService.Create(question);
                 return RedirectToAction(nameof(Index));
