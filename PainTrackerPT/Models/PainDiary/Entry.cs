@@ -33,6 +33,7 @@ namespace PainTrackerPT.Models.PainDiary
         [Display(Name = "Pain Time")]
         public DateTime painTime { get; set; }
 
+        [Display(Name = "Diary ID (FK)")]
         [ForeignKey("Diary")]
         public int diaryId { get; set; }
         

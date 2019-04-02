@@ -9,8 +9,9 @@ namespace PainTrackerPT.Common.PainDiary
     interface IDiary
     {
 
-        void GetDiaryPermission();
+        void GetDiaryPermission(bool permission);
         void GetPainDiaryList();
         void GetFollowUpsFromPainDiaryId(int id);
+        void GetPainDiaryObject(int id);
     }
 }

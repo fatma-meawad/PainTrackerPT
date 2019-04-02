@@ -26,7 +26,7 @@
 
         <div class="row mb-4">
             <div class="col-md-4">
-                <img src="https://via.placeholder.com/300?text=Diagram%20of%20Body%20parts" class="img-fluid" alt="Responsive image" />
+                <img src="https://via.placeholder.com/300?text=Diagram%20of%20Body%20Parts" class="img-fluid" alt="Responsive image" />
             </div>
             <div class="col-md-8">
                 <table id="myTable" class="display">
@@ -40,7 +40,7 @@
                     <tbody>
                         <tr>
                             <td>@Html.DisplayFor(model => model.painArea)</td>
-                            <td class="text-warning">@Html.DisplayFor(model => model.painIntensity)/ 5</td>
+                            <td class="text-warning">@Html.DisplayFor(model => model.painIntensity)/ 10</td>
                             <td>@Html.DisplayFor(model => model.painTime)</td>
                         </tr>
 
@@ -50,7 +50,7 @@
         </div>
         <!-- end row -->
         <div class="note-content">
-            <h4>Log Notes <button style="margin-left:70%" class="btn" onclick='window.location.href = "@Url.Action("LogCreate", "PainDiaryLogs")"'><i class="flaticon-edit-1 fa-2x"></i><br /></button></h4>
+            <h4>Log Notes <button style="margin-left:70%" class="btn" onclick='window.location.href = "@Url.Action("Create", "PainLog" , new { id = @ViewBag.id })"'><i class="flaticon-edit-1 fa-2x"></i><br /></button></h4>
             <table class="table">
                 <thead>
                     <tr>
@@ -75,7 +75,8 @@
                                 <td>@log.audioNotes</td>
                                 <td>@log.mood</td>
                                 <td>
-                                    <a asp-action="LogDelete" asp-route-id="@log.logID">Delete</a>
+                                   <a href="@Url.Action("Delete", "PainLog", new { id = @log.logID })">Delete</a>
+                                    
                                 </td>
 
 

@@ -7,6 +7,7 @@ namespace PainTrackerPT.Common.PainDiary
 {
     interface ILog
     {
-        void getMood();
+        void getMood(String mood);
+        void getLogDetails(int id);
     }
 }

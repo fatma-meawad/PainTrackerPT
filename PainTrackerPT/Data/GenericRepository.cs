@@ -9,23 +9,23 @@ using System.Linq.Expressions;
 
 namespace PainTrackerPT.Data
 {
-    public class GenericRepository<TEntity> where TEntity : class
+    public class GenericRepository<T> where T : class
     {
         internal PainTrackerPTContext context;
-        internal DbSet<TEntity> dbSet;
+        internal DbSet<T> dbSet;
 
         public GenericRepository(PainTrackerPTContext context)
         {
             this.context = context;
-            this.dbSet = context.Set<TEntity>();
+            this.dbSet = context.Set<T>();
         }
 
-        public virtual IEnumerable<TEntity> Get(
-            Expression<Func<TEntity, bool>> filter = null,
-            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
+        public virtual IEnumerable<T> Get(
+            Expression<Func<T, bool>> filter = null,
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "")
         {
-            IQueryable<TEntity> query = dbSet;
+            IQueryable<T> query = dbSet;
 
             if (filter != null)
             {
@@ -48,23 +48,23 @@ namespace PainTrackerPT.Data
             }
         }
 
-        public virtual TEntity GetByID(object id)
+        public virtual T GetByID(object id)
         {
             return dbSet.Find(id);
         }
 
-        public virtual void Insert(TEntity entity)
+        public virtual void Insert(T entity)
         {
             dbSet.Add(entity);
         }
 
         public virtual void Delete(object id)
         {
-            TEntity entityToDelete = dbSet.Find(id);
+            T entityToDelete = dbSet.Find(id);
             Delete(entityToDelete);
         }
 
-        public virtual void Delete(TEntity entityToDelete)
+        public virtual void Delete(T entityToDelete)
         {
             if (context.Entry(entityToDelete).State == EntityState.Detached)
             {
@@ -73,7 +73,7 @@ namespace PainTrackerPT.Data
             dbSet.Remove(entityToDelete);
         }
 
-        public virtual void Update(TEntity entityToUpdate)
+        public virtual void Update(T entityToUpdate)
         {
             dbSet.Attach(entityToUpdate);
             context.Entry(entityToUpdate).State = EntityState.Modified;
