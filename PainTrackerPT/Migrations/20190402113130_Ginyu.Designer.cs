@@ -10,7 +10,7 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190402040622_Ginyu")]
+    [Migration("20190402113130_Ginyu")]
     partial class Ginyu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,23 @@ namespace PainTrackerPT.Migrations
                     b.HasIndex("PainDiaryID");
 
                     b.ToTable("Interference");
+                });
+
+            modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.MedicineIntake", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnName("Date");
+
+                    b.Property<double>("Dosage")
+                        .HasColumnName("Dosage");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicineIntake");
                 });
 
             modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.Mood", b =>

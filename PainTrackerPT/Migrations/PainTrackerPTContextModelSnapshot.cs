@@ -60,6 +60,23 @@ namespace PainTrackerPT.Migrations
                     b.ToTable("Interference");
                 });
 
+            modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.MedicineIntake", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnName("Date");
+
+                    b.Property<double>("Dosage")
+                        .HasColumnName("Dosage");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicineIntake");
+                });
+
             modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.Mood", b =>
                 {
                     b.Property<int>("Id")

@@ -61,6 +61,20 @@ namespace PainTrackerPT.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MedicineIntake",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Dosage = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicineIntake", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MedicineLog",
                 columns: table => new
                 {
@@ -227,6 +241,9 @@ namespace PainTrackerPT.Migrations
 
             migrationBuilder.DropTable(
                 name: "Interference");
+
+            migrationBuilder.DropTable(
+                name: "MedicineIntake");
 
             migrationBuilder.DropTable(
                 name: "MedicineLog");
