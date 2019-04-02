@@ -69,7 +69,7 @@ namespace PainTrackerPT.Controllers.Followups
                 System.Diagnostics.Debug.WriteLine("THE FK IS :" + question.FollowUpId.ToString());
                 question.FollowUpId = id;
                 _questionService.Create(question);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), routeValues: new { id = question.FollowUpId });
             }
 
             ViewBag.id = question.FollowUpId;

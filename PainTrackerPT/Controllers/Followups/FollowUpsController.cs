@@ -28,6 +28,7 @@ namespace PainTrackerPT.Controllers.Followups
             return View(await _followUpService.SelectAll());
         }
 
+        
         public async Task<IActionResult> FilteredIndex(Int64 id)
         {
             return View(await ((FollowUpService)_followUpService).SelectAllByPatientId(id));
@@ -67,7 +68,8 @@ namespace PainTrackerPT.Controllers.Followups
             if (ModelState.IsValid)
             {
                 _followUpService.Create(followUp);
-                return RedirectToAction(nameof(Index));
+           
+                return RedirectToAction(nameof(FilteredIndex), routeValues: new { id = followUp.PatientId });
             }
             return View(followUp);
         }
