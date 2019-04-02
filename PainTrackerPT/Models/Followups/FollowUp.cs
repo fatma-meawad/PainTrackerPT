@@ -15,6 +15,5 @@ namespace PainTrackerPT.Models.Followups
         public string Description { get; set; }
         public DateTime DateGenerated { get; set; }
 
-        public virtual ICollection<Question> Questions { get; set; }
     }
 }

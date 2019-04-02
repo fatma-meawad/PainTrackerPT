@@ -10,8 +10,8 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190402090501_FollowUp")]
-    partial class FollowUp
+    [Migration("20190402100221_followup")]
+    partial class followup
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -223,7 +223,7 @@ namespace PainTrackerPT.Migrations
             modelBuilder.Entity("PainTrackerPT.Models.Followups.Question", b =>
                 {
                     b.HasOne("PainTrackerPT.Models.Followups.FollowUp", "FollowUp")
-                        .WithMany("Questions")
+                        .WithMany()
                         .HasForeignKey("FollowUpId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

@@ -3,58 +3,56 @@
 @{
     ViewData["Title"] = "Create";
 }
+<div class="container">
+    <h1>Create</h1>
 
-<h1>Create</h1>
+    <h4>Follow Up</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <!--
+                <div class="form-group">
+                    <label asp-for="PatientId" class="control-label"></label>
+                    <input asp-for="PatientId" class="form-control" />
+                    <span asp-validation-for="PatientId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DoctorId" class="control-label"></label>
+                    <input asp-for="DoctorId" class="form-control" />
+                    <span asp-validation-for="DoctorId" class="text-danger"></span>
+                </div>
+                    -->
+                <div class="form-group">
+                    <select asp-for="PatientId" class="form-control">
+                        <option value="1">Samuel Toh</option>
+                        <option value="2">Nicholas Toh</option>
+                        <option value="3">Cheryl Toh</option>
+                        <option value="4">Toh Yan Tian </option>
+                        <option value="5">Toh Hong Mao</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-<h4>FollowUp</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <!--
-        <div class="form-group">
-            <label asp-for="PatientId" class="control-label"></label>
-            <input asp-for="PatientId" class="form-control" />
-            <span asp-validation-for="PatientId" class="text-danger"></span>
+                <input asp-for="DateGenerated" class="form-control" type="hidden" value="@DateTime.Now" />
+                <input asp-for="State" class="form-control" type="hidden" value="1" />
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <button class="btn btn-danger" style="color:white;">
+                        <a asp-action="Index">Back to List</a>
+                    </button>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label asp-for="DoctorId" class="control-label"></label>
-            <input asp-for="DoctorId" class="form-control" />
-            <span asp-validation-for="DoctorId" class="text-danger"></span>
-        </div>
-            -->
-            <div class="form-group">
-                <select asp-for="PatientId" class="form-control">
-                    <option value="1">Samuel Toh</option>
-                    <option value="2">Nicholas Toh</option>
-                    <option value="3">Cheryl Toh</option>
-                    <option value="4">Toh Yan Tian </option>
-                    <option value="5">Toh Hong Mao</option>
-                </select>
-            </div>
-        <div class="form-group">
-            <label asp-for="Description" class="control-label"></label>
-            <input asp-for="Description" class="form-control" />
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label asp-for="DateGenerated" class="control-label"></label>
-            <input asp-for="DateGenerated" class="form-control" />
-            <span asp-validation-for="DateGenerated" class="text-danger"></span>
-        </div>
-            <input asp-for="State" class="form-control" type="hidden" value="1"/>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

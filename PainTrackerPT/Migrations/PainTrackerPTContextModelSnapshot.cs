@@ -221,7 +221,7 @@ namespace PainTrackerPT.Migrations
             modelBuilder.Entity("PainTrackerPT.Models.Followups.Question", b =>
                 {
                     b.HasOne("PainTrackerPT.Models.Followups.FollowUp", "FollowUp")
-                        .WithMany("Questions")
+                        .WithMany()
                         .HasForeignKey("FollowUpId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

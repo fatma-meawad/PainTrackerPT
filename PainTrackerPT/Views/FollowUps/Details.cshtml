@@ -7,48 +7,34 @@
         { "followUpId",  Model.Id}
     };
 }
+<div class="container">
 
-<h1>Details</h1>
 
-<div>
-    <h4>FollowUp</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PatientId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PatientId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DoctorId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DoctorId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.State)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.State)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateGenerated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateGenerated)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a> | 
-    <a asp-controller="Questions" asp-action="Create" asp-route-id="@Model.Id">Create Question</a> | 
-    <a asp-controller="Questions" asp-action="Index" asp-route-id="@Model.Id">View All Question</a>
+    <h1>Details</h1>
+
+    <div>
+        <h4>FollowUp</h4>
+        <hr />
+        <dl class="row">
+            
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateGenerated)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DateGenerated)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a> |
+        <a asp-controller="Questions" asp-action="Create" asp-route-id="@Model.Id">Create Question</a> |
+        <a asp-controller="Questions" asp-action="Index" asp-route-id="@Model.Id">View All Question</a>
+    </div>
 </div>

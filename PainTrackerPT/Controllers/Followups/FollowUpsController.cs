@@ -68,6 +68,7 @@ namespace PainTrackerPT.Controllers.Followups
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
+                followUp.DateGenerated = DateTime.Now;
                 _followUpService.Create(followUp);
            
                 return RedirectToAction(nameof(FilteredIndex), routeValues: new { id = followUp.PatientId });

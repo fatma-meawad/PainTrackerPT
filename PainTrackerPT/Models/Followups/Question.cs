@@ -12,7 +12,5 @@ namespace PainTrackerPT.Models.Followups
         public Int64 FollowUpId { get; set; }
         public String Description { get; set; }
         public DateTime DateGenerated { get; set; }
-
-        public virtual FollowUp FollowUp { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PainTrackerPT.Migrations
 {
-    public partial class DeleteMapperTest : Migration
+    public partial class followup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
