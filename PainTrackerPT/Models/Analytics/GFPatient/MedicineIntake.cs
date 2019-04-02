@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace PainTrackerPT.Models.Analytics.GFPatient
 {
-    public class Mood
+    public class MedicineIntake
     {
         [Key]
         public int Id { get; set; }
@@ -15,13 +15,7 @@ namespace PainTrackerPT.Models.Analytics.GFPatient
         [Column("Date")]
         public DateTime Date { get; set; }
 
-        [Column("MoodType")]
-        public int MoodType { get; set; }
-
-        [Column("Duration")]
-        public int Duration { get; set; }
-
-        [ForeignKey("PainDiary")]
-        public int PainDiaryID { get; set; }
+        [Column("Dosage")]
+        public double Dosage { get; set; }
     }
 }

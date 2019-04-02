@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using PainTrackerPT.Models.Analytics.GFPatient;
 
 namespace PainTrackerPT.Trends.Iterator
 {
-    public class SleepTrendIterator : Iterator
+    public class MedicineIntakeTrendIterator : Iterator
     {
-        List<Sleep> SleepList;
+        List<MedicineIntake> MedicineIntakeList;
         int Position = 0;
         int Flag = 0;
 
-        public SleepTrendIterator(List<Sleep> SleepList)
+        public MedicineIntakeTrendIterator(List<MedicineIntake> MedicineIntakeList)
         {
-            this.SleepList = SleepList.OrderBy(i => i.Date).ToList();
+            this.MedicineIntakeList = MedicineIntakeList.OrderBy(i => i.Date).ToList();
         }
-
-
         public override object Current()
         {
-            return SleepList[Position];
+            return MedicineIntakeList[Position];
         }
 
         public override int Key()
@@ -37,7 +36,7 @@ namespace PainTrackerPT.Trends.Iterator
 
             }
 
-            else if (updatedPosition >= 0 && updatedPosition < SleepList.Count)
+            else if (updatedPosition >= 0 && updatedPosition < MedicineIntakeList.Count)
             {
                 Position = updatedPosition;
                 return true;

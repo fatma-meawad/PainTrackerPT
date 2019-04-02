@@ -25,6 +25,7 @@ namespace PainTrackerPT.Models
         public DbSet<PainTrackerPT.Models.Analytics.GFPatient.Mood> Mood { get; set; }
         public DbSet<PainTrackerPT.Models.Analytics.GFPatient.PainIntensity> PainIntensity { get; set; }
         public DbSet<PainTrackerPT.Models.Analytics.GFPatient.Sleep> Sleep { get; set; }
+        public DbSet<PainTrackerPT.Models.Analytics.GFPatient.MedicineIntake> MedicineIntake { get; set; }
 
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
 

@@ -10,7 +10,7 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190328134715_Ginyu")]
+    [Migration("20190402040622_Ginyu")]
     partial class Ginyu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,22 +37,25 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.Interference", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PainDiaryID");
+                    b.Property<DateTime>("Date")
+                        .HasColumnName("Date");
 
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
                         .HasColumnName("Description");
 
-                    b.Property<int>("duration")
+                    b.Property<int>("Duration")
                         .HasColumnName("Duration");
 
-                    b.Property<int>("severity")
+                    b.Property<int>("PainDiaryID");
+
+                    b.Property<int>("Severity")
                         .HasColumnName("Severity");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.HasIndex("PainDiaryID");
 
@@ -61,19 +64,22 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.Mood", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("PainDiaryID");
+                    b.Property<DateTime>("Date")
+                        .HasColumnName("Date");
 
-                    b.Property<int>("duration")
+                    b.Property<int>("Duration")
                         .HasColumnName("Duration");
 
-                    b.Property<int>("moodType")
+                    b.Property<int>("MoodType")
                         .HasColumnName("MoodType");
 
-                    b.HasKey("id");
+                    b.Property<int>("PainDiaryID");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("PainDiaryID");
 
@@ -95,13 +101,25 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.PainIntensity", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("Date")
+                        .HasColumnName("Date");
+
+                    b.Property<int>("Duration")
+                        .HasColumnName("Duration");
+
+                    b.Property<int>("PainArea")
+                        .HasColumnName("PainArea");
+
                     b.Property<int>("PainDiaryID");
 
-                    b.HasKey("id");
+                    b.Property<int>("PainRating")
+                        .HasColumnName("PainRating");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("PainDiaryID");
 
@@ -110,13 +128,25 @@ namespace PainTrackerPT.Migrations
 
             modelBuilder.Entity("PainTrackerPT.Models.Analytics.GFPatient.Sleep", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ComfortLevel")
+                        .HasColumnName("ComfortLevel");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnName("Date");
+
                     b.Property<int>("PainDiaryID");
 
-                    b.HasKey("id");
+                    b.Property<int>("SleepHours")
+                        .HasColumnName("SleepHours");
+
+                    b.Property<int>("Tiredness")
+                        .HasColumnName("Tiredness");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("PainDiaryID");
 

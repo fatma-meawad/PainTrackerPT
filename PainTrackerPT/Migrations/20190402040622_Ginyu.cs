@@ -103,8 +103,9 @@ namespace PainTrackerPT.Migrations
                 name: "Interference",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Date = table.Column<DateTime>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Severity = table.Column<int>(nullable: false),
                     Duration = table.Column<int>(nullable: false),
@@ -112,7 +113,7 @@ namespace PainTrackerPT.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Interference", x => x.id);
+                    table.PrimaryKey("PK_Interference", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Interference_PainDiary_PainDiaryID",
                         column: x => x.PainDiaryID,
@@ -125,15 +126,16 @@ namespace PainTrackerPT.Migrations
                 name: "Mood",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Date = table.Column<DateTime>(nullable: false),
                     MoodType = table.Column<int>(nullable: false),
                     Duration = table.Column<int>(nullable: false),
                     PainDiaryID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Mood", x => x.id);
+                    table.PrimaryKey("PK_Mood", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Mood_PainDiary_PainDiaryID",
                         column: x => x.PainDiaryID,
@@ -146,17 +148,17 @@ namespace PainTrackerPT.Migrations
                 name: "PainIntensity",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PainDiaryID = table.Column<int>(nullable: false),
-                    painRating = table.Column<int>(nullable: false),
-                    painArea = table.Column<int>(nullable: false),
-                    duration = table.Column<int>(nullable: false),
-                    date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    PainRating = table.Column<int>(nullable: false),
+                    PainArea = table.Column<int>(nullable: false),
+                    Duration = table.Column<int>(nullable: false),
+                    PainDiaryID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PainIntensity", x => x.id);
+                    table.PrimaryKey("PK_PainIntensity", x => x.Id);
                     table.ForeignKey(
                         name: "FK_PainIntensity_PainDiary_PainDiaryID",
                         column: x => x.PainDiaryID,
@@ -169,18 +171,17 @@ namespace PainTrackerPT.Migrations
                 name: "Sleep",
                 columns: table => new
                 {
-                    id = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    PainDiaryID = table.Column<int>(nullable: false),
-                    sleepHours = table.Column<int>(nullable: false),
-                    comfortLevel = table.Column<int>(nullable: false),
-                    tiredness = table.Column<int>(nullable: false),
-                    date = table.Column<DateTime>(nullable: false)
-
+                    Date = table.Column<DateTime>(nullable: false),
+                    SleepHours = table.Column<int>(nullable: false),
+                    ComfortLevel = table.Column<int>(nullable: false),
+                    Tiredness = table.Column<int>(nullable: false),
+                    PainDiaryID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Sleep", x => x.id);
+                    table.PrimaryKey("PK_Sleep", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Sleep_PainDiary_PainDiaryID",
                         column: x => x.PainDiaryID,

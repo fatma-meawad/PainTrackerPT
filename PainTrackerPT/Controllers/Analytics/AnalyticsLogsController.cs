@@ -18,21 +18,39 @@ namespace PainTrackerPT.Controllers
 
         private readonly IGinyuGateway _gateway;
         private readonly IGFPatientGateway _patientGateway;
+        private readonly IGFPatientMedicineIntakeGateway _patientMedicineIntakeGateway;
 
-        public AnalyticsLogsController(IGinyuGateway gateway, IGFPatientGateway _patient)
+        public AnalyticsLogsController(IGinyuGateway gateway, IGFPatientGateway _patient, IGFPatientMedicineIntakeGateway _medicineIntake)
         {
             _gateway = gateway;
             _patientGateway = _patient;
+            _patientMedicineIntakeGateway = _medicineIntake;
         }
 
         public async Task<ActionResult> PatientTrend()
         {
-            analyticsModel.PainDiary painDiary = _patientGateway.SelectById(1);
-            IPatientTrend calculate = new PainIntensityTrend(painDiary.PainIntensity);            
+            analyticsModel.PainDiary PainDiary = _patientGateway.SelectById(1);
+            List<analyticsModel.MedicineIntake> Mitl = _patientMedicineIntakeGateway.SelectAll();
 
-            ViewBag.PainIntensityPlots = calculate.PlotGraph();
-            //ViewBag.InterferencePlots = calculate.PlotInterference();
-            ViewBag.MoodPlots = calculate.PlotGraph();
+            //All trends related to PainDiary
+            IPatientTrend PainIntensityTrend = new PainIntensityTrend(PainDiary.PainIntensity);
+            IPatientTrend SleepTrend = new SleepTrend(PainDiary.Sleep);
+            IPatientTrend MoodTrend = new MoodTrend(PainDiary.Mood);
+            IPatientTrend InterferenceTrend = new InterferenceTrend(PainDiary.Interference);
+
+            //Trends related to MedicineIntake
+            IPatientTrend MedicineIntakeTrend = new MedicineIntakeTrend(Mitl);
+
+            //Plot SuperImposed Graph in view
+            ViewBag.PainIntensityPlots = PainIntensityTrend.PlotGraph();
+            ViewBag.InterferencePlots = InterferenceTrend.PlotGraph();
+            ViewBag.MoodPlots = InterferenceTrend.PlotGraph();
+            ViewBag.SleepPlots = SleepTrend.PlotGraph();
+            ViewBag.MedicineIntakePlots = MedicineIntakeTrend.PlotGraph();
+
+
+            //Send PieChart data to frontend
+
             return View();
         }
 

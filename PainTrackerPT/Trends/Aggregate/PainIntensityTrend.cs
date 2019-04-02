@@ -20,7 +20,7 @@ namespace PainTrackerPT.Trends.Aggregate
             var PainIntensityPlots = new List<KeyValuePair<DateTime, int>>();
             foreach (PainIntensity item in this)
             {
-                PainIntensityPlots.Add(new KeyValuePair<DateTime, int>(item.date, item.painRating));
+                PainIntensityPlots.Add(new KeyValuePair<DateTime, int>(item.Date, item.PainRating));
             }
             return PainIntensityPlots;
         }

@@ -7,6 +7,6 @@ namespace PainTrackerPT.Trends
 {
     interface IDoctorTrend:ITrend
     {
-        KeyValuePair<DateTime, int> PlotFollowUps();
+        List<KeyValuePair<int, int>> PlotHeatMap();
     }
 }

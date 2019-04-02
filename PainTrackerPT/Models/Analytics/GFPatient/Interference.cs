@@ -10,19 +10,19 @@ namespace PainTrackerPT.Models.Analytics.GFPatient
     public class Interference
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Column("Date")]
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
 
         [Column("Description")]
-        public string description { get; set; }
+        public string Description { get; set; }
 
         [Column("Severity")]
-        public int severity { get; set; }
+        public int Severity { get; set; }
 
         [Column("Duration")]
-        public int duration { get; set; }
+        public int Duration { get; set; }
 
         [ForeignKey("PainDiary")]
         public int PainDiaryID { get; set; }

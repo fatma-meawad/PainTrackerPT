@@ -10,19 +10,19 @@ namespace PainTrackerPT.Models.Analytics.GFPatient
     public class Sleep
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         [Column("Date")]
-        public DateTime date;
+        public DateTime Date { get; set; }
 
         [Column("SleepHours")]
-        public int sleepHours;
+        public int SleepHours { get; set; }
 
         [Column("ComfortLevel")]
-        public int comfortLevel;
+        public int ComfortLevel { get; set; }
 
         [Column("Tiredness")]
-        public int tiredness;
+        public int Tiredness { get; set; }
 
         [ForeignKey("PainDiary")]
         public int PainDiaryID { get; set; }

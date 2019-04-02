@@ -14,7 +14,7 @@ namespace PainTrackerPT.Trends.Iterator
 
         public PainIntensityTrendIterator(List<PainIntensity> PainIntensityList)
         {
-            PainIntensities = PainIntensityList.OrderBy(i => i.date).ToList();
+            PainIntensities = PainIntensityList.OrderBy(i => i.Date).ToList();
             
         }
 
@@ -37,9 +37,8 @@ namespace PainTrackerPT.Trends.Iterator
                 return true;
 
             }
-            
 
-            if (updatedPosition >= 0 && updatedPosition < PainIntensities.Count)
+            else if (updatedPosition >= 0 && updatedPosition < PainIntensities.Count)
             {
                 Position = updatedPosition;
                 return true;
