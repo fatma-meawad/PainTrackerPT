@@ -9,7 +9,28 @@
 }
 
 <div class="container" style="margin:10px;">
-    <h1>Details</h1>
+    <h1>
+        @if (ViewBag.id == 0)
+        {
+            <text>Samuel Toh</text>
+        }
+        else if (ViewBag.id == 1)
+        {
+            <text>Nicholas Toh </text>
+        }
+        else if (ViewBag.id == 2)
+        {
+            <text>Cheryl Toh</text>
+        }
+        else if (ViewBag.id == 3)
+        {
+            <text>Toh Yan Tian</text>
+        }
+        else if (ViewBag.id == 4)
+        {
+            <text>Toh Hong Mao</text>
+        }
+    </h1>
 
     <div>
         <h4>FollowUp</h4>

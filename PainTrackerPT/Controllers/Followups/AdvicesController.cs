@@ -115,7 +115,7 @@ namespace PainTrackerPT.Controllers.Followups
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), routeValues: new { id = advice.AnswerId });
             }
             return View(advice);
         }

@@ -81,6 +81,8 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: FollowUps/Edit/5
         public async Task<IActionResult> Edit(Int64? id)
         {
+            ViewBag.id = id;
+      
             if (id == null)
             {
                 return NotFound();
@@ -133,6 +135,8 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: FollowUps/Delete/5
         public async Task<IActionResult> Delete(Int64? id)
         {
+            ViewBag.id = id;
+
             if (id == null)
             {
                 return NotFound();

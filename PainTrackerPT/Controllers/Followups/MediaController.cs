@@ -24,6 +24,7 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: Media
         public async Task<IActionResult> Index(int id)
         {
+            ViewBag.id = id;
             return View(await ((MediaService)_mediaService).SelectAllByAnswerId(id));
 
         }
@@ -31,6 +32,7 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: Media/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            ViewBag.id = id;
             if (id == null)
             {
                 return NotFound();
@@ -58,13 +60,13 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("AnswerId,MediaUrl,Id")] Media media)
+        public async Task<IActionResult> Create(int id, [Bind("AnswerId,MediaUrl")] Media media)
         {
             if (ModelState.IsValid)
             {
                 media.AnswerId = id;
                 _mediaService.Create(media);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), routeValues: new { id = media.AnswerId });
             }
             return View(media);
         }
@@ -114,7 +116,7 @@ namespace PainTrackerPT.Controllers.Followups
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), routeValues: new { id = media.AnswerId });
             }
             return View(media);
         }
