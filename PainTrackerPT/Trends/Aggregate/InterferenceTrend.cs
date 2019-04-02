@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Trends.Aggregate
 {
-    public class InterferenceTrend : TrendAggregate, IPatientTrend
+    public class InterferenceTrend : TrendAggregate, IPatientPatternTrend
     {
         List<Interference> InterferenceTrendList;
         public InterferenceTrend(List<Interference> InterferenceTrendList)
@@ -34,6 +34,16 @@ namespace PainTrackerPT.Trends.Aggregate
         public override IEnumerator GetEnumerator()
         {
             return new InterferenceTrendIterator(InterferenceTrendList);
+        }
+
+        public List<KeyValuePair<string, int>> RetrievePattern()
+        {
+            var InterferenceRows = new List<KeyValuePair<String, int>>();
+            foreach (var item in InterferenceTrendList)
+            {
+                InterferenceRows.Add(new KeyValuePair<String, int>(item.Description, item.Duration));
+            }
+            return InterferenceRows;
         }
     }
 }

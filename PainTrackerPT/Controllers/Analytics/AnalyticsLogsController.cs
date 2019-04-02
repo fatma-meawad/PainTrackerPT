@@ -36,7 +36,7 @@ namespace PainTrackerPT.Controllers
             IPatientTrend PainIntensityTrend = new PainIntensityTrend(PainDiary.PainIntensity);
             IPatientTrend SleepTrend = new SleepTrend(PainDiary.Sleep);
             IPatientTrend MoodTrend = new MoodTrend(PainDiary.Mood);
-            IPatientTrend InterferenceTrend = new InterferenceTrend(PainDiary.Interference);
+            IPatientPatternTrend InterferenceTrend = new InterferenceTrend(PainDiary.Interference);
 
             //Trends related to MedicineIntake
             IPatientTrend MedicineIntakeTrend = new MedicineIntakeTrend(Mitl);
@@ -50,6 +50,12 @@ namespace PainTrackerPT.Controllers
 
 
             //Send PieChart data to frontend
+            ViewBag.PainAreaPie = PainIntensityTrend.PlotPie();
+            ViewBag.MoodDoughnut = MoodTrend.PlotPie();
+
+            //Send Pattern data to front end
+            ViewBag.InterferenceRows = InterferenceTrend.RetrievePattern();
+            ViewBag.SleepRows = SleepTrend.PlotPie();
 
             return View();
         }

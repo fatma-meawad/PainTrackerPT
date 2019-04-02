@@ -128,14 +128,14 @@
                     <div class="m-section">
                         <div class="m-section__content">
 
-                            @*@foreach (var d in ViewBag.InterferenceRows)
+                            @foreach (var d in ViewBag.InterferenceRows)
                             {
                             <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
                                 <strong>Description - </strong>@d.Key<br />
                                 <strong>Duration - </strong>@d.Value hour(s)
                             </div>
 
-                            }*@
+                            }
 
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                Overall Pain Areas
+                                Overall Mood
                             </h3>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                 <div class="m-portlet__body">
                     <!--begin::Pain Area Section-->
                     <div class="m-section__content">
-                        <span>Below is an analysis of your overall pain areas over your body</span><br />
+                        <span>Below is an analysis of your overall mood</span><br />
                         <div id="canvas-holder" style="width:100%">
                             <canvas id="moodDoughnut"></canvas>
                         </div>
@@ -180,7 +180,7 @@
                     <div class="m-portlet__head-caption">
                         <div class="m-portlet__head-title">
                             <h3 class="m-portlet__head-text">
-                                Overall Interference
+                                Overall Sleep Pattern
                             </h3>
                         </div>
                     </div>
@@ -190,14 +190,14 @@
                     <!--begin::Section-->
                     <div class="m-section">
                         <div class="m-section__content">
-                            @*@foreach (var d in ViewBag.SleepRows)
+                            @foreach (var d in ViewBag.SleepRows)
                             {
                                 <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
                                     <strong>Comfort Level - </strong>@d.Key<br />
                                     <strong>Tiredness - </strong>@d.Value
                                 </div>
 
-                            }*@
+                            }
                         </div>
                     </div>
                     <!--end::Section-->
@@ -361,11 +361,11 @@
     var painAreaDataLabel = [];
     var painAreaData = [];
 
-    @*@foreach (var d in ViewBag.PainAreaPie)
+    @foreach (var d in ViewBag.PainAreaPie)
     {
         @:painAreaDataLabel.push('@d.Key');
         @:painAreaData.push(@d.Value);
-    }*@
+    }
 
     // Pie for overall pain areas
     var painAreaPieConfig = {
@@ -397,18 +397,18 @@
     var moodDataLabel = [];
     var moodData = [];
 
-    @*@foreach (var d in ViewBag.MoodDoughnut)
+    @foreach (var d in ViewBag.MoodDoughnut)
     {
         @:moodDataLabel.push('@d.Key');
         @:moodData.push(@d.Value);
-    }*@
+    }
 
     // Pie for overall pain areas
     var moodDoughnutConfig = {
         type: 'doughnut',
         data: {
             datasets: [{
-                data: painAreaData,
+                data: moodData,
                 backgroundColor: [
                     window.chartColors.red,
                     window.chartColors.orange,

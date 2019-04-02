@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using PainTrackerPT.Models.Analytics.GFPatient;
 using PainTrackerPT.Trends.Iterator;
 
@@ -27,7 +28,17 @@ namespace PainTrackerPT.Trends.Aggregate
 
         public List<KeyValuePair<int, int>> PlotPie()
         {
-            throw new NotImplementedException();
+            var PainAreaPieList = new List<KeyValuePair<int, int>>();
+            var PainAreaPieGroup = from item in PainIntensities
+                                   group item by item.PainArea into g
+                                   select new { g.Key, Count = g.Count() };
+
+            foreach (var pa in PainAreaPieGroup)
+            {
+                PainAreaPieList.Add(new KeyValuePair<int, int>(pa.Key, pa.Count));
+            }
+            return PainAreaPieList;
+
         }
 
         public override IEnumerator GetEnumerator()

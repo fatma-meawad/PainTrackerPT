@@ -28,7 +28,12 @@ namespace PainTrackerPT.Trends.Aggregate
 
         public List<KeyValuePair<int, int>> PlotPie()
         {
-            throw new NotImplementedException();
+            var SleepRows = new List<KeyValuePair<int, int>>();
+            foreach (var item in SleepList)
+            {
+                SleepRows.Add(new KeyValuePair<int, int>(item.ComfortLevel, item.Tiredness));
+            }
+            return SleepRows;
         }
 
         public override IEnumerator GetEnumerator()
