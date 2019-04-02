@@ -25,6 +25,9 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: Advices
         public async Task<IActionResult> Index(int id)
         {
+
+            ViewBag.id = id;
+
             return View(await ((AdviceService)_adviceService).SelectAllByAnswerId(id));
         }
 
@@ -58,13 +61,13 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int id, [Bind("AnswerId,Description,DateGenerated,Id")] Advice advice)
+        public async Task<IActionResult> Create(int id, [Bind("AnswerId,Description,DateGenerated")] Advice advice)
         {
             if (ModelState.IsValid)
             {
                 advice.AnswerId = id;
                 _adviceService.Create(advice);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), routeValues: new {id});
             }
             return View(advice);
         }
@@ -142,8 +145,9 @@ namespace PainTrackerPT.Controllers.Followups
         public async Task<IActionResult> DeleteConfirmed(Int64 id)
         {
             var advice = await _adviceService.Select(id);
+            int answerId = (int) advice.AnswerId;
             _adviceService.Delete(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), routeValues: new { id = answerId });
         }
 
         private bool AdviceExists(Int64 id)
