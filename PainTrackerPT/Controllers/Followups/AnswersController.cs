@@ -77,6 +77,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
+            ViewBag.Id = id;
             var answer = await _answerService.Select(id.Value);
             if (answer == null)
             {
@@ -92,6 +93,7 @@ namespace PainTrackerPT.Controllers.Followups
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Description, Id")] Answer answer)
         {
+            Answer oldAnswer = await _answerService.Select(id);
             if (id != answer.Id)
             {
                 return NotFound();
@@ -101,7 +103,8 @@ namespace PainTrackerPT.Controllers.Followups
             {
                 try
                 {
-                    _answerService.Update(answer);
+                    oldAnswer.Description = answer.Description;
+                    _answerService.Update(oldAnswer);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -114,7 +117,7 @@ namespace PainTrackerPT.Controllers.Followups
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), new { id = answer.QuestionId });
+                return RedirectToAction(nameof(Index), new { id = oldAnswer.QuestionId });
             }
             return View(answer);
         }
