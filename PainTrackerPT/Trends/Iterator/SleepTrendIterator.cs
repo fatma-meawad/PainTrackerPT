@@ -11,9 +11,12 @@ namespace PainTrackerPT.Trends.Iterator
         int Position = 0;
         int Flag = 0;
 
-        public SleepTrendIterator(List<Sleep> SleepList)
+        public SleepTrendIterator(List<Sleep> SleepList, bool NewestFirst)
         {
-            this.SleepList = SleepList.OrderBy(i => i.Date).ToList();
+            if(NewestFirst)
+                this.SleepList = SleepList.OrderByDescending(i => i.Date).ToList();
+            else
+                this.SleepList = SleepList.OrderBy(i => i.Date).ToList();
         }
 
 

@@ -9,6 +9,7 @@ namespace PainTrackerPT.Trends.Aggregate
     public class SleepTrend : TrendAggregate, IPatientTrend
     {
         List<Sleep> SleepList;
+        bool NewestFirst;
 
         public SleepTrend(List<Sleep> SleepList)
         {
@@ -19,6 +20,7 @@ namespace PainTrackerPT.Trends.Aggregate
         public List<KeyValuePair<DateTime, int>> PlotGraph()
         {
             var SleepPlots = new List<KeyValuePair<DateTime, int>>();
+            NewestFirst = false;
             foreach (Sleep item in this)
             {
                 SleepPlots.Add(new KeyValuePair<DateTime, int>(item.Date, item.SleepHours));
@@ -29,7 +31,8 @@ namespace PainTrackerPT.Trends.Aggregate
         public List<KeyValuePair<int, int>> PlotPie()
         {
             var SleepRows = new List<KeyValuePair<int, int>>();
-            foreach (var item in SleepList)
+            NewestFirst = true;
+            foreach (Sleep item in this)
             {
                 SleepRows.Add(new KeyValuePair<int, int>(item.ComfortLevel, item.Tiredness));
             }
@@ -38,7 +41,7 @@ namespace PainTrackerPT.Trends.Aggregate
 
         public override IEnumerator GetEnumerator()
         {
-            return new SleepTrendIterator(SleepList);
+            return new SleepTrendIterator(SleepList,NewestFirst);
         }
     }
 }

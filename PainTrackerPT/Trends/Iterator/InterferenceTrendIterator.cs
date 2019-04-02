@@ -13,9 +13,12 @@ namespace PainTrackerPT.Trends.Iterator
         int Flag = 0;
 
 
-        public InterferenceTrendIterator(List<Interference> InterferenceTrendList)
+        public InterferenceTrendIterator(List<Interference> InterferenceTrendList, bool NewestFirst)
         {
-            this.InterferenceTrendList = InterferenceTrendList;
+            if(NewestFirst)
+                this.InterferenceTrendList = InterferenceTrendList.OrderByDescending(i => i.Date).ToList();
+            else
+                this.InterferenceTrendList = InterferenceTrendList.OrderBy(i => i.Date).ToList();
         }
 
         public override object Current()

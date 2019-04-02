@@ -11,6 +11,8 @@ namespace PainTrackerPT.Trends.Aggregate
     public class InterferenceTrend : TrendAggregate, IPatientPatternTrend
     {
         List<Interference> InterferenceTrendList;
+        bool NewestFirst;
+
         public InterferenceTrend(List<Interference> InterferenceTrendList)
         {
             this.InterferenceTrendList = InterferenceTrendList;
@@ -19,6 +21,7 @@ namespace PainTrackerPT.Trends.Aggregate
         public List<KeyValuePair<DateTime, int>> PlotGraph()
         {
             var InterferencePlots = new List<KeyValuePair<DateTime, int>>();
+            NewestFirst = false;
             foreach (Interference item in this)
             {
                 InterferencePlots.Add(new KeyValuePair<DateTime, int>(item.Date,item.Severity));
@@ -33,13 +36,14 @@ namespace PainTrackerPT.Trends.Aggregate
 
         public override IEnumerator GetEnumerator()
         {
-            return new InterferenceTrendIterator(InterferenceTrendList);
+            return new InterferenceTrendIterator(InterferenceTrendList, NewestFirst);
         }
 
         public List<KeyValuePair<string, int>> RetrievePattern()
         {
             var InterferenceRows = new List<KeyValuePair<String, int>>();
-            foreach (var item in InterferenceTrendList)
+            NewestFirst = true;
+            foreach (Interference item in this)
             {
                 InterferenceRows.Add(new KeyValuePair<String, int>(item.Description, item.Duration));
             }
