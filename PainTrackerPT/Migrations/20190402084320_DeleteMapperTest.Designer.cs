@@ -10,8 +10,8 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190401182622_FollowUp2")]
-    partial class FollowUp2
+    [Migration("20190402084320_DeleteMapperTest")]
+    partial class DeleteMapperTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,6 +87,12 @@ namespace PainTrackerPT.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DateGenerated");
+
+                    b.Property<string>("Description");
+
+                    b.Property<long>("QuestionId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Answer");
@@ -157,8 +163,7 @@ namespace PainTrackerPT.Migrations
 
                     b.Property<DateTime>("DateGenerated");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<long>("FollowUpId");
 

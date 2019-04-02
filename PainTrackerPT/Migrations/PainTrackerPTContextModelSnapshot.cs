@@ -161,8 +161,7 @@ namespace PainTrackerPT.Migrations
 
                     b.Property<DateTime>("DateGenerated");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<long>("FollowUpId");
 

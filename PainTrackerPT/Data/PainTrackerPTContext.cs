@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using PainTrackerPT.Data.Followups.DatabaseConfiguration;
 using PainTrackerPT.Models.Analytics;
 using PainTrackerPT.Models.Doctors;
 using PainTrackerPT.Models.Events;
@@ -37,8 +36,6 @@ namespace PainTrackerPT.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            new FollowUpMap(modelBuilder.Entity<FollowUp>());
-            new QuestionMap(modelBuilder.Entity<Question>());
         }
 
         public DbSet<PainTrackerPT.Models.Analytics.AnalyticsLog> AnalyticsLog { get; set; }
