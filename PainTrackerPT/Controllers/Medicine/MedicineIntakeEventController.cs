@@ -108,7 +108,7 @@ namespace PainTrackerPT.Controllers.Medicine
         public ActionResult DeleteConfirmed([Bind("EventId,Dosage,Intervals,NumOfRecurringTimes,StartTime,MedId")] MedicineEvent medicineEvent)
             //int id, int medID)
         {
-            _medService.Delete(medicineEvent.EventId);
+            _medService.Delete(medicineEvent.EventId);  
             return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId });
         }
 
@@ -117,6 +117,16 @@ namespace PainTrackerPT.Controllers.Medicine
         {
             return null;
         }
-                
+
+
+        //These Functions will trigger when Team Huat(Healthcare Professionals) send us back with a notification 
+
+        // GET: MedicineIntakeEvent/ViewEventLog/5
+        public ActionResult ViewEventLog(int id)
+        {  
+            //retrieve Event Log data by passing event id           
+            return View(_medService.GetMedicineEventLogList(id));
+        }       
+
     }
 }

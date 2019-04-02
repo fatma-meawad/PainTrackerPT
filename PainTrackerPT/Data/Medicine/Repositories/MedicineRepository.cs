@@ -37,6 +37,14 @@ namespace PainTrackerPT.Repository
             return query;
         }
 
+        public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
+        {
+            var query = (from medEventLog in context.MedicineEventLog
+                         where medEventLog.EventId == eventID                      
+                         select medEventLog).ToList();
+            return query;
+        }
+
         public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
         {            
             var query = (from medEvent in context.MedicineEvent

@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Common.Medicine
 {
-    public interface IMedicineDataAPI
+    public interface IStoreMedicineEventLogAPI
     {
-        //Team Analytics's methods
-        IEnumerable<MedicineLog> GetMedicine(int patientID, int medicineID);
-
+        void StoreEventLog(MedicineEventLog eventLog);        
     }
 }

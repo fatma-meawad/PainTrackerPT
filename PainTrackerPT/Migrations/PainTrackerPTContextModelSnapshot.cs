@@ -96,6 +96,25 @@ namespace PainTrackerPT.Migrations
                     b.ToTable("MedicineEvent");
                 });
 
+            modelBuilder.Entity("PainTrackerPT.Models.Medicine.MedicineEventLog", b =>
+                {
+                    b.Property<int>("LogId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CurrentTime");
+
+                    b.Property<int>("Dosage");
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("MedId");
+
+                    b.HasKey("LogId");
+
+                    b.ToTable("MedicineEventLog");
+                });
+
             modelBuilder.Entity("PainTrackerPT.Models.Medicine.MedicineLog", b =>
                 {
                     b.Property<int>("Id")
@@ -107,6 +126,8 @@ namespace PainTrackerPT.Migrations
                     b.Property<Guid>("MedGuid");
 
                     b.Property<string>("Name");
+
+                    b.Property<int>("PatientID");
 
                     b.Property<string>("Type");
 

@@ -46,7 +46,8 @@
                     @Html.DisplayFor(modelItem => item.StartTime)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID }) |                  
+                    @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID }) |
+                    @Html.ActionLink("View Event Log", "ViewEventLog", "MedicineIntakeEvent", new { id = @item.EventId }) |
                     @Html.ActionLink("Delete", "Delete", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID })
                 </td>
             </tr>

@@ -31,6 +31,11 @@ namespace PainTrackerPT.Services
             return _medData.GetMedicineEventList(medID, eventID);
         }
 
+        public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
+        {           
+            return _medData.GetMedicineEventLogList(eventID);
+        }
+
         public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
         {
             return _medEvent.SelectMedEventById(medicineID);

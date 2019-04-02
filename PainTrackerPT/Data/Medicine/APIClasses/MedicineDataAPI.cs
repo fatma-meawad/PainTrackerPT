@@ -20,5 +20,6 @@ namespace PainTrackerPT.Data.Medicine.APIClasses
         {
             return _medService.SelectMedLogById(patientID, medicineID); 
         }
+
     }
 }
