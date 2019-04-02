@@ -12,6 +12,7 @@ namespace PainTrackerPT.Interfaces.Medicine
         MedicineEvent GetLogFromTo(DateTime start_dt, DateTime end_dt);
      
         IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID);
+        IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID);
         IEnumerable<MedicineEvent> SelectMedEventById(int medicineID);
  
         void Insert(MedicineEvent obj);

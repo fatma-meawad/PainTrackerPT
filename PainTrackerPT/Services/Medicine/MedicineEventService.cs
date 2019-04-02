@@ -55,7 +55,7 @@ namespace PainTrackerPT.Services.Medicine
 
         public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
         {
-            throw new NotImplementedException();
+            return _medEventRepo.GetMedicineEventLogList(eventID);
         }
 
         //public IEnumerable<MedicineEvent> SelectAll()
