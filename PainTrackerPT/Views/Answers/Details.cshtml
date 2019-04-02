@@ -3,37 +3,39 @@
 @{
     ViewData["Title"] = "Details";
 }
+<div class="container" style="margin:10px;">
 
-<h1>Details</h1>
+    <h1>Details</h1>
 
-<div>
-    <h4>Answer</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.QuestionId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.QuestionId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateGenerated)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateGenerated)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-    <a asp-controller="Advices" asp-action="Index" asp-route-id="@Model.Id">View Advice</a>
-    <a asp-controller="Recommendations" asp-action="Index" asp-route-id="@Model.Id">View Recommendation</a>
-    <a asp-controller="Media" asp-action="Index" asp-route-id="@Model.Id">View Media</a>
-</div>
+    <div>
+        <h4>Answer</h4>
+        <hr />
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.QuestionId)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.QuestionId)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DateGenerated)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DateGenerated)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+        <a asp-controller="Advices" asp-action="Index" asp-route-id="@Model.Id">View Advice</a>
+        <a asp-controller="Recommendations" asp-action="Index" asp-route-id="@Model.Id">View Recommendation</a>
+        <a asp-controller="Media" asp-action="Index" asp-route-id="@Model.Id">View Media</a>
+    </div>
+    </div>

@@ -4,8 +4,29 @@
     ViewData["Title"] = "FilteredIndex";
 }
 
-<div class="container">
-    <h1>FilteredIndex</h1>
+<div class="container" style="margin:10px;">
+    <h1>
+        @if (ViewBag.id == 0)
+        {
+            <text>Samuel Toh</text>
+        }
+        else if (ViewBag.id == 1)
+        {
+            <text>Nicholas Toh </text>
+        }
+        else if (ViewBag.id == 2)
+        {
+            <text>Cheryl Toh</text>
+        }
+        else if (ViewBag.id == 3)
+        {
+            <text>Toh Yan Tian</text>
+        }
+        else if (ViewBag.id == 4)
+        {
+            <text>Toh Hong Mao</text>
+        }
+    </h1>
 
     <p>
         <a asp-action="Create">Create New</a>
@@ -14,13 +35,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.PatientId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DoctorId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.State)
+                    <text>Patient</text>
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Description)
@@ -36,13 +51,26 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PatientId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DoctorId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.State)
+                        @if (item.PatientId == 0)
+                        {
+                            <text>Samuel Toh</text>
+                        }
+                        else if (item.PatientId == 1)
+                        {
+                            <text>Nicholas Toh </text>
+                        }
+                        else if (item.PatientId == 2)
+                        {
+                            <text>Cheryl Toh</text>
+                        }
+                        else if (item.PatientId == 3)
+                        {
+                            <text>Toh Yan Tian</text>
+                        }
+                        else if (item.PatientId == 4)
+                        {
+                            <text>Toh Hong Mao</text>
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Description)

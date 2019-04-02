@@ -31,6 +31,7 @@ namespace PainTrackerPT.Controllers.Followups
         
         public async Task<IActionResult> FilteredIndex(Int64 id)
         {
+            ViewBag.id = id;
             return View(await ((FollowUpService)_followUpService).SelectAllByPatientId(id));
 
         }
@@ -38,6 +39,7 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: FollowUps/Details/5
         public async Task<IActionResult> Details(Int64? id)
         {
+            ViewBag.id = id;
             if (id == null)
             {
                 return NotFound();
