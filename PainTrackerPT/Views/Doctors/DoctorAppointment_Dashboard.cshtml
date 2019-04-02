@@ -1,13 +1,57 @@
-﻿
+﻿@model IEnumerable<PainTrackerPT.Models.Doctors.Notification>
+
 @{
     ViewData["Title"] = "DoctorAppointment_Dashboard";
 }
 
 <h1>DoctorAppointment_Dashboard</h1>
 
-@if (ViewBag.Error == "appointmentError")
-{
-    <script>
-        alert('You have no appointment');
-    </script>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Role)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Header)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Viewed)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Header)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Viewed)
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.NotificationId">Delete</a>
+            </td>
+        </tr>
 }
+    </tbody>
+</table>

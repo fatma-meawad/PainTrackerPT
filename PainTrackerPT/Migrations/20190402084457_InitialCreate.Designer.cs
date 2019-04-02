@@ -10,7 +10,7 @@ using PainTrackerPT.Models;
 namespace PainTrackerPT.Migrations
 {
     [DbContext(typeof(PainTrackerPTContext))]
-    [Migration("20190401171508_InitialCreate")]
+    [Migration("20190402084457_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,7 +111,7 @@ namespace PainTrackerPT.Migrations
 
                     b.Property<string>("Role");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
 
                     b.Property<bool>("Viewed");
 

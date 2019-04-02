@@ -1,16 +1,52 @@
-﻿@{
+﻿@model IEnumerable<PainTrackerPT.Models.Doctors.Notification>
+
+@{
     ViewData["Title"] = "PatientAppointment_Dashboard";
 }
 
-<h1>PatientAppointment_Dashboard</h1>
+<h1>Patient Dashboard</h1>
 
-    @if (ViewBag.Error == "createError") {
+<p>
+</p>
+
+<div class="row">
+    <div class="col-md-8">
+
+    </div>
+    <div class="col-md-2">
+        <h2> Notification</h2>
+        <table class="table table-striped">
+
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td style="background-color:darkseagreen">
+                                @Html.DisplayFor(modelItem => item.Role)<BR />
+                                @Html.DisplayFor(modelItem => item.UserId)<BR />
+                                @Html.DisplayFor(modelItem => item.Header)<BR />
+                                @Html.DisplayFor(modelItem => item.Message)<BR />
+                                @Html.DisplayFor(modelItem => item.Viewed)<BR />
+                                <a asp-action="Delete" asp-route-id="@item.NotificationId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@if (ViewBag.Error == "createError")
+{
     <script>
         alert('You have an existing appointment. Error in create a new appointment');
     </script>
-    }
-    @if (ViewBag.Error == "appointmentError") {
+}
+@if (ViewBag.Error == "appointmentError")
+{
     <script>
         alert('You have no appointment');
     </script>
-    }
+}

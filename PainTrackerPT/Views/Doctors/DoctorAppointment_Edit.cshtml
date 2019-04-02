@@ -13,24 +13,24 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="AppointmentId" />
             <div class="form-group">
-                <label asp-for="PatientID" class="control-label"></label>
-                <input asp-for="PatientID" class="form-control" readonly />
-                <span asp-validation-for="PatientID" class="text-danger"></span>
+                <label asp-for="PatientID" class="control-label" hidden></label>
+                <input asp-for="PatientID" class="form-control" hidden />
+                <span asp-validation-for="PatientID" class="text-danger" hidden></span>
             </div>
             <div class="form-group">
-                <label asp-for="DoctorID" class="control-label"></label>
+                <label asp-for="DoctorID" class="control-label" ></label>
                 <input asp-for="DoctorID" class="form-control" />
-                <span asp-validation-for="DoctorID" class="text-danger"></span>
+                <span asp-validation-for="DoctorID" class="text-danger" ></span>
             </div>
             <div class="form-group">
-                <label asp-for="Message" class="control-label"></label>
-                <input asp-for="Message" class="form-control" readonly />
-                <span asp-validation-for="Message" class="text-danger"></span>
+                <label asp-for="Message" class="control-label" hidden></label>
+                <input asp-for="Message" class="form-control" hidden />
+                <span asp-validation-for="Message" class="text-danger" hidden></span>
             </div>
             <div class="form-group">
-                <label asp-for="AppDate" class="control-label"></label>
-                <input asp-for="AppDate" class="form-control" readonly />
-                <span asp-validation-for="AppDate" class="text-danger"></span>
+                <label asp-for="AppDate" class="control-label" hidden></label>
+                <input asp-for="AppDate" class="form-control" hidden />
+                <span asp-validation-for="AppDate" class="text-danger" hidden></span>
             </div>
             <div class="form-group">
                 <label asp-for="ProposedDate" class="control-label"></label>
@@ -55,12 +55,12 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="docCfm" readonly /> @Html.DisplayNameFor(model => model.docCfm)
+                    <input class="form-check-input" asp-for="docCfm" hidden /> @Html.DisplayNameFor(model => model.docCfm)
                 </label>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="patCfm" readonly /> @Html.DisplayNameFor(model => model.patCfm)
+                    <input class="form-check-input" asp-for="patCfm" hidden /> @Html.DisplayNameFor(model => model.patCfm)
                 </label>
             </div>
             <div class="form-group form-check">
@@ -74,8 +74,8 @@
                 </label>
             </div>
             <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="status" readonly value="AwaitingPatCfm"/> @Html.DisplayNameFor(model => model.status)
+                <label class="form-check-label" hidden>
+                    <input class="form-check-input" asp-for="status" hidden value="AwaitingPatCfm"/> @Html.DisplayNameFor(model => model.status)
                 </label>
             </div>
             <div class="form-group">

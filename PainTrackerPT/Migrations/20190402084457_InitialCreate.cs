@@ -118,7 +118,7 @@ namespace PainTrackerPT.Migrations
                     NotificationId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Role = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     Header = table.Column<string>(nullable: true),
                     Message = table.Column<string>(nullable: true),
                     Viewed = table.Column<bool>(nullable: false)

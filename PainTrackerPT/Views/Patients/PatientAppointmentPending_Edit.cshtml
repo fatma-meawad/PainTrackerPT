@@ -4,7 +4,7 @@
     ViewData["Title"] = "PatientAppointmentPending_Edit";
 }
 
-<h1>PatientAppointmentPending_Edit</h1>
+<h1>Patient</h1>
 
 <h4>Appointment</h4>
 <hr />
@@ -27,41 +27,13 @@
                 <input asp-for="PatientID" class="form-control" readonly/>
                 <span asp-validation-for="PatientID" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="DoctorID" class="control-label"></label>
-                <input asp-for="DoctorID" class="form-control" readonly/>
-                <span asp-validation-for="DoctorID" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
                 <input asp-for="Message" class="form-control" />
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="AppDate" class="control-label"></label>
-                <input asp-for="AppDate" class="form-control" readonly/>
-                <span asp-validation-for="AppDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProposedDate" class="control-label"></label>
-                <input asp-for="ProposedDate" class="form-control" readonly/>
-                <span asp-validation-for="ProposedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApptLocation" class="control-label"></label>
-                <input asp-for="ApptLocation" class="form-control" readonly/>
-                <span asp-validation-for="ApptLocation" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="docCfm" /> @Html.DisplayNameFor(model => model.docCfm)
-                </label>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="patCfm" /> @Html.DisplayNameFor(model => model.patCfm)
-                </label>
-            </div>
+
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="pdAttach" /> @Html.DisplayNameFor(model => model.pdAttach)
@@ -73,9 +45,9 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="status" class="control-label"></label>
-                <input asp-for="status" class="form-control" readonly/>
-                <span asp-validation-for="status" class="text-danger"></span>
+                <label asp-for="status" class="control-label" hidden></label>
+                <input asp-for="status" class="form-control" hidden/>
+                <span asp-validation-for="status" class="text-danger" hidden></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

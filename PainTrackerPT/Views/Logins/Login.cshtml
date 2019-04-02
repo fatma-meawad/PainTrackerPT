@@ -1,0 +1,52 @@
+﻿@model PainTrackerPT.Models.Doctors.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <form asp-action="Autherize">
+        <table>
+            <tr>
+                <td></td>
+                <td style="text-decoration:underline">App Name</td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Username)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Username)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(model => model.Pin)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.Pin)
+                </td>
+            </tr>
+            <tr>
+                <td colspon="2">
+                    <label class="field-validation-error">@ViewBag.Error</label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" name="name" value="Login" />
+                    <input type="reset" name="name" value="Clear" />
+                </td>
+            </tr>
+        </table>
+        </form>
+
+
+</body>
+</html>

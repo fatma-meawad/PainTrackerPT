@@ -5,14 +5,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PainTrackerPT.Models;
+using PainTrackerPT.Models.Doctors;
 
 namespace PainTrackerPT.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(User user)
         {
-            return View();
+            ViewBag.Error = "createError";
+            
+            return View(user);
         }
 
         public IActionResult Privacy()

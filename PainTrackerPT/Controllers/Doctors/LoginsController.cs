@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -18,136 +19,39 @@ namespace PainTrackerPT.Controllers.Doctors
         {
             _context = context;
         }
-
-        // GET: Logins
-        public async Task<IActionResult> Index()
+        // GET: Login
+        public ActionResult Login()
         {
-            return View(await _context.Login.ToListAsync());
-        }
 
-        // GET: Logins/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var login = await _context.Login
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (login == null)
-            {
-                return NotFound();
-            }
-
-            return View(login);
-        }
-
-        // GET: Logins/Create
-        public IActionResult Create()
-        {
             return View();
         }
 
-        // POST: Logins/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("UserID,Username,Pin,LoginError")] Login login)
+        public async Task<IActionResult> Autherize(PainTrackerPT.Models.Doctors.User xxx)
         {
-            if (ModelState.IsValid)
+            var userDetailsPatients = _context.User.Where(x => x.Username == xxx.Username && x.Pin == xxx.Pin).FirstOrDefault();
+            //var userDetailsDoctors = _context.User.Where(x => x.Username == xxx.Username && x.Pin == xxx.Pin).FirstOrDefault();
+            //var userDetailsAdmin = _context.Admins.Where(x => x.Username == xxx.Username && x.Pin == xxx.Pin).FirstOrDefault();
+
+
+
+
+            if (userDetailsPatients != null)
             {
-                _context.Add(login);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //ViewBag.Role = "Patient";
+
+                //TempData["Role"] = "doctor";
+                
+                return RedirectToAction("Index", "Home");
             }
-            return View(login);
+
+            ViewBag.Error = "Invalid username or password";
+
+            return View("Login", xxx);
         }
 
-        // GET: Logins/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var login = await _context.Login.FindAsync(id);
-            if (login == null)
-            {
-                return NotFound();
-            }
-            return View(login);
-        }
 
-        // POST: Logins/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("UserID,Username,Pin,LoginError")] Login login)
-        {
-            if (id != login.UserID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(login);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LoginExists(login.UserID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(login);
-        }
-
-        // GET: Logins/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var login = await _context.Login
-                .FirstOrDefaultAsync(m => m.UserID == id);
-            if (login == null)
-            {
-                return NotFound();
-            }
-
-            return View(login);
-        }
-
-        // POST: Logins/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var login = await _context.Login.FindAsync(id);
-            _context.Login.Remove(login);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool LoginExists(int id)
-        {
-            return _context.Login.Any(e => e.UserID == id);
-        }
     }
 }

@@ -3,22 +3,13 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using PainTrackerPT.Models.Doctors;
 
 namespace PainTrackerPT.Models.Doctors
 {
-    public class Patient
+    public class Patient : User
     {
-        [Key]
-        public int PatientId { get; set; }
-        [Column(TypeName ="nvarchar(250)")]
-        public string Username { get; set; }
         [Column(TypeName = "nvarchar(250)")]
-        public string Pin { get; set; }
-        [Column(TypeName = "nvarchar(250)")]
-        public string Firstname { get; set; }
-        [Column(TypeName = "nvarchar(250)")]
-        public string Lastname { get; set; }
-        [Column(TypeName = "nvarchar(250)")]
-        public string EmailAdd { get; set; }
+        public string Role { get; set; }
     }
 }

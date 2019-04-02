@@ -41,7 +41,7 @@ namespace PainTrackerPT.Controllers.Doctors
             }
 
             var patient = await _context.Patients
-                .FirstOrDefaultAsync(m => m.PatientId == id);
+                .FirstOrDefaultAsync(m => m.UserId == id);
             if (patient == null)
             {
                 return NotFound();
@@ -60,7 +60,7 @@ namespace PainTrackerPT.Controllers.Doctors
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PatientAccount_Create([Bind("PatientId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
+        public async Task<IActionResult> PatientAccount_Create([Bind("UserId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
         {
             if (ModelState.IsValid)
             {
@@ -92,9 +92,9 @@ namespace PainTrackerPT.Controllers.Doctors
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PatientAccount_Edit(int id, [Bind("PatientId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
+        public async Task<IActionResult> PatientAccount_Edit(int id, [Bind("UserId,Username,Pin,Firstname,Lastname,EmailAdd")] Patient patient)
         {
-            if (id != patient.PatientId)
+            if (id != patient.UserId)
             {
                 return NotFound();
             }
@@ -108,7 +108,7 @@ namespace PainTrackerPT.Controllers.Doctors
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PatientExists(patient.PatientId))
+                    if (!PatientExists(patient.UserId))
                     {
                         return NotFound();
                     }
@@ -131,7 +131,7 @@ namespace PainTrackerPT.Controllers.Doctors
             }
 
             var patient = await _context.Patients
-                .FirstOrDefaultAsync(m => m.PatientId == id);
+                .FirstOrDefaultAsync(m => m.UserId == id);
             if (patient == null)
             {
                 return NotFound();
@@ -153,7 +153,7 @@ namespace PainTrackerPT.Controllers.Doctors
 
         private bool PatientExists(int id)
         {
-            return _context.Patients.Any(e => e.PatientId == id);
+            return _context.Patients.Any(e => e.UserId == id);
         }
 
 
@@ -198,8 +198,8 @@ namespace PainTrackerPT.Controllers.Doctors
                 try
                 {
                     Notification notification = new Notification();
-                    notification.Role = "Doctor";
-                    notification.UserId = appointment.DoctorID;
+                    notification.Role = "Patient";
+                    notification.UserId = appointment.PatientID;
                     notification.Header = "Alert";
                     notification.Message = "Doctor has propose an appointment date";
 

@@ -10,29 +10,9 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DoctorID)
-            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Message)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AppDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ProposedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ApptLocation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.docCfm)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.patCfm)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.pdAttach)
@@ -40,54 +20,26 @@
             <th>
                 @Html.DisplayNameFor(model => model.miAttach)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.status)
-            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorID)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Message)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProposedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ApptLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.docCfm)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.patCfm)
-            </td>
+
+
             <td>
                 @Html.DisplayFor(modelItem => item.pdAttach)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.miAttach)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.status)
-            </td>
+
             <td>
                 <a asp-action="DoctorAppointment_Edit" asp-route-id="@item.AppointmentId">View</a> |
                 @*<a asp-action="Details" asp-route-id="@item.AppointmentId">Details</a> |

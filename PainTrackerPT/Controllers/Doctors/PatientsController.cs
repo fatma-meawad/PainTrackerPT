@@ -23,10 +23,10 @@ namespace PainTrackerPT.Controllers.Doctors
         }
 
         // GET: Dashboard
-        public ActionResult PatientAppointment_Dashboard()
+        public async Task<IActionResult> PatientAppointment_Dashboard()
         {
             
-            return View();
+            return View(await _context.Notification.ToListAsync());
         }
 
         // GET: Appointments/Edit/5
@@ -205,7 +205,7 @@ namespace PainTrackerPT.Controllers.Doctors
             {
                 if (item.PatientID == id)
                 {
-                    ViewBag.Error = "createError";
+                    //ViewBag.Error = "createError";
                     return View("PatientAppointment_Dashboard");
                 }
             }
@@ -222,6 +222,13 @@ namespace PainTrackerPT.Controllers.Doctors
         {
             if (ModelState.IsValid)
             {
+                //Notification notification = new Notification();
+                //notification.Role = "Doctor";
+                //notification.Header = "Alert";
+                //notification.Message = "Patient has request an appointment date";
+
+                //_context.Add(notification);
+
                 _context.Add(appointment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(PatientAppointment));
