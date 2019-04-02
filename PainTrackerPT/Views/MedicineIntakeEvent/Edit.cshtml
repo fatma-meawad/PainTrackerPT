@@ -4,51 +4,79 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit for @ViewBag.eventID in @ViewBag.medID</h1>
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
 
-<h4>MedicineEvent</h4>
-<hr />
-<div class="row" >
-    <div class="col-md-4" >
-        <form asp-action="Edit" id="forms">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EventId" value=@ViewBag.eventID />
-            <input type="hidden" asp-for="MedId" value=@ViewBag.medID />
-            <div class="form-group">
-                <label asp-for="Dosage" class="control-label"></label>
-                <input asp-for="Dosage" class="form-control" value="@ViewBag.eventList[0].Dosage" required="required" />
-                <span asp-validation-for="Dosage" class="text-danger"></span>
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <h3 class="m-subheader__title ">Edit for @ViewBag.eventID in @ViewBag.medID</h3>
             </div>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <label asp-for="Intervals" class="control-label"></label>
-                <input asp-for="Intervals" class="form-control" value="@ViewBag.eventList[0].Intervals" required="required" />
-                <span asp-validation-for="Intervals" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="NumOfRecurringTimes" class="control-label"></label>
-                <input asp-for="NumOfRecurringTimes" class="form-control" value="@ViewBag.eventList[0].NumOfRecurringTimes" required="required" />
-                <span asp-validation-for="NumOfRecurringTimes" class="text-danger"></span>
-            </div>
+    <!-- END: Subheader -->
+    <div class="m-content">
 
-            <div class="form-group" id="timestamp">
-                <label asp-for="StartTime" class="control-label" value="@ViewBag.eventList[0].StartTime"></label>                
-                <input asp-for="StartTime" required="required" />               
+        <!--Begin::Section-->
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="m-portlet m-portlet--mobile ">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Medicine Event
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form asp-action="Edit" id="forms">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="EventId" value=@ViewBag.eventID />
+                                    <input type="hidden" asp-for="MedId" value=@ViewBag.medID />
+                                    <div class="form-group">
+                                        <label asp-for="Dosage" class="control-label"></label>
+                                        <input asp-for="Dosage" class="form-control" value="@ViewBag.eventList[0].Dosage" required="required" />
+                                        <span asp-validation-for="Dosage" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="Intervals" class="control-label"></label>
+                                        <input asp-for="Intervals" class="form-control" value="@ViewBag.eventList[0].Intervals" required="required" />
+                                        <span asp-validation-for="Intervals" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label asp-for="NumOfRecurringTimes" class="control-label"></label>
+                                        <input asp-for="NumOfRecurringTimes" class="form-control" value="@ViewBag.eventList[0].NumOfRecurringTimes" required="required" />
+                                        <span asp-validation-for="NumOfRecurringTimes" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group" id="timestamp">
+                                        <label asp-for="StartTime" class="control-label" value="@ViewBag.eventList[0].StartTime"></label>
+                                        <input asp-for="StartTime" required="required" />
+                                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="submit" value="Save" class="btn btn-primary" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        @Html.ActionLink("Back Home", "Index", "MedicineIntakeEvent", new { id = @ViewBag.MedID })
+                    </div>
+                </div>
             </div>
-            
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <!--End::Section-->
     </div>
 </div>
-
-<div>
-    @Html.ActionLink("Index", "Index", "MedicineIntakeEvent", new { id = @ViewBag.medID })
-</div>
-
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -67,8 +95,8 @@
 
     function ChangeDateTime() {
         var div = document.createElement('div');
-        div.innerHTML = addDTForm();        
-        var original = document.getElementById("timestamp");        
+        div.innerHTML = addDTForm();
+        var original = document.getElementById("timestamp");
         document.getElementById("forms").replaceChild(div, original);
     }
 </script>

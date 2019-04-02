@@ -3,57 +3,102 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="m-grid__item m-grid__item--fluid m-wrapper">
 
-<h1>Medicine Schedules for @ViewBag.ID</h1>
+    <!-- BEGIN: Subheader -->
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto">
+                <h3 class="m-subheader__title ">Medicine Schedules for @ViewBag.ID</h3>
+            </div>
+        </div>
+    </div>
 
-<p>    
-    @Html.ActionLink("Create", "Create", new { medID = ViewBag.ID })
-</p>
+    <!-- END: Subheader -->
+    <div class="m-content">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Dosage)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Intervals)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NumOfRecurringTimes)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.StartTime)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null)
-            {
-                @foreach (var item in Model)
-                {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Dosage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Intervals)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumOfRecurringTimes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID }) |
-                    @Html.ActionLink("View Event Log", "ViewEventLog", "MedicineIntakeEvent", new { id = @item.EventId }) |
-                    @Html.ActionLink("Delete", "Delete", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID })
-                </td>
-            </tr>
-                }
-            }
-        </tbody>
-    </table>
+        <!--Begin::Section-->
+        <div class="row">
+            <div class="col-xl-8">
+                <div class="m-portlet m-portlet--mobile ">
+                    <div class="m-portlet__head">
+                        <div class="m-portlet__head-caption">
+                            <div class="m-portlet__head-title">
+                                <h3 class="m-portlet__head-text">
+                                    Medicine Schedules
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="m-portlet__head-tools">
+                            <ul class="m-portlet__nav">
+                                <li class="m-portlet__nav-item">
+                                    <a href="@Url.Action("Create")" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
+                                        <span>
+                                            <i class="la la-plus"></i>
+                                            <span>New record</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="m-portlet__body">
 
+                        <!--begin: Datatable -->
+                        <table class="table table-striped- table-bordered table-hover table-checkable" id="medicineScheduleTable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Dosage)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Intervals)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.NumOfRecurringTimes)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.StartTime)
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Dosage)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Intervals)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.NumOfRecurringTimes)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.StartTime)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID }) |
+                                                @Html.ActionLink("View Event Log", "ViewEventLog", "MedicineIntakeEvent", new { id = @item.EventId }) |
+                                                @Html.ActionLink("Delete", "Delete", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID })
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!--End::Section-->
+
+    </div>
+</div>

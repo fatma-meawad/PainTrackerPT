@@ -75,12 +75,12 @@ namespace PainTrackerPT.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicineEvent", x => x.EventId);
-                    table.ForeignKey(
-                    name: "FK_MedicineEvent_MedicineLog_MedId",
-                    column: x => x.MedId,
-                    principalTable: "MedicineLog",
-                    principalColumn: "Id",
-                    onDelete: ReferentialAction.Cascade);
+                    //table.ForeignKey(
+                    //name: "FK_MedicineEvent_MedicineLog_MedId",
+                    //column: x => x.MedId,
+                    //principalTable: "MedicineLog",
+                    //principalColumn: "Id",
+                    //onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,12 +97,12 @@ namespace PainTrackerPT.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MedicineEventLog", x => x.LogId);
-                    table.ForeignKey(
-                    name: "FK_MedicineEventLog_MedicineEvent_EventId",
-                    column: x => x.EventId,
-                    principalTable: "MedicineEvent",
-                    principalColumn: "EventId",
-                    onDelete: ReferentialAction.Cascade);
+                    //table.ForeignKey(
+                    //name: "FK_MedicineEventLog_MedicineEvent_EventId",
+                    //column: x => x.EventId,
+                    //principalTable: "MedicineEvent",
+                    //principalColumn: "EventId",
+                    //onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
