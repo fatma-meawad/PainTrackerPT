@@ -14,5 +14,9 @@ namespace PainTrackerPT.Data.Followups
     public class AnswerRepository : BaseRepository<Answer>
     {
         public AnswerRepository(PainTrackerPTContext db) : base(db) { }
+        public async Task<IEnumerable<Answer>> SelectAllByQuestionId(Int64 questionId)
+        {
+            return await _dbSet.Where(q => q.QuestionId == questionId).ToListAsync();
+        }
     }
 }

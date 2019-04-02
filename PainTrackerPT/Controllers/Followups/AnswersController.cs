@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups;
 using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
@@ -21,9 +22,9 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Answers
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View(await _answerService.SelectAll());
+            return View(await ((AnswerService)_answerService).SelectAllByFollowUpId(id));
         }
 
         // GET: Answers/Details/5
@@ -44,8 +45,9 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Answers/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            ViewBag.id = id;
             return View();
         }
         
@@ -60,7 +62,7 @@ namespace PainTrackerPT.Controllers.Followups
             if (ModelState.IsValid)
             {
                 _answerService.Create(answer);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), routeValues: new { id = answer.QuestionId });
             }
             return View(answer);
         }

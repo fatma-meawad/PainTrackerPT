@@ -20,6 +20,9 @@ namespace PainTrackerPT.Data.Followups
         public AnswerService(IBaseRepository<Answer> baseRepository) : base(baseRepository)
         {
         }
-       
+        public async Task<IEnumerable<Answer>> SelectAllByFollowUpId(Int64 questionId)
+        {
+            return await ((AnswerRepository)_baseRepository).SelectAllByQuestionId(questionId);
+        }
     }
 }
