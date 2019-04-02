@@ -6,16 +6,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Common.Medicine;
+using PainTrackerPT.Interfaces.Medicine;
 using PainTrackerPT.Models.Medicine;
 
 namespace PainTrackerPT.Controllers.Medicine
 {
     public class MedicineIntakeEventController : Controller 
     {
-        private readonly IMedicineService<MedicineEvent> _medService;
+        private readonly IMedicineEventService _medService;
         private MedicineEvent _medEvent;
 
-        public MedicineIntakeEventController(IMedicineService<MedicineEvent> medService)
+        public MedicineIntakeEventController(IMedicineEventService medService)
         {
             _medService = medService;
         }

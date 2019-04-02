@@ -8,73 +8,75 @@ using System.Linq;
 
 namespace PainTrackerPT.Repository
 {
-    public class MedicineRepository<T> : IMedicineLog<T> where T: class
+    public class MedicineRepository : IMedicineLog
     {
         PainTrackerPTContext context = new PainTrackerPTContext();   
-        DbSet<T> data = null;    
+        DbSet<MedicineLog> data = null;
+        //private readonly PainTrackerPTContext context;
 
-        public MedicineRepository()
-        {            
-            this.data = context.Set<T>();            
+        public MedicineRepository()//PainTrackerPTContext _context)
+        {
+            //context = _context;
+            this.data = context.Set<MedicineLog>();            
         }
 
-        public T GetLogAt(DateTime dt)
+        public MedicineLog GetLogAt(DateTime dt)
         {          
             return null;
         }
 
-        public IEnumerable<T> SelectAll()
+        public IEnumerable<MedicineLog> SelectAll()
         {
             return data.ToList();
         }
 
-        public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
-        {
-            var query = (from medEvent in context.MedicineEvent                   
-                         where medEvent.MedId == medID 
-                         & medEvent.EventId == eventID
-                         select medEvent).ToList();
-            return query;
-        }
+        //public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
+        //{
+        //    var query = (from medEvent in context.MedicineEvent                   
+        //                 where medEvent.MedId == medID 
+        //                 & medEvent.EventId == eventID
+        //                 select medEvent).ToList();
+        //    return query;
+        //}
 
-        public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
-        {
-            var query = (from medEventLog in context.MedicineEventLog
-                         where medEventLog.EventId == eventID                      
-                         select medEventLog).ToList();
-            return query;
-        }
+        //public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
+        //{
+        //    var query = (from medEventLog in context.MedicineEventLog
+        //                 where medEventLog.EventId == eventID                      
+        //                 select medEventLog).ToList();
+        //    return query;
+        //}
 
-        public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
-        {            
-            var query = (from medEvent in context.MedicineEvent
-                         where medEvent.MedId == medicineID
-                         orderby medEvent.EventId
-                         select medEvent).ToList();
-            return query;
-        }
+        //public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
+        //{            
+        //    var query = (from medEvent in context.MedicineEvent
+        //                 where medEvent.MedId == medicineID
+        //                 orderby medEvent.EventId
+        //                 select medEvent).ToList();
+        //    return query;
+        //}
 
-        public IEnumerable<MedicineLog> SelectMedLogById(int patientID, int medicineID)
+        public IEnumerable<MedicineLog> SelectMedLogById(int patientID)
         {
             var query = (from medLog in context.MedicineLog
-                         //where medLog.Id == medicineID
+                         where medLog.PatientID == patientID
                          orderby medLog.Id
                          select medLog).ToList();
             return query;
         }
 
-        public void Insert(T obj)
+        public void Insert(MedicineLog obj)
         {
             data.Add(obj);
             Save();
         }
 
-        public T GetLogFromTo(DateTime start_dt, DateTime end_dt)
+        public MedicineLog GetLogFromTo(DateTime start_dt, DateTime end_dt)
         {
             throw new NotImplementedException();
         }
 
-        public T SelectById(int? id)
+        public MedicineLog SelectById(int? id)
         {
             return data.Find(id);
         }
@@ -84,7 +86,7 @@ namespace PainTrackerPT.Repository
             context.SaveChangesAsync();
         }
 
-        public void Update(T obj)
+        public void Update(MedicineLog obj)
         {
             data.Update(obj);
             Save();
@@ -92,7 +94,7 @@ namespace PainTrackerPT.Repository
 
         public void Delete(int? id)
         {
-            T obj = data.Find(id);
+            MedicineLog obj = data.Find(id);
             data.Remove(obj);
             Save();
             

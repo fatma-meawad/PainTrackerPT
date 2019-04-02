@@ -7,66 +7,66 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Services
 {
-    public class MedicineService<T> : IMedicineService<T> where T: class
+    public class MedicineService : IMedicineService//<T> where T: class
     {
-        private readonly IMedicineLog<T> _medLog;
-        private readonly IMedicineLog<MedicineEvent> _medEvent;
-        private readonly IMedicineLog<MedicineLog> _medData;
+        private readonly IMedicineLog _medLog;
+       // private readonly IMedicineLog<MedicineEvent> _medEvent;
+       // private readonly IMedicineLog<MedicineLog> _medData;
 
 
-        public MedicineService(IMedicineLog<T> medLog, IMedicineLog<MedicineEvent> medEvent, IMedicineLog<MedicineLog> medData)
+        public MedicineService(IMedicineLog medLog)//, IMedicineLog<MedicineEvent> medEvent, IMedicineLog<MedicineLog> medData)
         {
             _medLog = medLog;
-            _medEvent = medEvent;
-            _medData = medData;
+            //_medEvent = medEvent;
+            //_medData = medData;
         }
 
-        public IEnumerable<T> SelectAll()
+        public IEnumerable<MedicineLog> SelectAll()
         {
             return _medLog.SelectAll();
         }
 
-        public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
-        {           
-            return _medData.GetMedicineEventList(medID, eventID);
-        }
+        //public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
+        //{
+        //    return _medLog.GetMedicineEventList(medID, eventID);
+        //}
 
-        public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
-        {           
-            return _medData.GetMedicineEventLogList(eventID);
-        }
+        //public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
+        //{
+        //    return _medLog.GetMedicineEventLogList(eventID);
+        //}
 
-        public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
+        //public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
+        //{
+        //    return _medLog.SelectMedEventById(medicineID);
+        //}
+
+        public IEnumerable<MedicineLog> SelectMedLogById(int patientID)
         {
-            return _medEvent.SelectMedEventById(medicineID);
+            return _medLog.SelectMedLogById(patientID);
         }
 
-        public IEnumerable<MedicineLog> SelectMedLogById(int patientID, int medicineID)
-        {
-            return _medData.SelectMedLogById(patientID, medicineID);
-        }
-
-        public void Insert(T obj)
+        public void Insert(MedicineLog obj)
         {
             _medLog.Insert(obj);
         }
 
-        public T GetLogAt(DateTime dt)    
+        public MedicineLog GetLogAt(DateTime dt)    
         {
             return _medLog.GetLogAt(dt);
         }
 
-        public T GetLogFromTo(DateTime start_dt, DateTime end_dt)
+        public MedicineLog GetLogFromTo(DateTime start_dt, DateTime end_dt)
         {
             throw new NotImplementedException();
         }
 
-        public T SelectById(int? id)
+        public MedicineLog SelectById(int? id)
         {
             return _medLog.SelectById(id);
         }
 
-        public void Update(T obj)
+        public void Update(MedicineLog obj)
         {
              _medLog.Update(obj);
         }

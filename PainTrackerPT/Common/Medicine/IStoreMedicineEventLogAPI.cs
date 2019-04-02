@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PainTrackerPT.Common.Medicine
 {
     public interface IStoreMedicineEventLogAPI
-    {
+    {        
         void StoreEventLog(MedicineEventLog eventLog);        
     }
 }

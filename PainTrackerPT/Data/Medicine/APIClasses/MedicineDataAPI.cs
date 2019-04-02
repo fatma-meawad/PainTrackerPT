@@ -7,18 +7,24 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Data.Medicine.APIClasses
 {
-    public class MedicineDataAPI : IMedicineDataAPI
+    public class MedicineDataAPI 
     {
-        private readonly IMedicineService<MedicineLog> _medService;
+        private readonly IMedicineService _medService;
 
-        public MedicineDataAPI(IMedicineService<MedicineLog> medService)
+        public MedicineDataAPI()
+        {
+       
+        }
+
+        //uses dependency injection so that no initalisation in this class is needed
+        public MedicineDataAPI(IMedicineService medService)
         {
             _medService = medService;
         }
 
-        public IEnumerable<MedicineLog> GetMedicine(int patientID, int medicineID)
+        public IEnumerable<MedicineLog> GetMedicine(int patientID)
         {
-            return _medService.SelectMedLogById(patientID, medicineID); 
+            return _medService.SelectMedLogById(patientID);
         }
 
     }

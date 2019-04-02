@@ -15,6 +15,9 @@ using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Services;
 using PainTrackerPT.Repository;
 using PainTrackerPT.Data.Medicine.APIClasses;
+using PainTrackerPT.Interfaces.Medicine;
+using PainTrackerPT.Data.Medicine.Repositories;
+using PainTrackerPT.Services.Medicine;
 
 namespace PainTrackerPT
 {
@@ -42,17 +45,19 @@ namespace PainTrackerPT
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddDbContext<PainTrackerPTContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PainTrackerPTContext")));  
+                    options.UseSqlServer(connectionString: Configuration.GetConnectionString("PainTrackerPTContext")));  
             //.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
 
             // Just for testing use the in memory database but in real testing, create  your own one.
             //options.UseInMemoryDatabase("PainTrackerPTContext"));
 
-            services.AddScoped(typeof(IMedicineLog<>), typeof(MedicineRepository<>));
-            services.AddScoped(typeof(IMedicineService<>), typeof(MedicineService<>));
-            services.AddScoped(typeof(IMedicineIntakeEventAPI), typeof(MedicineIntakeEventAPI));
-            services.AddScoped(typeof(IMedicineDataAPI), typeof(MedicineDataAPI));
-            services.AddScoped<PainTrackerPTContext>(db => new PainTrackerPTContext());
+            services.AddScoped<IMedicineEventRepository, MedicineEventRepository>();
+            services.AddScoped<IMedicineService, MedicineService>();
+            services.AddScoped<IMedicineEventService, MedicineEventService>();
+            services.AddScoped<IMedicineLog,MedicineRepository>();
+            //services.AddScoped(typeof(IMedicineIntakeEventAPI), typeof(MedicineIntakeEventAPI));
+            //services.AddScoped(typeof(IMedicineDataAPI), typeof(MedicineDataAPI));
+            //services.Add<PainTrackerPTContext>(db => new PainTrackerPTContext());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

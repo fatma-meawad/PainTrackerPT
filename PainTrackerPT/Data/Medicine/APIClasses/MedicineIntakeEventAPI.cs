@@ -1,4 +1,5 @@
 ﻿using PainTrackerPT.Common.Medicine;
+using PainTrackerPT.Interfaces.Medicine;
 using PainTrackerPT.Models.Medicine;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Data.Medicine.APIClasses
 {
-    public class MedicineIntakeEventAPI : IMedicineIntakeEventAPI
+    public class MedicineIntakeEventAPI
     {
-        private readonly IMedicineService<MedicineEvent> _medService;
-        
-        public MedicineIntakeEventAPI(IMedicineService<MedicineEvent> medService)
+        private readonly IMedicineEventService _medService;
+
+        //uses dependency injection so that no initalisation in this class is needed
+        public MedicineIntakeEventAPI(IMedicineEventService medService)
         {
             _medService = medService;
         }

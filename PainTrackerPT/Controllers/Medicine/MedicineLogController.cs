@@ -14,22 +14,22 @@ using PainTrackerPT.Common.Medicine;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
 using PainTrackerPT.Models.Medicine;
+using System.Web;
 
 namespace PainTrackerPT.Controllers.Medicine
 {
     public class MedicineLogController : Controller
     {
-        private readonly IMedicineService<MedicineLog> _medService;
-        private readonly IHostingEnvironment _environment;
+        private readonly IMedicineService _medService;   
         //private readonly IMediaService _mediaService;
         private MedicineLog _medLog;
         //private Media _media;
 
-        public MedicineLogController(IMedicineService<MedicineLog> medService, IHostingEnvironment IHostingEnvironment)//, IMediaService mediaService)
+        public MedicineLogController(IMedicineService medService)//, IHostingEnvironment IHostingEnvironment)//, IMediaService mediaService)
         {
             //_mediaService = mediaService;
             _medService = medService;
-            _environment = IHostingEnvironment;
+            //_environment = IHostingEnvironment;
         }
               
         
@@ -43,8 +43,7 @@ namespace PainTrackerPT.Controllers.Medicine
         //GET: MedicineLogs
         public IActionResult Index()
         {
-            //return View(_medService.SelectAll());
-            return View(_medService.SelectMedLogById(1, 1));
+            return View(_medService.SelectAll());           
         }
 
         // GET: MedicineLogs/Create
@@ -64,7 +63,7 @@ namespace PainTrackerPT.Controllers.Medicine
         {
             if (ModelState.IsValid)
             {
-                medicineLog.MedGuid = Guid.NewGuid();
+                medicineLog.MedGuid = Guid.NewGuid();               
                 //createImage(medicineLog.Img);
                 _medService.Insert(medicineLog);
 
@@ -149,45 +148,6 @@ namespace PainTrackerPT.Controllers.Medicine
         {
             return null;
         }
-
-        public void createImage(string filename)
-        {
-            var newFileName = string.Empty;            
-            var fileName = string.Empty;
-            string PathDB = string.Empty;
-
-            var files = HttpContext.Request.Form.Files;
-
-            foreach (var file in files)
-            {
-                if (file.Length > 0)
-                {
-                    //Getting FileName
-                    fileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-
-                    //Assigning Unique Filename (Guid)
-                    var myUniqueFileName = Convert.ToString(Guid.NewGuid());
-
-                    //Getting file Extension
-                    var FileExtension = Path.GetExtension(fileName);
-
-                    // concating  FileName + FileExtension
-                    newFileName = myUniqueFileName + FileExtension;
-
-                    // Combines two strings into a path.
-                    fileName = Path.Combine(_environment.WebRootPath, "demoImages") + $@"\{newFileName}";
-
-                    // if you want to store path of folder in database
-                    PathDB = "demoImages/" + newFileName;
-
-                    using (FileStream fs = System.IO.File.Create(fileName))
-                    {
-                        file.CopyTo(fs);
-                        fs.Flush();
-                    }
-                }
-            }
-                
-        }
+     
     }
 }
