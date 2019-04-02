@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PainTrackerPT.Migrations
 {
-    public partial class FollowUp2 : Migration
+    public partial class DeleteMapperTest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,10 @@ namespace PainTrackerPT.Migrations
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    QuestionId = table.Column<long>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    DateGenerated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -169,7 +172,7 @@ namespace PainTrackerPT.Migrations
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FollowUpId = table.Column<long>(nullable: false),
-                    Description = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
                     DateGenerated = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<PainTrackerPT.Models.Followups.Answer>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Answers for Question #" + ViewBag.Id;
 }
 
-<h1>Index</h1>
+<h1>List of Answers for Question # @ViewBag.Id</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Add New Answer</a>
 </p>
 <table class="table">
     <thead>

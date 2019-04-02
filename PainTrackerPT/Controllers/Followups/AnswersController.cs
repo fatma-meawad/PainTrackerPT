@@ -24,6 +24,7 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: Answers
         public async Task<IActionResult> Index(int id)
         {
+            ViewBag.Id = id;
             return View(await ((AnswerService)_answerService).SelectAllByFollowUpId(id));
         }
 
@@ -50,7 +51,7 @@ namespace PainTrackerPT.Controllers.Followups
             ViewBag.id = id;
             return View();
         }
-        
+
 
         // POST: Answers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -76,6 +77,7 @@ namespace PainTrackerPT.Controllers.Followups
                 return NotFound();
             }
 
+            ViewBag.Id = id;
             var answer = await _answerService.Select(id.Value);
             if (answer == null)
             {
@@ -89,8 +91,9 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Answer answer)
+        public async Task<IActionResult> Edit(int id, [Bind("Description, Id")] Answer answer)
         {
+            Answer oldAnswer = await _answerService.Select(id);
             if (id != answer.Id)
             {
                 return NotFound();
@@ -100,7 +103,8 @@ namespace PainTrackerPT.Controllers.Followups
             {
                 try
                 {
-                    _answerService.Update(answer);
+                    oldAnswer.Description = answer.Description;
+                    _answerService.Update(oldAnswer);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -113,7 +117,7 @@ namespace PainTrackerPT.Controllers.Followups
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = oldAnswer.QuestionId });
             }
             return View(answer);
         }

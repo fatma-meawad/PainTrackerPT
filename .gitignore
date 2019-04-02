@@ -278,3 +278,5 @@ PainTrackerPT/Migrations/20190401130546_InitialCreate.Designer.cs
 PainTrackerPT/Migrations/20190401130711_FollowUpInit.cs
 PainTrackerPT/Migrations/20190401130711_FollowUpInit.Designer.cs
 PainTrackerPT/Migrations/PainTrackerPTContextModelSnapshot.cs
+PainTrackerPT/Migrations/20190402082208_Initial.Designer.cs
+PainTrackerPT/Migrations/20190402082208_Initial.cs

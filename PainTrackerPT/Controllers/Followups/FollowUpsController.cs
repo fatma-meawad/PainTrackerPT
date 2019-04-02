@@ -65,6 +65,7 @@ namespace PainTrackerPT.Controllers.Followups
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PatientId,DoctorId,State,Description,DateGenerated,Id")] FollowUp followUp)
         {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (ModelState.IsValid)
             {
                 _followUpService.Create(followUp);

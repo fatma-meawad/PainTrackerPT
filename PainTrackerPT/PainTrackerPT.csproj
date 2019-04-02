@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Followups\DatabaseConfiguration\" />
     <Folder Include="Views\PainDairies\" />
     <Folder Include="Migrations\" />
   </ItemGroup>

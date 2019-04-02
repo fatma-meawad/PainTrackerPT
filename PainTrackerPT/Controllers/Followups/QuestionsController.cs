@@ -41,6 +41,7 @@ namespace PainTrackerPT.Controllers.Followups
             }
 
             Question question = await _questionService.Select(id.Value);
+            ViewBag.id = question.FollowUpId;
             if (question == null)
             {
                 return NotFound();
@@ -86,6 +87,7 @@ namespace PainTrackerPT.Controllers.Followups
             }
 
             var question = await _questionService.Select(id.Value);
+            ViewBag.id = question.FollowUpId;
             if (question == null)
             {
                 return NotFound();
@@ -100,6 +102,7 @@ namespace PainTrackerPT.Controllers.Followups
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Int64 id, [Bind("Description,DateGenerated,Id")] Question question)
         {
+            Question oldQns = await _questionService.Select(id);
             if (id != question.Id)
             {
                 return NotFound();
@@ -109,7 +112,9 @@ namespace PainTrackerPT.Controllers.Followups
             {
                 try
                 {
-                    _questionService.Update(question);
+                    oldQns.DateGenerated = question.DateGenerated;
+                    oldQns.Description = question.Description;
+                    _questionService.Update(oldQns);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -122,7 +127,7 @@ namespace PainTrackerPT.Controllers.Followups
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), routeValues: new { id = oldQns.FollowUpId });
             }
             return View(question);
         }
@@ -136,6 +141,7 @@ namespace PainTrackerPT.Controllers.Followups
             }
 
             var question = await _questionService.Select(id.Value);
+            ViewBag.id = question.FollowUpId;
             if (question == null)
             {
                 return NotFound();
