@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Data.Followups;
 using PainTrackerPT.Data.Followups.Repository;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Followups;
@@ -21,9 +22,9 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Recommendations
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View(await _recommendationService.SelectAll());
+            return View(await ((RecommendationService)_recommendationService).SelectAllByAnswerId(id));
         }
 
         // GET: Recommendations/Details/5

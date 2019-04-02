@@ -21,10 +21,9 @@ namespace PainTrackerPT.Data.Followups
         {
         }
 
-        public void Testing()
+        public async Task<IEnumerable<Advice>> SelectAllByAnswerId(Int64 answerId)
         {
-
+            return await ((AdviceRepository)_baseRepository).SelectAllByAnswerId(answerId);
         }
-        
     }
 }

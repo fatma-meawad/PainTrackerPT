@@ -12,6 +12,12 @@ namespace PainTrackerPT.Data.Followups
 
         public MediaService(IBaseRepository<Media> baseRepository): base(baseRepository)
         {       
+
         }
+        public async Task<IEnumerable<Media>> SelectAllByAnswerId(Int64 answerId)
+        {
+            return await ((MediaRepository)_baseRepository).SelectAllByAnswerId(answerId);
+        }
+
     }
 }

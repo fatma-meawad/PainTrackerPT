@@ -14,5 +14,10 @@ namespace PainTrackerPT.Data.Followups
     public class RecommendationRepository : BaseRepository<Recommendation>
     {
         public RecommendationRepository(PainTrackerPTContext db) : base(db) {}
+        public async Task<IEnumerable<Recommendation>> SelectAllByAnswerId(Int64 answerId)
+        {
+            return await _dbSet.Where(q => q.AnswerId == answerId).ToListAsync();
+        }
     }
+
 }

@@ -18,5 +18,10 @@ namespace PainTrackerPT.Data.Followups
     public class MediaRepository : BaseRepository<Media>
     {
         public MediaRepository(PainTrackerPTContext db) : base(db) { }
+
+        public async Task<IEnumerable<Media>> SelectAllByAnswerId(Int64 answerId)
+        {
+            return await _dbSet.Where(q => q.AnswerId == answerId).ToListAsync();
+        }
     }
 }

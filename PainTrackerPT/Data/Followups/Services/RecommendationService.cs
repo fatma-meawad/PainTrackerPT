@@ -19,6 +19,10 @@ namespace PainTrackerPT.Data.Followups
         // TODO: DI THIS
         public RecommendationService(IBaseRepository <Recommendation> baseRepository) : base(baseRepository)
         {
-        }         
+        }
+        public async Task<IEnumerable<Recommendation>> SelectAllByAnswerId(Int64 answerId)
+        {
+            return await ((RecommendationRepository)_baseRepository).SelectAllByAnswerId(answerId);
+        }
     }
 }

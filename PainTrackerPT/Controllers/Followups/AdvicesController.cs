@@ -23,9 +23,9 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Advices
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View(await _adviceService.SelectAll());
+            return View(await ((AdviceService)_adviceService).SelectAllByAnswerId(id));
         }
 
         // GET: Advices/Details/5
