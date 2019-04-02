@@ -25,9 +25,13 @@
         </div>
         -->
             <div class="form-group">
-                <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
-                <span asp-validation-for="State" class="text-danger"></span>
+                <select asp-for="PatientId" class="form-control">
+                    <option value="1">Samuel Toh</option>
+                    <option value="2">Nicholas Toh</option>
+                    <option value="3">Cheryl Toh</option>
+                    <option value="4">Toh Yan Tian </option>
+                    <option value="5">Toh Hong Mao</option>
+                </select>
             </div>
         <div class="form-group">
             <label asp-for="Description" class="control-label"></label>

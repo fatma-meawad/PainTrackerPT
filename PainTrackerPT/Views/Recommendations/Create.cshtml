@@ -1,12 +1,17 @@
-﻿@model PainTrackerPT.Models.Followups.Recommendation
+﻿@using PainTrackerPT.Models.Followups
+@model PainTrackerPT.Models.Followups.Recommendation
 
 @{
     ViewData["Title"] = "Create";
-}
+    int id = ViewBag.id;
 
+    Recommendation recommendation = new Recommendation();
+    recommendation.AnswerId = id;
+
+}
 <h1>Create</h1>
 
-<h4>Recommendation</h4>
+<h4>Adding Recommendation to answer @recommendation.AnswerId  </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">

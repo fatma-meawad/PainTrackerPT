@@ -1,12 +1,18 @@
-﻿@model PainTrackerPT.Models.Followups.Advice
+﻿@using PainTrackerPT.Models.Followups
+@model PainTrackerPT.Models.Followups.Advice
 
 @{
-    ViewData["Title"] = "Create";
-}
 
+    ViewData["Title"] = "Create";
+    int id = ViewBag.id;
+
+    Advice advice = new Advice();
+    advice.AnswerId = id;
+
+}
 <h1>Create</h1>
 
-<h4>Advice</h4>
+<h4>Adding advice to answer @advice.AnswerId </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">

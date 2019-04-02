@@ -1,12 +1,17 @@
-﻿@model PainTrackerPT.Models.Followups.Media
+﻿@using PainTrackerPT.Models.Followups
+@model PainTrackerPT.Models.Followups.Media
 
 @{
     ViewData["Title"] = "Create";
-}
+    int id = ViewBag.id;
 
+    Media media = new Media();
+    media.AnswerId = id;
+
+}
 <h1>Create</h1>
 
-<h4>Media</h4>
+<h4>Adding Recommendation to answer @media.AnswerId  </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">

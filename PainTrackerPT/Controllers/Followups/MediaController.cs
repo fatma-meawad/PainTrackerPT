@@ -46,8 +46,10 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Media/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            ViewBag.id = id;
+
             return View();
         }
 
@@ -56,10 +58,11 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnswerId,MediaUrl,Id")] Media media)
+        public async Task<IActionResult> Create(int id, [Bind("AnswerId,MediaUrl,Id")] Media media)
         {
             if (ModelState.IsValid)
             {
+                media.AnswerId = id;
                 _mediaService.Create(media);
                 return RedirectToAction(nameof(Index));
             }

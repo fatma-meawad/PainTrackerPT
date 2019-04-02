@@ -61,6 +61,7 @@ namespace PainTrackerPT.Controllers.Followups
         {
             if (ModelState.IsValid)
             {
+                answer.QuestionId = id;
                 _answerService.Create(answer);
                 return RedirectToAction(nameof(Index), routeValues: new { id = answer.QuestionId });
             }

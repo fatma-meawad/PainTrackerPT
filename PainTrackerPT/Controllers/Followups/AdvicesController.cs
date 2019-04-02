@@ -46,8 +46,10 @@ namespace PainTrackerPT.Controllers.Followups
         }
 
         // GET: Advices/Create
-        public IActionResult Create()
+        public IActionResult Create(int id)
         {
+            ViewBag.id = id;
+        
             return View();
         }
 
@@ -56,10 +58,11 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AnswerId,Description,DateGenerated,Id")] Advice advice)
+        public async Task<IActionResult> Create(int id, [Bind("AnswerId,Description,DateGenerated,Id")] Advice advice)
         {
             if (ModelState.IsValid)
             {
+                advice.AnswerId = id;
                 _adviceService.Create(advice);
                 return RedirectToAction(nameof(Index));
             }
