@@ -24,6 +24,7 @@ namespace PainTrackerPT.Controllers.Followups
         // GET: Answers
         public async Task<IActionResult> Index(int id)
         {
+            ViewBag.Id = id;
             return View(await ((AnswerService)_answerService).SelectAllByFollowUpId(id));
         }
 
@@ -50,7 +51,7 @@ namespace PainTrackerPT.Controllers.Followups
             ViewBag.id = id;
             return View();
         }
-        
+
 
         // POST: Answers/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -89,7 +90,7 @@ namespace PainTrackerPT.Controllers.Followups
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] Answer answer)
+        public async Task<IActionResult> Edit(int id, [Bind("Description, Id")] Answer answer)
         {
             if (id != answer.Id)
             {
@@ -113,7 +114,7 @@ namespace PainTrackerPT.Controllers.Followups
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = answer.QuestionId });
             }
             return View(answer);
         }
