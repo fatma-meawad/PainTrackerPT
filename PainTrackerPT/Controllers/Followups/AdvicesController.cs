@@ -143,8 +143,9 @@ namespace PainTrackerPT.Controllers.Followups
         public async Task<IActionResult> DeleteConfirmed(Int64 id)
         {
             var advice = await _adviceService.Select(id);
+            int answerId = (int) advice.AnswerId;
             _adviceService.Delete(id);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), routeValues: new { id = answerId });
         }
 
         private bool AdviceExists(Int64 id)
