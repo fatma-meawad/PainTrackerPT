@@ -3,14 +3,17 @@
     ViewData["Title"] = "PatientTrend";
 
 }
+
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+<script src="https://www.chartjs.org/samples/latest/utils.js"></script>
 <script type="text/javascript">
 </script>
 
 <br /><br />
-<h1 class="mx-4">PatientTrend</h1>
+<h1 class="mx-4">Patient Trends</h1>
 
+<!--begin::Filter buttons-->
 <div class="mx-5" style="float:right;">
     <div class="m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" m-dropdown-toggle="hover" aria-expanded="true">
         <a href="#" class="m-portlet__nav-link btn btn-lg btn-secondary  m-btn m-btn--outline-2x m-btn--air m-btn--icon m-btn--icon-only m-btn--pill  m-dropdown__toggle">
@@ -41,6 +44,12 @@
                                     <span class="m-nav__link-text">Month</span>
                                 </a>
                             </li>
+                            <li class="m-nav__item" onclick="showWeek()">
+                                <a href="#" class="m-nav__link">
+                                    <i class="m-nav__link-icon flaticon-calendar-1"></i>
+                                    <span class="m-nav__link-text">Week</span>
+                                </a>
+                            </li>
                             <li class="m-nav__item">
                                 <a href="#" class="m-nav__link" onclick="showDay()">
                                     <i class="m-nav__link-icon flaticon-calendar-3"></i>
@@ -54,7 +63,8 @@
         </div>
     </div>
 </div>
-
+<!--end::Filter buttons-->
+<!--begin::Graph buttons-->
 <div class="box-body px-4">
 
     <div class="chart-container" style="height:500px">
@@ -62,44 +72,160 @@
     </div>
 
     <br />
-
-    <div style="width:100%; text-align:center; margin-top:50px;margin-bottom:50px;">
+    <div style="width:100%; text-align:center; margin-top:50px;">
         <div class="btn-group btn-group" role="group">
-            <button id="moodBtn" type="button" class="btn btn-secondary" onclick="setXAxis()">Pain Intensity</button>
-            <button type="button" class="btn btn-secondary">Sleep</button>
-            <button type="button" class="btn btn-secondary">Mood</button>
-            <button type="button" class="btn btn-secondary">Interference</button>
+            <button id="moodBtn" type="button" class="btn btn-secondary" onclick="togglePainIntensity()">Pain Intensity</button>
+            <button type="button" class="btn btn-secondary" onclick="toggleMood()">Mood</button>
+            <button type="button" class="btn btn-secondary" onclick="toggleSleep()">Sleep</button>
+            <button type="button" class="btn btn-secondary" onclick="toggleInterference()">Interference</button>
         </div>
     </div>
-    <table class="table">
-        <tbody></tbody>
-        <thead>
-            <tr>
-                <th>
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-    </table>
+</div>
+<!--end::Graph buttons-->
+<div class="m-content">
+    <!--begin::Rows1-->
+    <div class="row">
+        <!--begin::Left column-->
+        <div class="col-xl-6">
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Overall Pain Areas
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <!--begin::Pain Area Section-->
+                    <div class="m-section__content">
+                        <span>Below is an analysis of your overall pain areas over your body</span><br />
+                        <div id="canvas-holder" style="width:100%">
+                            <canvas id="painAreaPie"></canvas>
+                        </div>
+                    </div>
+                    <!--end::Pain Area Section-->
+                </div>
+            </div>
+        </div>
+        <!--end::Left column-->
+        <!--begin::Right column-->
+        <div class="col-xl-6">
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Overall Interference Patterns
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
 
+                    <!--begin::Section-->
+                    <div class="m-section">
+                        <div class="m-section__content">
+
+                            @*@foreach (var d in ViewBag.InterferenceRows)
+                            {
+                            <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Description - </strong>@d.Key<br />
+                                <strong>Duration - </strong>@d.Value hour(s)
+                            </div>
+
+                            }*@
+
+                        </div>
+                    </div>
+                    <!--end::Section-->
+                </div>
+            </div>
+        </div>
+        <!--end::Right column-->
+    </div>
+    <!--end::Rows1-->
+    <!--begin::Rows2-->
+    <div class="row">
+        <!--begin::Left column-->
+        <div class="col-xl-6">
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Overall Pain Areas
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+                    <!--begin::Pain Area Section-->
+                    <div class="m-section__content">
+                        <span>Below is an analysis of your overall pain areas over your body</span><br />
+                        <div id="canvas-holder" style="width:100%">
+                            <canvas id="moodDoughnut"></canvas>
+                        </div>
+                    </div>
+                    <!--end::Pain Area Section-->
+                </div>
+            </div>
+        </div>
+        <!--end::Left column-->
+        <!--begin::Right column-->
+        <div class="col-xl-6">
+            <div class="m-portlet">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-caption">
+                        <div class="m-portlet__head-title">
+                            <h3 class="m-portlet__head-text">
+                                Overall Interference
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-portlet__body">
+
+                    <!--begin::Section-->
+                    <div class="m-section">
+                        <div class="m-section__content">
+                            @*@foreach (var d in ViewBag.SleepRows)
+                            {
+                                <div class="m-alert m-alert--outline alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>Comfort Level - </strong>@d.Key<br />
+                                    <strong>Tiredness - </strong>@d.Value
+                                </div>
+
+                            }*@
+                        </div>
+                    </div>
+                    <!--end::Section-->
+                </div>
+            </div>
+        </div>
+        <!--end::Right column-->
+    </div>
+    <!--end::Rows2-->
 </div>
 
 <script>
-    function toDate(dateStr) {
-        var empty = dateStr.split(" ");
-        var parts = empty[0].split("-");
-        return (parts[1] + "-" + parts[0] + "-" + parts[2] + " " + empty[1] +" AM");
-    }
+
+    /**
+        * List variables
+        * Razor function to call from controller to populate empty list
+    **/
+
     var painIntensityData = [];
     var moodData = [];
     var sleepData = [];
+    var interferenceData = [];
 
     @foreach (var d in ViewBag.PainIntensityPlots)
     {
         @:var dicDate = '@d.Key';
         @:dicDate = dicDate.replace(/\//g, '-');
         @:painIntensityData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
-        @:alert(dicDate);
     }
 
     @foreach (var d in ViewBag.MoodPlots)
@@ -109,13 +235,28 @@
         @:moodData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
     }
 
+    @foreach (var d in ViewBag.SleepPlots)
+    {
+        @:var dicDate = '@d.Key';
+        @:dicDate = dicDate.replace(/\//g, '-');
+        @:sleepData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
+    }
+
+    @foreach (var d in ViewBag.InterferencePlots)
+    {
+        @:var dicDate = '@d.Key';
+        @:dicDate = dicDate.replace(/\//g, '-');
+        @:interferenceData.push({ x: new Date(toDate(dicDate)), y: '@d.Value' });
+    }
 
     //Set canvas of graph
     var ctx = document.getElementById("chart").getContext("2d");
+
     //Date for range of graph
     var startDate = new Date();
     var tempDate = new Date();
     var endDate = new Date(tempDate.setTime(tempDate.getTime() + 6 * 86400000));
+
     //Define dataset
     var data = {
         datasets: [
@@ -128,6 +269,7 @@
                 backgroundColor: 'rgba(244, 86, 66, 0.2)',
                 borderColor:'rgba(244, 86, 66,1)',
                 borderWidth: 1,
+                hidden: false,
                 data: painIntensityData
             },
             /**
@@ -141,6 +283,30 @@
                 borderWidth: 1,
                 hidden: true,
                 data: moodData
+            },
+            /**
+                * Dataset 3 - Sleep
+                * X value = Date, Y = Sleep hours
+            **/
+            {
+                label: "Sleep",
+                backgroundColor: 'rgba(235, 86, 255, 0.2)',
+                borderColor: 'rgba(235, 86, 255, 1)',
+                borderWidth: 1,
+                hidden: true,
+                data: sleepData
+            },
+            /**
+                * Dataset 4 - Interference
+                * X value = Date, Y = Interference Severity
+            **/
+            {
+                label: "Interference",
+                backgroundColor: 'rgba(52, 249, 249, 0.2)',
+                borderColor: 'rgba(52, 249, 249, 1)',
+                borderWidth: 1,
+                hidden: true,
+                data: interferenceData
             }
         ]
     };
@@ -184,17 +350,140 @@
         data: data,
         type: 'line'
     });
+
+
+
+    /**
+     * All the pie charts configurations are placed here
+     * (1 - PAIN AREA)
+     * */
+
+    var painAreaDataLabel = [];
+    var painAreaData = [];
+
+    @*@foreach (var d in ViewBag.PainAreaPie)
+    {
+        @:painAreaDataLabel.push('@d.Key');
+        @:painAreaData.push(@d.Value);
+    }*@
+
+    // Pie for overall pain areas
+    var painAreaPieConfig = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: painAreaData,
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                    window.chartColors.blue,
+                ],
+                label: 'Overall Pain Area'
+            }],
+            labels: painAreaDataLabel
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+    /**
+     * All the pie charts configurations are placed here
+     * (2 - MOOD)
+     * */
+
+    var moodDataLabel = [];
+    var moodData = [];
+
+    @*@foreach (var d in ViewBag.MoodDoughnut)
+    {
+        @:moodDataLabel.push('@d.Key');
+        @:moodData.push(@d.Value);
+    }*@
+
+    // Pie for overall pain areas
+    var moodDoughnutConfig = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: painAreaData,
+                backgroundColor: [
+                    window.chartColors.red,
+                    window.chartColors.orange,
+                    window.chartColors.yellow,
+                    window.chartColors.green,
+                    window.chartColors.blue,
+                ],
+                label: 'Overall Mood'
+            }],
+            labels: moodDataLabel
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+    window.onload = function () {
+        var painAreaPie = document.getElementById('painAreaPie').getContext('2d');
+        window.myPie = new Chart(painAreaPie, painAreaPieConfig);
+
+        var moodDoughnut = document.getElementById('moodDoughnut').getContext('2d');
+        window.myPie = new Chart(moodDoughnut, moodDoughnutConfig);
+    };
+
+    function toDate(dateStr) {
+        var empty = dateStr.split(" ");
+        var parts = empty[0].split("-");
+        return (parts[1] + "-" + parts[0] + "-" + parts[2] + " " + empty[1] + " AM");
+    }
+
     function showDay() {
         myChart.options.scales.xAxes[0].time.unit = 'day';
+        myChart.options.scales.xAxes[0].time.min = new Date("04-01-2019");
+        myChart.options.scales.xAxes[0].time.max = new Date("04-31-2019");
         myChart.update();
     }
+
     function showMonth() {
         myChart.options.scales.xAxes[0].time.unit = 'month';
+        myChart.options.scales.xAxes[0].time.min = new Date("01-01-2019");
+        myChart.options.scales.xAxes[0].time.max = new Date("12-31-2019");
         myChart.update();
     }
+
+    function showWeek() {
+        myChart.options.scales.xAxes[0].time.unit = 'week';
+        myChart.options.scales.xAxes[0].time.min = startDate;
+        myChart.options.scales.xAxes[0].time.max = endDate;
+        myChart.update();
+    }
+
     function showYear() {
         myChart.options.scales.xAxes[0].time.unit = 'year';
         myChart.options.scales.xAxes[0].time.min = new Date("01-01-2019");
         myChart.update();
     }
+
+    function togglePainIntensity() {
+        myChart.data.datasets[0].hidden = !myChart.data.datasets[0].hidden;
+        myChart.update();
+    }
+
+    function toggleMood() {
+        myChart.data.datasets[1].hidden = !myChart.data.datasets[1].hidden;
+        myChart.update();
+    }
+
+    function toggleSleep() {
+        myChart.data.datasets[2].hidden = !myChart.data.datasets[2].hidden;
+        myChart.update();
+    }
+
+    function toggleInterference() {
+        myChart.data.datasets[3].hidden = !myChart.data.datasets[3].hidden;
+        myChart.update();
+    }
+
 </script>

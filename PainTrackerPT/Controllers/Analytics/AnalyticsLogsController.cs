@@ -44,7 +44,7 @@ namespace PainTrackerPT.Controllers
             //Plot SuperImposed Graph in view
             ViewBag.PainIntensityPlots = PainIntensityTrend.PlotGraph();
             ViewBag.InterferencePlots = InterferenceTrend.PlotGraph();
-            ViewBag.MoodPlots = InterferenceTrend.PlotGraph();
+            ViewBag.MoodPlots = MoodTrend.PlotGraph();
             ViewBag.SleepPlots = SleepTrend.PlotGraph();
             ViewBag.MedicineIntakePlots = MedicineIntakeTrend.PlotGraph();
 
