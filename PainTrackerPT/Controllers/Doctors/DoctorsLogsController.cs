@@ -7,34 +7,36 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.Doctors;
+using PainTrackerPT.Services.Doctors;
 
 namespace PainTrackerPT.Controllers.Doctors
 {
     public class DoctorsLogsController : Controller
     {
-        private readonly PainTrackerPTContext _context;
 
-        public DoctorsLogsController(PainTrackerPTContext context)
+        public IDoctorsLogServices DoctorsLogServices;
+
+
+        public DoctorsLogsController(IDoctorsLogServices _doctorsLogServices)
         {
-            _context = context;
+            DoctorsLogServices = _doctorsLogServices;
         }
 
         // GET: DoctorsLogs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.DoctorsLog.ToListAsync());
+            return View(DoctorsLogServices.SelectAll());
         }
 
         // GET: DoctorsLogs/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var doctorsLog = await _context.DoctorsLog
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var doctorsLog = DoctorsLogServices.SelectById(id);
             if (doctorsLog == null)
             {
                 return NotFound();
@@ -58,23 +60,21 @@ namespace PainTrackerPT.Controllers.Doctors
         {
             if (ModelState.IsValid)
             {
-                doctorsLog.Id = Guid.NewGuid();
-                _context.Add(doctorsLog);
-                await _context.SaveChangesAsync();
+                DoctorsLogServices.Insert(doctorsLog);
                 return RedirectToAction(nameof(Index));
             }
             return View(doctorsLog);
         }
 
         // GET: DoctorsLogs/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var doctorsLog = await _context.DoctorsLog.FindAsync(id);
+            var doctorsLog = DoctorsLogServices.SelectById(id);
             if (doctorsLog == null)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace PainTrackerPT.Controllers.Doctors
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Description,timeStamp")] DoctorsLog doctorsLog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,timeStamp")] DoctorsLog doctorsLog)
         {
             if (id != doctorsLog.Id)
             {
@@ -98,12 +98,12 @@ namespace PainTrackerPT.Controllers.Doctors
             {
                 try
                 {
-                    _context.Update(doctorsLog);
-                    await _context.SaveChangesAsync();
+                    DoctorsLogServices.Update(doctorsLog);
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!DoctorsLogExists(doctorsLog.Id))
+                    if (id != doctorsLog.Id)
                     {
                         return NotFound();
                     }
@@ -118,15 +118,14 @@ namespace PainTrackerPT.Controllers.Doctors
         }
 
         // GET: DoctorsLogs/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var doctorsLog = await _context.DoctorsLog
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var doctorsLog = DoctorsLogServices.SelectById(id);
             if (doctorsLog == null)
             {
                 return NotFound();
@@ -138,17 +137,16 @@ namespace PainTrackerPT.Controllers.Doctors
         // POST: DoctorsLogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var doctorsLog = await _context.DoctorsLog.FindAsync(id);
-            _context.DoctorsLog.Remove(doctorsLog);
-            await _context.SaveChangesAsync();
+
+            DoctorsLogServices.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DoctorsLogExists(Guid id)
+        private bool DoctorsLogExists(int id)
         {
-            return _context.DoctorsLog.Any(e => e.Id == id);
+            return (DoctorsLogServices.SelectById(id) != null);
         }
     }
 }
