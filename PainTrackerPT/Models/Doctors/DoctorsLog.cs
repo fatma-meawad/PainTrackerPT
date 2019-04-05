@@ -18,6 +18,6 @@ namespace PainTrackerPT.Models.Doctors
         [Display(Name = "Time Stamp")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime? TimeStamp { get; set; }
+        public DateTime timeStamp { get; set; }
     }
 }
