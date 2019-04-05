@@ -64,6 +64,8 @@ namespace PainTrackerPT
             //services.Add<PainTrackerPTContext>(db => new PainTrackerPTContext());
             services.AddScoped<IFollowupsLogsRepository, FollowupsRepository>();
             services.AddScoped<IFollowupsLogsService, FollowupsLogsService>();
+
+            services.AddTransient<UnitOfWork>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

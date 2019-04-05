@@ -7,148 +7,128 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PainTrackerPT.Models;
 using PainTrackerPT.Models.PainDiary;
+using PainTrackerPT.Services;
 
 namespace PainTrackerPT.Controllers.PainDiary
 {
     public class PainDiaryLogsController : Controller
     {
-        private readonly PainTrackerPTContext _context;
 
-        public PainDiaryLogsController(PainTrackerPTContext context)
+        public PainDiaryLogService PainDiaryLogService;
+
+        public PainDiaryLogsController(PainDiaryLogService painDiaryLogServices)
         {
-            _context = context;
+            PainDiaryLogService = painDiaryLogServices;
+        }
+        /*
+         * Entry Controller 
+         */
+
+        // GET: Entry
+        public ActionResult Index()
+        {
+
+            return View(PainDiaryLogService.Get());
         }
 
-        // GET: PainDiaryLogs
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.PainDiaryLog.ToListAsync());
-        }
-
-        // GET: PainDiaryLogs/Details/5
-        public async Task<IActionResult> Details(Guid? id)
+        // GET: Entry/Details/5
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var painDiaryLog = await _context.PainDiaryLog
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (painDiaryLog == null)
+            var pdl = PainDiaryLogService.GetByID(id);
+            if (pdl == null)
             {
                 return NotFound();
             }
 
-            return View(painDiaryLog);
+            return View(pdl);
         }
 
-        // GET: PainDiaryLogs/Create
-        public IActionResult Create()
+        // GET: Entry/Create
+        public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PainDiaryLogs/Create
+        // POST: Entry/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,timeStamp")] PainDiaryLog painDiaryLog)
+        public ActionResult Create(PainDiaryLog pdl)
         {
-            if (ModelState.IsValid)
+            try
             {
-                painDiaryLog.Id = Guid.NewGuid();
-                _context.Add(painDiaryLog);
-                await _context.SaveChangesAsync();
+                // Insert Logic here
+                PainDiaryLogService.Insert(pdl);
                 return RedirectToAction(nameof(Index));
             }
-            return View(painDiaryLog);
+            catch
+            {
+                return View();
+            }
         }
 
-        // GET: PainDiaryLogs/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        // GET: Entry/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var painDiaryLog = await _context.PainDiaryLog.FindAsync(id);
-            if (painDiaryLog == null)
+            var pdl = PainDiaryLogService.GetByID(id);
+            if (pdl == null)
             {
                 return NotFound();
             }
-            return View(painDiaryLog);
+
+            return View(pdl);
         }
 
-        // POST: PainDiaryLogs/Edit/5
+        // POST: Entry/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Description,timeStamp")] PainDiaryLog painDiaryLog)
+        public ActionResult Edit(int id, PainDiaryLog pdl)
         {
-            if (id != painDiaryLog.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(painDiaryLog);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PainDiaryLogExists(painDiaryLog.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                // Update logic here
+                PainDiaryLogService.Update(pdl);
                 return RedirectToAction(nameof(Index));
             }
-            return View(painDiaryLog);
+            return View(pdl);
         }
 
-        // GET: PainDiaryLogs/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        // GET: Entry/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var painDiaryLog = await _context.PainDiaryLog
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (painDiaryLog == null)
+            var pdl = PainDiaryLogService.GetByID(id);
+            if (pdl == null)
             {
                 return NotFound();
             }
 
-            return View(painDiaryLog);
+            return View(pdl);
         }
 
-        // POST: PainDiaryLogs/Delete/5
+        // POST: Entry/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public ActionResult Delete(int id)
         {
-            var painDiaryLog = await _context.PainDiaryLog.FindAsync(id);
-            _context.PainDiaryLog.Remove(painDiaryLog);
-            await _context.SaveChangesAsync();
+            // Delete logic here
+            PainDiaryLogService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PainDiaryLogExists(Guid id)
-        {
-            return _context.PainDiaryLog.Any(e => e.Id == id);
-        }
     }
 }
