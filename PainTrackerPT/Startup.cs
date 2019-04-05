@@ -10,13 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using PainTrackerPT.Common.Followups;
 using PainTrackerPT.Models;
 using PainTrackerPT.Common.Medicine;
+using PainTrackerPT.Data;
 using PainTrackerPT.Services;
 using PainTrackerPT.Repository;
 using PainTrackerPT.Data.Medicine.APIClasses;
 using PainTrackerPT.Interfaces.Medicine;
 using PainTrackerPT.Data.Medicine.Repositories;
+using PainTrackerPT.Services.Followup;
 using PainTrackerPT.Services.Medicine;
 
 namespace PainTrackerPT
@@ -59,6 +62,8 @@ namespace PainTrackerPT
             //services.AddScoped(typeof(IMedicineIntakeEventAPI), typeof(MedicineIntakeEventAPI));
             //services.AddScoped(typeof(IMedicineDataAPI), typeof(MedicineDataAPI));
             //services.Add<PainTrackerPTContext>(db => new PainTrackerPTContext());
+            services.AddScoped<IFollowupsLogsRepository, FollowupsRepository>();
+            services.AddScoped<IFollowupsLogsService, FollowupsLogsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

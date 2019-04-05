@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Common.Followups
 {
-    interface IFollowupssLog
+    interface IFollowupsLog
     {
         FollowupsLog GetLogAt(DateTime dt);
         FollowupsLog GetLogFromTo(DateTime start_dt, DateTime end_dt);
