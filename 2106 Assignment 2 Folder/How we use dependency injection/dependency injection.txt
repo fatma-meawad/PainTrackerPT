@@ -1,0 +1,5 @@
+services.AddScoped<IMedicineEventRepository, MedicineEventRepository>();
+services.AddScoped<IMedicineService, MedicineService>();
+services.AddScoped<IMedicineEventService, MedicineEventService>();
+services.AddScoped<IMedicineLog,MedicineRepository>();
+services.AddScoped<IMedicineFacade, MedicineFacade>();
