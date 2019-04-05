@@ -11,7 +11,7 @@
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
-                <h3 class="m-subheader__title ">View Event Log</h3>
+                <h3 class="m-subheader__title ">Event logs for @ViewBag.Name</h3>
             </div>
         </div>
     </div>
@@ -27,22 +27,11 @@
                         <div class="m-portlet__head-caption">
                             <div class="m-portlet__head-title">
                                 <h3 class="m-portlet__head-text">
-                                    Medicine Schedules
+                                    Event Logs
                                 </h3>
                             </div>
                         </div>
-                        <div class="m-portlet__head-tools">
-                            <ul class="m-portlet__nav">
-                                <li class="m-portlet__nav-item">
-                                    <a href="@Url.Action("Create")" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
-                                        <span>
-                                            <i class="la la-plus"></i>
-                                            <span>New record</span>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                      
                     </div>
                     <div class="m-portlet__body">
 
@@ -51,10 +40,10 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Dosage)
+                                        Number of dosage
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.CurrentTime)
+                                        Time taken
                                     </th>
                                 </tr>
                             </thead>

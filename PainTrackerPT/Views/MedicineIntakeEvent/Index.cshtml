@@ -9,7 +9,7 @@
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
-                <h3 class="m-subheader__title ">Medicine Schedules for @ViewBag.ID</h3>
+                <h3 class="m-subheader__title ">Medicine Schedules for @ViewBag.Name</h3>
             </div>
         </div>
     </div>
@@ -32,11 +32,12 @@
                         <div class="m-portlet__head-tools">
                             <ul class="m-portlet__nav">
                                 <li class="m-portlet__nav-item">
-                                    <a href="@Url.Action("Create")" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">
-                                        <span>
-                                            <i class="la la-plus"></i>
-                                            <span>New record</span>
-                                        </span>
+                                    @*<a href="@Url.Action("Create")" class="btn btn-accent m-btn m-btn--custom m-btn--pill m-btn--icon m-btn--air">*@
+                                    @Html.ActionLink("Create", "Create", "MedicineIntakeEvent", new { medID = ViewBag.ID, medName = ViewBag.Name })
+                                    <span>
+                                        <i class="la la-plus"></i>
+                                        <span>New Schedule</span>
+                                    </span>
                                     </a>
                                 </li>
                             </ul>
@@ -52,13 +53,13 @@
                                         @Html.DisplayNameFor(model => model.Dosage)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Intervals)
+                                        Number of intervals
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.NumOfRecurringTimes)
+                                        Number of Recurring times
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.StartTime)
+                                        Start Time
                                     </th>
                                     <th>
                                         Actions
@@ -84,9 +85,9 @@
                                                 @Html.DisplayFor(modelItem => item.StartTime)
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID }) |
-                                                @Html.ActionLink("View Event Log", "ViewEventLog", "MedicineIntakeEvent", new { id = @item.EventId }) |
-                                                @Html.ActionLink("Delete", "Delete", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID })
+                                                @Html.ActionLink("Edit", "Edit", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID, medName = ViewBag.Name }) |
+                                                @Html.ActionLink("View Event Log", "ViewEventLog", "MedicineIntakeEvent", new { id = @item.EventId, medName = ViewBag.Name }) |
+                                                @Html.ActionLink("Delete", "Delete", "MedicineIntakeEvent", new { id = @item.EventId, medID = ViewBag.ID, medName = ViewBag.Name })
                                             </td>
                                         </tr>
                                     }

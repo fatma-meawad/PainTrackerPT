@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Common.Medicine
 {
-    interface IMedicineFacade
+    public interface IMedicineFacade
     {
         //uses facade pattern which hides complex backend functions with just 1 interface for client to call
-        Dictionary<string, IEnumerable<MedicineEvent>> GetMedicineData(int patientID);
+        IDictionary<string, IEnumerable<MedicineEventLog>> GetMedicineData(int patientID);     
+
     }
 }

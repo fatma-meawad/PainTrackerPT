@@ -7,39 +7,19 @@ using System.Threading.Tasks;
 
 namespace PainTrackerPT.Services
 {
-    public class MedicineService : IMedicineService//<T> where T: class
+    public class MedicineService : IMedicineService
     {
-        private readonly IMedicineLog _medLog;
-       // private readonly IMedicineLog<MedicineEvent> _medEvent;
-       // private readonly IMedicineLog<MedicineLog> _medData;
+        private readonly IMedicineLog _medLog;   
 
-
-        public MedicineService(IMedicineLog medLog)//, IMedicineLog<MedicineEvent> medEvent, IMedicineLog<MedicineLog> medData)
+        public MedicineService(IMedicineLog medLog)
         {
-            _medLog = medLog;
-            //_medEvent = medEvent;
-            //_medData = medData;
+            _medLog = medLog;           
         }
 
         public IEnumerable<MedicineLog> SelectAll()
         {
             return _medLog.SelectAll();
-        }
-
-        //public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
-        //{
-        //    return _medLog.GetMedicineEventList(medID, eventID);
-        //}
-
-        //public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
-        //{
-        //    return _medLog.GetMedicineEventLogList(eventID);
-        //}
-
-        //public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
-        //{
-        //    return _medLog.SelectMedEventById(medicineID);
-        //}
+        }        
 
         public IEnumerable<MedicineLog> SelectMedLogById(int patientID)
         {

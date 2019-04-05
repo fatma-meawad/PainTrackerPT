@@ -66,12 +66,13 @@
                                 <form asp-action="Delete">
                                     <input type="hidden" asp-for="EventId" value=@Model.EventId />
                                     <input type="hidden" asp-for="MedId" value=@Model.MedId />
+                                    <input type="hidden" name="medName" value=@ViewBag.Name />
                                     <input type="submit" value="Delete" class="btn btn-danger" />
                                 </form>
                             </div>
                         </div>
                         <br />
-                        @Html.ActionLink("Back Home", "Index", "MedicineIntakeEvent", new { id = @ViewBag.MedID })
+                        @Html.ActionLink("Back Home", "Index", "MedicineIntakeEvent", new { id = @Model.MedId, medName = ViewBag.Name })
                     </div>
                 </div>
             </div>

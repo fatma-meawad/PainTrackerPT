@@ -20,30 +20,26 @@ namespace PainTrackerPT.Controllers.Medicine
 {
     public class MedicineLogController : Controller
     {
-        private readonly IMedicineService _medService;   
-        //private readonly IMediaService _mediaService;
+        private readonly IMedicineService _medService;         
         private MedicineLog _medLog;
-        //private Media _media;
+        private readonly IMedicineFacade _medFacade;      
+        //private IMediaService _media;
+        //private IDoctor _doctor;
 
-        public MedicineLogController(IMedicineService medService)//, IHostingEnvironment IHostingEnvironment)//, IMediaService mediaService)
-        {
-            //_mediaService = mediaService;
+        public MedicineLogController(IMedicineService medService, IMedicineFacade medFacade) //IMediaService media, IDoctor doctor
+        {      
             _medService = medService;
-            //_environment = IHostingEnvironment;
-        }
-              
-        
-        // GET: MedicineLogs/Details/5
-        public ActionResult Details(DateTime dt)
-        {            
-            return View(_medService.GetLogAt(dt));
-            
-        }
+            _medFacade = medFacade;
+            //_media = media;
+            //_doctor = doctor;
+        }       
 
         //GET: MedicineLogs
         public IActionResult Index()
         {
-            return View(_medService.SelectAll());           
+            var result = _medFacade.GetMedicineData(1);
+            ViewBag.medNameList = result;
+            return View(_medService.SelectAll());                 
         }
 
         // GET: MedicineLogs/Create
@@ -63,14 +59,18 @@ namespace PainTrackerPT.Controllers.Medicine
         {
             if (ModelState.IsValid)
             {
-                medicineLog.MedGuid = Guid.NewGuid();               
-                //createImage(medicineLog.Img);
-                _medService.Insert(medicineLog);
+                medicineLog.MedGuid = Guid.NewGuid();
+
+                //using API from Doctor team
+                //int patientId = _doctor.GetPatientId();
+                //medicineLog.PatientID = patientId;
 
                 //using API from FollowUp team
                 //_media.AnswerId = medicineLog.medGuid;
                 //_media.MediaUrl = medicineLog.Img;
-                //_mediaService.Create(_media);
+                //var img = _mediaService.Create(_media);
+                //medicineLog.Img = img;
+                _medService.Insert(medicineLog);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -148,6 +148,15 @@ namespace PainTrackerPT.Controllers.Medicine
         {
             return null;
         }
-     
+
+
+
+        // GET: MedicineLogs/Details/5
+        public ActionResult Details(DateTime dt)
+        {
+            return View(_medService.GetLogAt(dt));
+
+        }
+
     }
 }

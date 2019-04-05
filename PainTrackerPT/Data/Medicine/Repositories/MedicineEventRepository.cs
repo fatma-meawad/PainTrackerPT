@@ -13,10 +13,9 @@ namespace PainTrackerPT.Data.Medicine.Repositories
     {
         PainTrackerPTContext context = new PainTrackerPTContext();   
         DbSet<MedicineEvent> data = null;
-        DbSet<MedicineEventLog> dataEventLog = null;
-        //private readonly PainTrackerPTContext context;
+        DbSet<MedicineEventLog> dataEventLog = null;        
 
-        public MedicineEventRepository()//PainTrackerPTContext _context)
+        public MedicineEventRepository()
         {
             //context = _context;
             this.data = context.Set<MedicineEvent>();

@@ -55,6 +55,7 @@ namespace PainTrackerPT
             services.AddScoped<IMedicineService, MedicineService>();
             services.AddScoped<IMedicineEventService, MedicineEventService>();
             services.AddScoped<IMedicineLog,MedicineRepository>();
+            services.AddScoped<IMedicineFacade, MedicineFacade>();
             //services.AddScoped(typeof(IMedicineIntakeEventAPI), typeof(MedicineIntakeEventAPI));
             //services.AddScoped(typeof(IMedicineDataAPI), typeof(MedicineDataAPI));
             //services.Add<PainTrackerPTContext>(db => new PainTrackerPTContext());

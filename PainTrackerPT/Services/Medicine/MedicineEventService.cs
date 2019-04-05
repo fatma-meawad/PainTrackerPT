@@ -9,19 +9,12 @@ namespace PainTrackerPT.Services.Medicine
 {
     public class MedicineEventService : IMedicineEventService
     {
-        private readonly IMedicineEventRepository _medEventRepo;
-        // private readonly IMedicineLog<MedicineEvent> _medEvent;
-        // private readonly IMedicineLog<MedicineLog> _medData;
+        private readonly IMedicineEventRepository _medEventRepo;  
 
-
-        public MedicineEventService(IMedicineEventRepository medEventRepo)//, IMedicineLog<MedicineEvent> medEvent, IMedicineLog<MedicineLog> medData)
+        public MedicineEventService(IMedicineEventRepository medEventRepo)
         {
-            _medEventRepo = medEventRepo;
-            //_medEvent = medEvent;
-            //_medData = medData;
+            _medEventRepo = medEventRepo;       
         }
-
-       
 
         public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
         {

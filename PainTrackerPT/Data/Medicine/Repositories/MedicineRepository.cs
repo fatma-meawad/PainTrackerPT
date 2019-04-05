@@ -11,12 +11,10 @@ namespace PainTrackerPT.Repository
     public class MedicineRepository : IMedicineLog
     {
         PainTrackerPTContext context = new PainTrackerPTContext();   
-        DbSet<MedicineLog> data = null;
-        //private readonly PainTrackerPTContext context;
+        DbSet<MedicineLog> data = null;      
 
-        public MedicineRepository()//PainTrackerPTContext _context)
-        {
-            //context = _context;
+        public MedicineRepository()
+        {         
             this.data = context.Set<MedicineLog>();            
         }
 
@@ -29,32 +27,6 @@ namespace PainTrackerPT.Repository
         {
             return data.ToList();
         }
-
-        //public IEnumerable<MedicineEvent> GetMedicineEventList(int medID, int eventID)
-        //{
-        //    var query = (from medEvent in context.MedicineEvent                   
-        //                 where medEvent.MedId == medID 
-        //                 & medEvent.EventId == eventID
-        //                 select medEvent).ToList();
-        //    return query;
-        //}
-
-        //public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
-        //{
-        //    var query = (from medEventLog in context.MedicineEventLog
-        //                 where medEventLog.EventId == eventID                      
-        //                 select medEventLog).ToList();
-        //    return query;
-        //}
-
-        //public IEnumerable<MedicineEvent> SelectMedEventById(int medicineID)
-        //{            
-        //    var query = (from medEvent in context.MedicineEvent
-        //                 where medEvent.MedId == medicineID
-        //                 orderby medEvent.EventId
-        //                 select medEvent).ToList();
-        //    return query;
-        //}
 
         public IEnumerable<MedicineLog> SelectMedLogById(int patientID)
         {

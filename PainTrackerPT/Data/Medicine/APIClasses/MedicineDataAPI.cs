@@ -10,12 +10,7 @@ namespace PainTrackerPT.Data.Medicine.APIClasses
     public class MedicineDataAPI 
     {
         private readonly IMedicineService _medService;
-
-        public MedicineDataAPI()
-        {
-       
-        }
-
+        
         //uses dependency injection so that no initalisation in this class is needed
         public MedicineDataAPI(IMedicineService medService)
         {

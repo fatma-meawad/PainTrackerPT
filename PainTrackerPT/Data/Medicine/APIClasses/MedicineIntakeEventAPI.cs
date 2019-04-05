@@ -12,6 +12,10 @@ namespace PainTrackerPT.Data.Medicine.APIClasses
     {
         private readonly IMedicineEventService _medService;
 
+        public MedicineIntakeEventAPI()
+        {
+        }
+
         //uses dependency injection so that no initalisation in this class is needed
         public MedicineIntakeEventAPI(IMedicineEventService medService)
         {
@@ -21,6 +25,11 @@ namespace PainTrackerPT.Data.Medicine.APIClasses
         public IEnumerable<MedicineEvent> GetMedicineEvent(int medicineID)
         {
             return _medService.SelectMedEventById(medicineID);            
+        }
+
+        public IEnumerable<MedicineEventLog> GetMedicineEventLogList(int eventID)
+        {
+            return _medService.GetMedicineEventLogList(eventID);
         }
     }
 }

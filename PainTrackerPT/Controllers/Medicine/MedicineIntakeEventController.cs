@@ -15,16 +15,22 @@ namespace PainTrackerPT.Controllers.Medicine
     {
         private readonly IMedicineEventService _medService;
         private MedicineEvent _medEvent;
+        private static string _medName;
+        //calling API interface from Doctor team
+        //private INotification _notification;
 
-        public MedicineIntakeEventController(IMedicineEventService medService)
+        public MedicineIntakeEventController(IMedicineEventService medService)//INotification notification
         {
             _medService = medService;
+            //_notification = notification;
         }
        
         // GET: MedicineIntakeEvent
-        public ActionResult Index(int id)
+        public ActionResult Index(int id, string medName)
         {            
-            ViewBag.ID = id;            
+            ViewBag.ID = id;
+            ViewBag.Name = medName;
+            _medName = medName;
             return View(_medService.SelectMedEventById(id));            
         }
 
@@ -35,9 +41,10 @@ namespace PainTrackerPT.Controllers.Medicine
         }
 
         // GET: MedicineIntakeEvent/Create
-        public ActionResult Create(int medID)
+        public ActionResult Create(int medID, string medName)
         {
             ViewBag.MedID = medID;
+            ViewBag.Name = medName;
             return View();
         }
 
@@ -46,15 +53,21 @@ namespace PainTrackerPT.Controllers.Medicine
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(int medID, [Bind("EventId,Dosage,Intervals,NumOfRecurringTimes,StartTime,MedId")] MedicineEvent medicineEvent)
         {
-            _medService.Insert(medicineEvent);     
-            return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId });            
+            _medService.Insert(medicineEvent);
+
+            //using API from Doctor team           
+            //_notification.SetNotification(medicineEvent.Dosage, medicineEvent.Intervals, medicineEvent.NumOfRecurringTimes, Request.Form["medName"]);
+
+            return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId, medName = Request.Form["medName"] });            
         }
 
         // GET: MedicineIntakeEvent/Edit/5
-        public ActionResult Edit(int id, int medID)
+        public ActionResult Edit(int id, int medID, string medName)
+
         {
             ViewBag.medID = medID;
             ViewBag.eventID = id;
+            ViewBag.Name = medName;
 
             //retrieve Event data by passing medicine id and event id
             var eventList = _medService.GetMedicineEventList(medID, id);
@@ -86,8 +99,9 @@ namespace PainTrackerPT.Controllers.Medicine
         }
 
         // GET: MedicineEvent/Delete/5
-        public async Task<IActionResult> Delete(int? id, int medID)
+        public async Task<IActionResult> Delete(int? id, int medID, string medName)
         {
+            ViewBag.Name = medName;
             if (id == null)
             {
                 return NotFound();
@@ -110,7 +124,7 @@ namespace PainTrackerPT.Controllers.Medicine
             //int id, int medID)
         {
             _medService.Delete(medicineEvent.EventId);  
-            return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId });
+            return RedirectToAction("Index", "MedicineIntakeEvent", new { id = medicineEvent.MedId, medName = Request.Form["medName"] });
         }
 
         // GET: Medicines/Event/
@@ -123,8 +137,10 @@ namespace PainTrackerPT.Controllers.Medicine
         //These Functions will trigger when Team Huat(Healthcare Professionals) send us back with a notification 
 
         // GET: MedicineIntakeEvent/ViewEventLog/5
-        public ActionResult ViewEventLog(int id)
-        {  
+        public ActionResult ViewEventLog(int id, string medName)
+        {
+            ViewBag.Name = medName;
+
             //retrieve Event Log data by passing event id           
             return View(_medService.GetMedicineEventLogList(id));
         }       

@@ -10,7 +10,7 @@
     <div class="m-subheader ">
         <div class="d-flex align-items-center">
             <div class="mr-auto">
-                <h3 class="m-subheader__title ">Edit for @ViewBag.eventID in @ViewBag.medID</h3>
+                <h3 class="m-subheader__title ">Edit Schedule for @ViewBag.Name</h3>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
                                 </form>
                             </div>
                         </div>
-                        @Html.ActionLink("Back Home", "Index", "MedicineIntakeEvent", new { id = @ViewBag.MedID })
+                        @Html.ActionLink("Back Home", "Index", "MedicineIntakeEvent", new { id = @ViewBag.MedID, medName = ViewBag.Name })
                     </div>
                 </div>
             </div>
@@ -84,19 +84,19 @@
 
 <script>
     var eventList = @Json.Serialize(ViewBag.eventList);
-    console.log(eventList);
+    console.log(eventList[0]);
 
-    function addDTForm() {
-        return '<div class="form-group"><label asp-for="TimeStamp">TimeStamp: </label>\
-                <input type="datetime-local" input asp-for="TimeStamp" class="form-control" required="required" />\
-                <span asp-validation-for= "TimeStamp" class= "text-danger"></span >\
-                </div>';
-    }
+    //function addDTForm() {
+    //    return '<div class="form-group"><label asp-for="TimeStamp">TimeStamp: </label>\
+    //            <input type="datetime-local" input asp-for="TimeStamp" class="form-control" required="required" />\
+    //            <span asp-validation-for= "TimeStamp" class= "text-danger"></span >\
+    //            </div>';
+    //}
 
-    function ChangeDateTime() {
-        var div = document.createElement('div');
-        div.innerHTML = addDTForm();
-        var original = document.getElementById("timestamp");
-        document.getElementById("forms").replaceChild(div, original);
-    }
+    //function ChangeDateTime() {
+    //    var div = document.createElement('div');
+    //    div.innerHTML = addDTForm();
+    //    var original = document.getElementById("timestamp");
+    //    document.getElementById("forms").replaceChild(div, original);
+    //}
 </script>
